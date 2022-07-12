@@ -9,6 +9,7 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.woowatechcamp.githubapplication.GithubApplication
+import org.woowatechcamp.githubapplication.data.auth.AuthService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
@@ -46,4 +47,8 @@ object NetworkModule {
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }
+    @Singleton
+    @Provides
+    fun provideAuthService(retrofit: Retrofit) : AuthService =
+        retrofit.create(AuthService::class.java)
 }

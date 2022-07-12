@@ -18,12 +18,33 @@ import org.woowatechcamp.githubapplication.databinding.ActivitySignInBinding
 class SignInActivity : AppCompatActivity() {
 
     lateinit var binding : ActivitySignInBinding
+    private val mViewModel : SignInViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
         // 성공 시 동작 - Access Token
+        mViewModel.code.observe(this) {
+            mViewModel.getToken(it)
+        }
+        // 실패시 동작 - SnackBar 메시지 띄움
+        mViewModel.errorMessage.observe(this) {
+            Snackbar.make(binding.root, it, Snackbar.LENGTH_SHORT)
+                .setTextColor(
+                    ColorStateList.valueOf(
+                        ContextCompat.getColor(this, R.color.white)))
+                .setBackgroundTintList(
+                    ColorStateList.valueOf(
+                        ContextCompat.getColor(this, R.color.navy)))
+                .show()
+        }
+        intent?.data?.let {
+            val code = it.getQueryParameter("code")
+            code?.let {
+                mViewModel.setCode(it)
+            }
+        }
 
         binding.btnSignIn.setOnClickListener {
             val scope = "user_repo+admin:org"
