@@ -17,14 +17,27 @@
         android:theme="@style/Theme.GithubApplication"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-        <activity
-            android:name=".presentation.MainActivity"
+        <activity android:name=".presentation.auth.SignInActivity"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data
+                    android:host="github-auth"
+                    android:scheme="wooah"/>
+            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+        </activity>
+        <activity
+            android:name=".presentation.MainActivity"
+            android:exported="true">
         </activity>
     </application>
 
