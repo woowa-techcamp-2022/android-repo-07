@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Github Application</string>
+    <string name="sign_in_title">What\'s In\nMy GitHub</string>
+    <string name="sign_in_btn">GitHub 로그인</string>
+    <string name="main_tab_title_issue">Issue</string>
+    <string name="main_tab_title_notifications">Notifications</string>
 </resources>
