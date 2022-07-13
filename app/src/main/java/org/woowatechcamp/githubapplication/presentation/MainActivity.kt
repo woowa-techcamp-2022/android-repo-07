@@ -2,7 +2,7 @@ package org.woowatechcamp.githubapplication.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import org.woowatechcamp.mailapplication.R
+import org.woowatechcamp.githubapplication.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
