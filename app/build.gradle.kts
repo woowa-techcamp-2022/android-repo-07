@@ -26,6 +26,9 @@ android {
 
         buildConfigField("String", "CLIENT_ID", properties.getProperty("github_client_id"))
         buildConfigField("String", "CLIENT_SECRETS", properties.getProperty("github_client_secrets"))
+        buildConfigField("String", "GITHUB_BASE", properties.getProperty("github_base_url"))
+        buildConfigField("String", "GITHUB_API", properties.getProperty("github_api_url"))
+        buildConfigField("String", "GITHUB_AUTH", properties.getProperty("github_auth_url"))
     }
 
     buildTypes {
