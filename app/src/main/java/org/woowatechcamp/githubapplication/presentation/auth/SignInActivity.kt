@@ -47,7 +47,7 @@ class SignInActivity : AppCompatActivity() {
         }
 
         binding.btnSignIn.setOnClickListener {
-            val scope = "user_repo+admin:org"
+            val scope = "user+repo"
             val loginUrl =  "${BuildConfig.GITHUB_AUTH}?client_id=${BuildConfig.CLIENT_ID}&scope=$scope"
             val intent = Intent(Intent.ACTION_VIEW, loginUrl.toUri())
             intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
