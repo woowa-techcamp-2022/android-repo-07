@@ -24,7 +24,7 @@ class SignInViewModel @Inject constructor(
     private val _code = MutableLiveData<String>()
     private val _errorMessage = MutableLiveData<String>()
     val code : LiveData<String> = _code
-    val errorMessage : LiveData<String> = _errorMessage
+    val errorMessage : LiveData<String>  = _errorMessage
 
     fun setCode(code : String) {
         _code.postValue(code)
@@ -41,7 +41,6 @@ class SignInViewModel @Inject constructor(
                 body.apply {
                     preferences.accessToken = accessToken
 //                    Log.d("GITHUB_AUTH", "$accessToken")
-                    // viewmodel 에서 바로 전환이 타당한지
                     val intent = Intent(GithubApplication.application, MainActivity::class.java).apply {
                         flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     }
@@ -55,5 +54,4 @@ class SignInViewModel @Inject constructor(
             _errorMessage.postValue(e.message)
         }
     }
-
 }
