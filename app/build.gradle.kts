@@ -11,7 +11,7 @@ android {
     buildToolsVersion = "30.0.3"
 
     defaultConfig {
-        applicationId = "org.woowatechcamp.mailapplication"
+        applicationId = "org.woowatechcamp.githubapplication"
         minSdk = 26
         targetSdk = 32
         versionCode = 1
@@ -44,7 +44,7 @@ android {
         viewBinding = true
     }
 
-    namespace = "org.woowatechcamp.mailapplication"
+    namespace = "org.woowatechcamp.githubapplication"
 }
 
 dependencies {
