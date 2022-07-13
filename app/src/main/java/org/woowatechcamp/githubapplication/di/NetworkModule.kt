@@ -13,6 +13,7 @@ import org.woowatechcamp.githubapplication.BuildConfig
 import org.woowatechcamp.githubapplication.GithubApplication
 import org.woowatechcamp.githubapplication.data.auth.AuthService
 import org.woowatechcamp.githubapplication.data.issue.IssueService
+import org.woowatechcamp.githubapplication.data.noti.NotiService
 import org.woowatechcamp.githubapplication.data.user.UserService
 import org.woowatechcamp.githubapplication.network.TokenInterceptor
 import org.woowatechcamp.githubapplication.util.AuthPreferences
@@ -39,13 +40,11 @@ object NetworkModule {
     annotation class TokenInter
 
     @TokenInter
-    @Singleton
     @Provides
     fun providesTokenInterceptor(
         preferences : AuthPreferences
     ) : Interceptor = TokenInterceptor(preferences)
 
-    @Singleton
     @Provides
     fun providesOkHttpClient(
         @TokenInter tokenInterceptor : Interceptor
@@ -60,7 +59,6 @@ object NetworkModule {
 
     // 로그인 시에 사용하는 Retrofit
     @AuthRetrofit
-    @Singleton
     @Provides
     fun providesAuthRetrofit(
        okHttpClient: OkHttpClient
@@ -77,7 +75,6 @@ object NetworkModule {
     }
     // API 연동을 위한 Retrofit
     @GithubRetrofit
-    @Singleton
     @Provides
     fun providesGithubRetrofit(
         okHttpClient: OkHttpClient
@@ -93,21 +90,24 @@ object NetworkModule {
             .build()
     }
 
-    @Singleton
     @Provides
     fun providesAuthService(
         @AuthRetrofit retrofit : Retrofit) : AuthService =
         retrofit.create(AuthService::class.java)
 
-    @Singleton
     @Provides
     fun providesIssueService(
         @GithubRetrofit retrofit : Retrofit
     ) : IssueService = retrofit.create(IssueService::class.java)
 
-    @Singleton
     @Provides
     fun providesUserService(
         @GithubRetrofit retrofit : Retrofit
     ) : UserService = retrofit.create(UserService::class.java)
+
+    @Provides
+    fun providesNotiService(
+        @GithubRetrofit retrofit: Retrofit
+    ) : NotiService = retrofit.create(NotiService::class.java)
+
 }

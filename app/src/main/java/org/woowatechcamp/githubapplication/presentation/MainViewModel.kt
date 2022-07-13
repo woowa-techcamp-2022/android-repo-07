@@ -54,9 +54,9 @@ class MainViewModel @Inject constructor(
     }
 
     // 이슈 가져오기
-    fun getIssues() = viewModelScope.launch {
+    fun getIssues(state : String) = viewModelScope.launch {
         try {
-            val response = issueRepository.getIssues()
+            val response = issueRepository.getIssues(state)
             val body = response.body()
             if (response.isSuccessful && body != null) {
                 _issueList.postValue(body.toList())
