@@ -8,6 +8,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.woowatechcamp.githubapplication.BuildConfig
 import org.woowatechcamp.githubapplication.GithubApplication
 import org.woowatechcamp.githubapplication.data.auth.AuthService
 import retrofit2.Retrofit
@@ -19,7 +20,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-    @Singleton
     @Provides
     fun provideOkHttpClient(
 
@@ -32,7 +32,6 @@ object NetworkModule {
     }
 
     // 로그인 시에만 사용하는 거라, 이후 지울 수 있는 방식으로 변경하기
-    @Singleton
     @Provides
     fun provideRetrofit(
         okHttpClient: OkHttpClient
@@ -42,12 +41,11 @@ object NetworkModule {
             .create()
 
         return Retrofit.Builder()
-            .baseUrl(GithubApplication.BASE)
+            .baseUrl(BuildConfig.GITHUB_BASE)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }
-    @Singleton
     @Provides
     fun provideAuthService(retrofit: Retrofit) : AuthService =
         retrofit.create(AuthService::class.java)

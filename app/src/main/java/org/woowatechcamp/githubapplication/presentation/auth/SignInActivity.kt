@@ -7,23 +7,47 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import org.woowatechcamp.githubapplication.BuildConfig
 import org.woowatechcamp.githubapplication.GithubApplication
 import org.woowatechcamp.githubapplication.R
 import org.woowatechcamp.githubapplication.databinding.ActivitySignInBinding
+import org.woowatechcamp.githubapplication.presentation.MainActivity
 
 @AndroidEntryPoint
 class SignInActivity : AppCompatActivity() {
 
-    lateinit var binding : ActivitySignInBinding
+    private lateinit var binding : ActivitySignInBinding
     private val mViewModel : SignInViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        observeData()
+
+        intent?.data?.let {
+            val code = it.getQueryParameter("code")
+            code?.let {
+                mViewModel.setCode(it)
+            }
+        }
+
+        binding.btnSignIn.setOnClickListener {
+            val scope = "user+repo"
+            val loginUrl =  "${BuildConfig.GITHUB_AUTH}?client_id=${BuildConfig.CLIENT_ID}&scope=$scope"
+            val intent = Intent(Intent.ACTION_VIEW, loginUrl.toUri())
+            intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+            startActivity(intent)
+        }
+    }
+
+    private fun observeData() {
         // 성공 시 동작 - Access Token
         mViewModel.code.observe(this) {
             mViewModel.getToken(it)
@@ -39,20 +63,17 @@ class SignInActivity : AppCompatActivity() {
                         ContextCompat.getColor(this, R.color.navy)))
                 .show()
         }
-        intent?.data?.let {
-            val code = it.getQueryParameter("code")
-            code?.let {
-                mViewModel.setCode(it)
+        lifecycleScope.launch {
+            mViewModel.loginEvent.collect { getTokened ->
+                if (getTokened) {
+                    val intent = Intent(this@SignInActivity, MainActivity::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    }
+                    startActivity(intent)
+                }
             }
         }
 
-        binding.btnSignIn.setOnClickListener {
-            val scope = "user_repo+admin:org"
-            val loginUrl =  "${GithubApplication.AUTH}?client_id=${BuildConfig.CLIENT_ID}&scope=$scope"
-            val intent = Intent(Intent.ACTION_VIEW, loginUrl.toUri())
-            intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
-            startActivity(intent)
-        }
     }
 
 }

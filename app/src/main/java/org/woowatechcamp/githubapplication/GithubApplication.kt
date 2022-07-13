@@ -8,16 +8,5 @@ import androidx.security.crypto.MasterKeys
 
 @HiltAndroidApp
 class GithubApplication : Application() {
-    override fun onCreate() {
-        super.onCreate()
-        application = this
-    }
-
-    companion object {
-        lateinit var application : GithubApplication
-        const val AUTH = "https://github.com/login/oauth/authorize"
-        const val ACCESS = "https://github.com/login/oauth/access_token"
-        const val BASE = "https://github.com/"
-    }
 }
 

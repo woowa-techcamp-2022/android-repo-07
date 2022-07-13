@@ -7,6 +7,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import org.woowatechcamp.githubapplication.BuildConfig
 import org.woowatechcamp.githubapplication.GithubApplication
@@ -23,35 +25,31 @@ class SignInViewModel @Inject constructor(
 
     private val _code = MutableLiveData<String>()
     private val _errorMessage = MutableLiveData<String>()
+    private val _loginEvent = MutableSharedFlow<Boolean>()
+
     val code : LiveData<String> = _code
     val errorMessage : LiveData<String> = _errorMessage
+    val loginEvent = _loginEvent.asSharedFlow()
 
     fun setCode(code : String) {
         _code.postValue(code)
     }
 
     fun getToken(code: String) = viewModelScope.launch {
-        try {
-            val response = repository.getToken(
+        kotlin.runCatching {
+            repository.getToken(
                 BuildConfig.CLIENT_ID,
                 BuildConfig.CLIENT_SECRETS,
                 code)
-            val body = response.body()
-            if (response.isSuccessful && body!= null) {
-                body.apply {
-                    preferences.accessToken = accessToken
-//                    Log.d("GITHUB_AUTH", "$accessToken")
-                    // viewmodel 에서 바로 전환이 타당한지
-                    val intent = Intent(GithubApplication.application, MainActivity::class.java).apply {
-                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    }
-                    GithubApplication.application.startActivity(intent)
-                }
-            }
+        }.onSuccess { res ->
+            val body = res.body()
+            if (body == null) { _errorMessage.postValue("로그인을 하는 데 실패했습니다.") }
             else {
-                _errorMessage.postValue("오류가 발생하였습니다.")
+                preferences.accessToken = body.accessToken
+//                    Log.d("GITHUB_AUTH", "$accessToken")
+                _loginEvent.emit(true)
             }
-        } catch (e : Exception) {
+        }.onFailure { e ->
             _errorMessage.postValue(e.message)
         }
     }
