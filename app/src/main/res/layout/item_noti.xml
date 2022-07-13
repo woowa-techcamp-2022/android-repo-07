@@ -17,7 +17,7 @@
         android:paddingEnd="28dp">
 
         <ImageView
-            android:id="@+id/iv_issue"
+            android:id="@+id/iv_noti"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_issue_open_24"
@@ -25,44 +25,44 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_issue_name"
+            android:id="@+id/tv_noti_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="11dp"
             android:text="sam/whatsingmygithub"
             android:textColor="@color/grey"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@id/iv_issue"
-            app:layout_constraintStart_toEndOf="@+id/iv_issue"
-            app:layout_constraintTop_toTopOf="@+id/iv_issue" />
+            app:layout_constraintBottom_toBottomOf="@id/iv_noti"
+            app:layout_constraintStart_toEndOf="@+id/iv_noti"
+            app:layout_constraintTop_toTopOf="@+id/iv_noti" />
 
         <TextView
-            android:id="@+id/tv_issue_num"
+            android:id="@+id/tv_noti_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="11dp"
             android:text="#1"
             android:textColor="@color/grey"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@id/iv_issue"
-            app:layout_constraintEnd_toStartOf="@+id/tv_issue_date"
+            app:layout_constraintBottom_toBottomOf="@id/iv_noti"
+            app:layout_constraintEnd_toStartOf="@+id/tv_noti_date"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
-            app:layout_constraintStart_toEndOf="@+id/tv_issue_name"
-            app:layout_constraintTop_toTopOf="@+id/iv_issue" />
+            app:layout_constraintStart_toEndOf="@+id/tv_noti_name"
+            app:layout_constraintTop_toTopOf="@+id/iv_noti" />
 
         <TextView
-            android:id="@+id/tv_issue_date"
+            android:id="@+id/tv_noti_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1일 전"
             android:textColor="@color/grey"
             android:textSize="14sp"
-            app:layout_constraintBaseline_toBaselineOf="@+id/tv_issue_name"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv_noti_name"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tv_issue_num" />
+            app:layout_constraintStart_toEndOf="@+id/tv_noti_num" />
 
         <TextView
-            android:id="@+id/tv_issue_title"
+            android:id="@+id/tv_noti_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="11dp"
@@ -70,8 +70,24 @@
             android:text="프로젝트 요구사항 및 참고자료"
             android:textColor="@color/white"
             android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@id/iv_issue"
-            app:layout_constraintTop_toBottomOf="@+id/tv_issue_name" />
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toEndOf="@id/iv_noti"
+            app:layout_constraintTop_toBottomOf="@+id/tv_noti_name"
+            app:layout_constraintEnd_toStartOf="@+id/tv_noti_comment"/>
+
+        <TextView
+            android:id="@+id/tv_noti_comment"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/rectangle_white_radius_3"
+            android:gravity="center"
+            android:text="1"
+            android:textColor="@color/primary"
+            android:textSize="12sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv_noti_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_noti_title" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
