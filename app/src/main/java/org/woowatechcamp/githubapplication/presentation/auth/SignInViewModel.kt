@@ -19,19 +19,19 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SignInViewModel @Inject constructor(
-    private val repository : AuthRepository,
-    private val preferences : AuthPreferences
+    private val repository: AuthRepository,
+    private val preferences: AuthPreferences
 ) : ViewModel() {
 
     private val _code = MutableLiveData<String>()
     private val _errorMessage = MutableLiveData<String>()
     private val _loginEvent = MutableSharedFlow<Boolean>()
 
-    val code : LiveData<String> = _code
-    val errorMessage : LiveData<String> = _errorMessage
+    val code: LiveData<String> = _code
+    val errorMessage: LiveData<String> = _errorMessage
     val loginEvent = _loginEvent.asSharedFlow()
 
-    fun setCode(code : String) {
+    fun setCode(code: String) {
         _code.postValue(code)
     }
 
@@ -40,11 +40,13 @@ class SignInViewModel @Inject constructor(
             repository.getToken(
                 BuildConfig.CLIENT_ID,
                 BuildConfig.CLIENT_SECRETS,
-                code)
+                code
+            )
         }.onSuccess { res ->
             val body = res.body()
-            if (body == null) { _errorMessage.postValue("로그인을 하는 데 실패했습니다.") }
-            else {
+            if (body == null) {
+                _errorMessage.postValue("로그인을 하는 데 실패했습니다.")
+            } else {
                 preferences.accessToken = body.accessToken
 //                    Log.d("GITHUB_AUTH", "$accessToken")
                 _loginEvent.emit(true)
@@ -53,5 +55,4 @@ class SignInViewModel @Inject constructor(
             _errorMessage.postValue(e.message)
         }
     }
-
 }

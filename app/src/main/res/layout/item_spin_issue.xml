@@ -8,7 +8,8 @@
 
     <TextView
         android:id="@+id/tv_issue_title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:textSize="14sp"/>
