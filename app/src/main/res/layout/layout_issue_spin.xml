@@ -18,7 +18,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Filter"
+        android:text="@string/filter"
         android:textColor="@color/white"
         android:textSize="14sp"
         android:layout_marginStart="14dp"/>
@@ -31,7 +31,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Option"
         android:textColor="@color/white"
         android:textSize="14sp" />
 

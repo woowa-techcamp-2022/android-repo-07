@@ -20,4 +20,6 @@
 
     <!-- profile   -->
     <string name="profile">Profile</string>
+
+    <string name="filter">Filter</string>
 </resources>
