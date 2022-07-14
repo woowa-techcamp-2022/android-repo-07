@@ -75,7 +75,7 @@ class SearchEditText(
                 textChangeListener?.invoke()
                 with(etSearch.text.isNotEmpty()) {
                     isNotEmpty = this
-                    etSearch.isSelected = this
+                    layoutEdit.isSelected = this
                 }
             }
         }
