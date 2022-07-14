@@ -1,3 +1,8 @@
+import org.jetbrains.kotlin.konan.properties.Properties
+
+val properties = Properties()
+properties.load(project.rootProject.file("local.properties").inputStream())
+
 plugins {
     id("com.android.application")
     id("kotlin-parcelize")
@@ -11,13 +16,19 @@ android {
     buildToolsVersion = "30.0.3"
 
     defaultConfig {
-        applicationId = "org.woowatechcamp.mailapplication"
+        applicationId = "org.woowatechcamp.githubapplication"
         minSdk = 26
         targetSdk = 32
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "CLIENT_ID", properties.getProperty("github_client_id"))
+        buildConfigField("String", "CLIENT_SECRETS", properties.getProperty("github_client_secrets"))
+        buildConfigField("String", "GITHUB_BASE", properties.getProperty("github_base_url"))
+        buildConfigField("String", "GITHUB_API", properties.getProperty("github_api_url"))
+        buildConfigField("String", "GITHUB_AUTH", properties.getProperty("github_auth_url"))
     }
 
     buildTypes {
@@ -44,7 +55,7 @@ android {
         viewBinding = true
     }
 
-    namespace = "org.woowatechcamp.mailapplication"
+    namespace = "org.woowatechcamp.githubapplication"
 }
 
 dependencies {

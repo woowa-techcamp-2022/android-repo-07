@@ -1,6 +1,7 @@
 package org.woowatechcamp.githubapplication.di
 
 import android.app.Application
+import android.content.Context
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -12,9 +13,10 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object PreferencesModule {
+
     @Provides
     @Singleton
     fun providesSharedPreferences(
-        @ApplicationContext context : Application
+        @ApplicationContext context : Context
     ) = AuthPreferences(context)
 }
