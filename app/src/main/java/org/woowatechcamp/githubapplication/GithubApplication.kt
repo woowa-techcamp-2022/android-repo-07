@@ -17,4 +17,3 @@ class GithubApplication : Application() {
         lateinit var application : GithubApplication
     }
 }
-
