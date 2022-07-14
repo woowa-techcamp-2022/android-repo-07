@@ -4,6 +4,7 @@
     package="org.woowatechcamp.githubapplication">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".GithubApplication"
         android:allowBackup="true"
@@ -16,6 +17,9 @@
         android:theme="@style/Theme.GithubApplication"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".presentation.profile.ProfileActivity"
+            android:exported="false" />
         <activity
             android:name=".presentation.search.SearchActivity"
             android:exported="false" />
@@ -37,10 +41,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".presentation.MainActivity"
             android:exported="false" />
     </application>
+
 </manifest>
