@@ -1,34 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/tv_find_stuff"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:letterSpacing="0.05"
-        android:text="@string/find_your_stuff"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-    <TextView
-        android:id="@+id/tv_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:letterSpacing="0.06"
-        android:text="@string/search_description"
-        android:textColor="@color/grey"
-        app:layout_constraintEnd_toEndOf="@+id/tv_find_stuff"
-        app:layout_constraintStart_toStartOf="@+id/tv_find_stuff"
-        app:layout_constraintTop_toBottomOf="@+id/tv_find_stuff" />
-</merge>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_search"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_find_stuff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:letterSpacing="0.05"
+            android:text="@string/search_find_your_stuff"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:letterSpacing="0.06"
+            android:text="@string/search_description"
+            android:textColor="@color/grey"
+            app:layout_constraintEnd_toEndOf="@+id/tv_find_stuff"
+            app:layout_constraintStart_toStartOf="@+id/tv_find_stuff"
+            app:layout_constraintTop_toBottomOf="@+id/tv_find_stuff" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

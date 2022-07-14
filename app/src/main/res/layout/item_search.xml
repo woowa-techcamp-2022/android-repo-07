@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="data"
+            type="org.woowatechcamp.githubapplication.domain.entity.SearchInfo" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,6 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:text="@{data.owner}"
             android:textColor="@color/grey"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/iv_profile"
@@ -40,6 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:text="@{data.title}"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold"
@@ -49,14 +54,16 @@
 
         <TextView
             android:id="@+id/tv_description"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:lineSpacingExtra="-6sp"
-            android:text="@string/search_item_description"
+            android:layout_marginEnd="24dp"
+            android:text="@{data.description}"
             android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tv_title"
-            app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_title"
+            tools:text="@string/search_description" />
 
         <ImageView
             android:id="@+id/iv_star"
@@ -72,6 +79,7 @@
             android:id="@+id/tv_star_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{data.starCount}"
             android:textColor="@color/grey"
             app:layout_constraintBottom_toBottomOf="@+id/iv_star"
             app:layout_constraintStart_toEndOf="@+id/iv_star"
@@ -91,16 +99,17 @@
             tools:src="@color/purple" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/tv_language"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            android:text="@string/kotlin"
+            android:text="@{data.language}"
             android:textColor="@color/grey"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/iv_type"
             app:layout_constraintStart_toEndOf="@+id/iv_type"
-            app:layout_constraintTop_toTopOf="@+id/iv_type" />
+            app:layout_constraintTop_toTopOf="@+id/iv_type"
+            tools:text="@string/kotlin" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
