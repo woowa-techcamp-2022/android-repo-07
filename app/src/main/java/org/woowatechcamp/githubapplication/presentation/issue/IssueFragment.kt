@@ -15,7 +15,6 @@ import org.woowatechcamp.githubapplication.presentation.MainViewModel
 import org.woowatechcamp.githubapplication.databinding.FragmentIssueBinding
 import org.woowatechcamp.githubapplication.presentation.issue.adapter.IssueAdapter
 import org.woowatechcamp.githubapplication.presentation.issue.adapter.IssueSpinAdapter
-import org.woowatechcamp.githubapplication.presentation.issue.adapter.IssueSpinAdapterCustom
 import org.woowatechcamp.githubapplication.presentation.view_util.CustomItemDivider
 import org.woowatechcamp.githubapplication.util.showSnackBar
 
@@ -65,7 +64,7 @@ class IssueFragment : Fragment(), AdapterView.OnItemSelectedListener {
         mViewModel.issueList.observe(viewLifecycleOwner) {
             issueAdapter.submitList(it)
         }
-        mViewModel.getIssues()
+        mViewModel.getIssues("all")
     }
 
     override fun onDestroyView() {
