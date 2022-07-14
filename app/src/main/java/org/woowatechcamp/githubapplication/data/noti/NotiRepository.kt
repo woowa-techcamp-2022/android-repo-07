@@ -9,5 +9,5 @@ class NotiRepository @Inject constructor(
 ) {
     suspend fun getNoti() = service.getNoti()
 
-    suspend fun markNoti(threadId : Int) = service.markNoti(threadId)
+    suspend fun markNoti(threadId : Long) = service.markNoti(threadId)
 }

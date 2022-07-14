@@ -86,27 +86,30 @@ object NetworkModule {
 
         return Retrofit.Builder()
             .baseUrl(BuildConfig.GITHUB_API)
-            .baseUrl(BuildConfig.GITHUB_BASE)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }
 
+    @Singleton
     @Provides
     fun providesAuthService(
         @AuthRetrofit retrofit : Retrofit) : AuthService =
         retrofit.create(AuthService::class.java)
 
+    @Singleton
     @Provides
     fun providesIssueService(
         @GithubRetrofit retrofit : Retrofit
     ) : IssueService = retrofit.create(IssueService::class.java)
 
+    @Singleton
     @Provides
     fun providesUserService(
         @GithubRetrofit retrofit : Retrofit
     ) : UserService = retrofit.create(UserService::class.java)
 
+    @Singleton
     @Provides
     fun providesNotiService(
         @GithubRetrofit retrofit: Retrofit

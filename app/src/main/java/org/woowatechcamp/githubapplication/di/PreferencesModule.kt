@@ -15,7 +15,6 @@ import javax.inject.Singleton
 object PreferencesModule {
 
     @Provides
-    @Singleton
     fun providesSharedPreferences(
         @ApplicationContext context : Context
     ) = AuthPreferences(context)

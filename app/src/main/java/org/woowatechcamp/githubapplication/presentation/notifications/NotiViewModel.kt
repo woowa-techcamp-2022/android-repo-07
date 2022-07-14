@@ -35,7 +35,7 @@ class NotiViewModel @Inject constructor(
         }
     }
     // noti 읽음 표시하기 - thread 를 통해 개별적으로 처리
-    fun markNoti(threadId : Int) = viewModelScope.launch {
+    fun markNoti(threadId : Long) = viewModelScope.launch {
         kotlin.runCatching {
             notiRepository.markNoti(threadId)
         }.onSuccess { res ->

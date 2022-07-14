@@ -1,7 +1,6 @@
 package org.woowatechcamp.githubapplication.data.issue
 
-enum class IssueCategory(val title : String) {
-    OPEN("Open"),
-    CLOSED("Closed"),
-    ALL("All")
-}
+data class IssueCategory(
+    val title : String,
+    var selected : Boolean
+    )

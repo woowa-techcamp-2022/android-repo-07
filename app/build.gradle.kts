@@ -54,7 +54,6 @@ android {
         dataBinding = true
         viewBinding = true
     }
-
     namespace = "org.woowatechcamp.githubapplication"
 }
 
