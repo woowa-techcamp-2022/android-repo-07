@@ -7,5 +7,5 @@ import javax.inject.Singleton
 class IssueRepository @Inject constructor(
     private val service : IssueService
 ) {
-    suspend fun getIssues() = service.getIssues()
+    suspend fun getIssues(state : String) = service.getIssues(state)
 }
