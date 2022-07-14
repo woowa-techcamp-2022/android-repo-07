@@ -1,6 +1,8 @@
 package org.woowatechcamp.githubapplication.presentation.search
 
 import android.os.Bundle
+import android.view.MotionEvent
+import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -13,6 +15,7 @@ import org.woowatechcamp.githubapplication.R
 import org.woowatechcamp.githubapplication.databinding.ActivitySearchBinding
 import org.woowatechcamp.githubapplication.util.ItemDecorationUtil
 import org.woowatechcamp.githubapplication.util.ResolutionMetrics
+import org.woowatechcamp.githubapplication.util.ext.closeKeyboard
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -72,5 +75,25 @@ class SearchActivity : AppCompatActivity() {
                 )
             }
         }
+    }
+
+    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+        val view = currentFocus
+
+        if (view != null && ev.action == MotionEvent.ACTION_UP || ev.action == MotionEvent.ACTION_MOVE && view is EditText && !view.javaClass.name.startsWith(
+                "android.webkit."
+            )
+        ) {
+            val locationList = IntArray(2)
+            view.getLocationOnScreen(locationList)
+            val x = ev.rawX + view.left - locationList[0]
+            val y = ev.rawY + view.top - locationList[1]
+            if (x < view.left || x > view.right || y < view.top || y > view.bottom) {
+                closeKeyboard(view)
+                view.clearFocus()
+            }
+        }
+
+        return super.dispatchTouchEvent(ev)
     }
 }
