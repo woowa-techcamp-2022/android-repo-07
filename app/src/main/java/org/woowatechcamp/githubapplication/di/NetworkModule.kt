@@ -57,6 +57,7 @@ object NetworkModule {
             .build()
     }
 
+    // 로그인 시에만 사용하는 거라, 이후 지울 수 있는 방식으로 변경하기
     // 로그인 시에 사용하는 Retrofit
     @AuthRetrofit
     @Provides
@@ -90,21 +91,25 @@ object NetworkModule {
             .build()
     }
 
+    @Singleton
     @Provides
     fun providesAuthService(
         @AuthRetrofit retrofit : Retrofit) : AuthService =
         retrofit.create(AuthService::class.java)
 
+    @Singleton
     @Provides
     fun providesIssueService(
         @GithubRetrofit retrofit : Retrofit
     ) : IssueService = retrofit.create(IssueService::class.java)
 
+    @Singleton
     @Provides
     fun providesUserService(
         @GithubRetrofit retrofit : Retrofit
     ) : UserService = retrofit.create(UserService::class.java)
 
+    @Singleton
     @Provides
     fun providesNotiService(
         @GithubRetrofit retrofit: Retrofit

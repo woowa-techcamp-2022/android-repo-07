@@ -16,8 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SignInViewModel @Inject constructor(
-    private val repository : AuthRepository,
-    private val preferences : AuthPreferences
+    private val repository: AuthRepository,
+    private val preferences: AuthPreferences
 ) : ViewModel() {
 
     private val _code = MutableLiveData<String>()
@@ -28,7 +28,7 @@ class SignInViewModel @Inject constructor(
     val errorMessage : LiveData<String>  = _errorMessage
     val accessSuccess : SharedFlow<Boolean> = _accessSuccess.asSharedFlow()
 
-    fun setCode(code : String) {
+    fun setCode(code: String) {
         _code.postValue(code)
     }
 
@@ -43,7 +43,7 @@ class SignInViewModel @Inject constructor(
             else {
                 preferences.accessToken = res.body()!!.accessToken
                 _accessSuccess.emit(true)
-            }
+        }
         }.onFailure { e ->
             _errorMessage.postValue(e.message)
         }

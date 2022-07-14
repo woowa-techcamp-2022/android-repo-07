@@ -4,7 +4,6 @@
     package="org.woowatechcamp.githubapplication">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:name=".GithubApplication"
         android:allowBackup="true"
@@ -29,10 +28,11 @@
         <activity android:name=".presentation.auth.SignInActivity"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.VIEW" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
                 <data
                     android:host="github-auth"
                     android:scheme="wooah"/>
@@ -45,5 +45,4 @@
 
         </activity>
     </application>
-
 </manifest>

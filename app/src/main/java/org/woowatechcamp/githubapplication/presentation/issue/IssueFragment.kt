@@ -57,7 +57,7 @@ class IssueFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
 
         binding.swipeIssue.setOnRefreshListener(this)
 
-        mViewModel.getIssues(option)
+//        mViewModel.getIssues(option)
     }
 
     private fun initAdapter() {

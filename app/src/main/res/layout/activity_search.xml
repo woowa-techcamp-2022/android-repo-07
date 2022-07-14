@@ -5,6 +5,11 @@
 
     <data>
 
+        <import type="android.view.View" />
+
+        <variable
+            name="isNotEmpty"
+            type="boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,30 +39,37 @@
         </androidx.appcompat.widget.Toolbar>
 
         <!--TODO : 해당 부분 커스텀 뷰로 바꿀 예정-->
-        <EditText
+        <org.woowatechcamp.githubapplication.presentation.search.custom.SearchEditText
             android:id="@+id/et_search"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
-            android:background="@null"
-            android:hint="@string/search_github"
-            android:inputType="textPersonName"
-            android:textColor="@color/white"
-            android:textColorHint="@color/grey"
-            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar_search" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clipToPadding="false"
             android:overScrollMode="never"
             android:paddingTop="16dp"
+            android:visibility="@{isNotEmpty? View.VISIBLE : View.GONE}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_search"
-            app:layout_constraintTop_toBottomOf="@+id/et_search" />
+            app:layout_constraintTop_toBottomOf="@+id/et_search"
+            tools:listitem="@layout/item_search" />
+
+        <include
+            android:id="@+id/layout_search_empty"
+            layout="@layout/layout_search_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{isNotEmpty? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_search" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
