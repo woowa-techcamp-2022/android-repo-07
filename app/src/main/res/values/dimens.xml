@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="size_profile_24">24dp</dimen>
+    <dimen name="size_language_type_14dp">14dp</dimen>
+</resources>
