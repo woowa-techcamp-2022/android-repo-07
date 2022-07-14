@@ -17,4 +17,3 @@ class GithubApplication : Application() {
         const val BASE = "https://github.com/"
     }
 }
-
