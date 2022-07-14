@@ -1,17 +1,16 @@
 package org.woowatechcamp.githubapplication.presentation.auth
 
-import android.content.Intent
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import org.woowatechcamp.githubapplication.BuildConfig
-import org.woowatechcamp.githubapplication.GithubApplication
 import org.woowatechcamp.githubapplication.data.auth.AuthRepository
-import org.woowatechcamp.githubapplication.presentation.MainActivity
 import org.woowatechcamp.githubapplication.util.AuthPreferences
 import javax.inject.Inject
 
@@ -23,34 +22,29 @@ class SignInViewModel @Inject constructor(
 
     private val _code = MutableLiveData<String>()
     private val _errorMessage = MutableLiveData<String>()
+    private val _accessSuccess = MutableSharedFlow<Boolean>()
+
     val code : LiveData<String> = _code
     val errorMessage : LiveData<String>  = _errorMessage
+    val accessSuccess : SharedFlow<Boolean> = _accessSuccess.asSharedFlow()
 
     fun setCode(code : String) {
         _code.postValue(code)
     }
 
     fun getToken(code: String) = viewModelScope.launch {
-        try {
-            val response = repository.getToken(
+        kotlin.runCatching {
+            repository.getToken(
                 BuildConfig.CLIENT_ID,
                 BuildConfig.CLIENT_SECRETS,
                 code)
-            val body = response.body()
-            if (response.isSuccessful && body!= null) {
-                body.apply {
-                    preferences.accessToken = accessToken
-//                    Log.d("GITHUB_AUTH", "$accessToken")
-                    val intent = Intent(GithubApplication.application, MainActivity::class.java).apply {
-                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    }
-                    GithubApplication.application.startActivity(intent)
-                }
-            }
+        }.onSuccess { res ->
+            if (res.body() == null) { _errorMessage.postValue("로그인에 실패했습니다.") }
             else {
-                _errorMessage.postValue("오류가 발생하였습니다.")
+                preferences.accessToken = res.body()!!.accessToken
+                _accessSuccess.emit(true)
             }
-        } catch (e : Exception) {
+        }.onFailure { e ->
             _errorMessage.postValue(e.message)
         }
     }

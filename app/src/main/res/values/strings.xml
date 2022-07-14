@@ -17,4 +17,7 @@
     <string name="search_item_description">The Kotlin Programming Language.</string>
     <string name="star_count">1.4k</string>
     <string name="kotlin">Kotlin</string>
+
+    <!-- profile   -->
+    <string name="profile">Profile</string>
 </resources>

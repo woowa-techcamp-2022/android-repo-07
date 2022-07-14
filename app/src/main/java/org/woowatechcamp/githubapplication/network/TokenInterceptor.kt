@@ -24,5 +24,4 @@ class TokenInterceptor(
         }
         return chain.proceed(builder.build())
     }
-
 }

@@ -14,6 +14,6 @@ interface NotiService {
     // 특정 Notifications 제거
     @PATCH("/notifications/threads/{thread_id}")
     suspend fun markNoti(
-        @Path("thread_id") threadId : Int
+        @Path("thread_id") threadId : Long
     ) : Response<NotiMarkResponse>
 }

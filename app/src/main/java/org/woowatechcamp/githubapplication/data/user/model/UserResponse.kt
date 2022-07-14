@@ -1,5 +1,9 @@
 package org.woowatechcamp.githubapplication.data.user.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class UserResponse(
     val avatar_url: String,
     val bio: String,
@@ -16,7 +20,7 @@ data class UserResponse(
     val following_url: String,
     val gists_url: String,
     val gravatar_id: String,
-    val hireable: Any,
+    val hireable: Boolean?,
     val html_url: String,
     val id: Int,
     val location: String,
@@ -35,9 +39,9 @@ data class UserResponse(
     val starred_url: String,
     val subscriptions_url: String,
     val total_private_repos: Int,
-    val twitter_username: Any,
+    val twitter_username: String?,
     val two_factor_authentication: Boolean,
     val type: String,
     val updated_at: String,
     val url: String
-)
+) : Parcelable

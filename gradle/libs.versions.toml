@@ -2,7 +2,7 @@
 androidStudioGradlePlugin = "7.2.1"
 
 # AndroiX
-view_component = "1.5.0"
+view-component = "1.5.0"
 lifecycle = "2.4.1"
 
 # 3rd-party
@@ -31,6 +31,7 @@ androidX-test-junit = "androidx.test.ext:junit:1.1.3"
 androidX-security-crypto = "androidx.security:security-crypto:1.0.0"
 androidX-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "view_component" }
 androidX-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "view_component" }
+androidX-swiperefresh = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 # 3rd-party
 ## material
 material-design = "com.google.android.material:material:1.5.0"
@@ -62,7 +63,7 @@ kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlinKapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 
 [bundles]
-androidx = [ "androidX-arch-coreTesting", "androidX-appcompat", "androidX-core-ktx", "androidX-lifecycle-viewModel", "androidX-lifecycle-runtimeTesting", "androidX-lifecycle-java8", "androidX-recyclerview", "androidX-test-junit", "androidX-security-crypto", "androidX-fragment-ktx", "androidX-activity-ktx" ]
+androidx = [ "androidX-arch-coreTesting", "androidX-appcompat", "androidX-core-ktx", "androidX-lifecycle-viewModel", "androidX-lifecycle-runtimeTesting", "androidX-lifecycle-java8", "androidX-recyclerview", "androidX-test-junit", "androidX-security-crypto", "androidX-fragment-ktx", "androidX-activity-ktx", "androidX-swiperefresh" ]
 kotlin = [ "kotlin-coroutine-core", "kotlin-coroutine-android", "kotlin-coroutine-test"]
 dagger = [ "dagger", "dagger-hilt-android" ]
 compiler = [ "dagger-compiler", "dagger-hilt-compiler" ]
