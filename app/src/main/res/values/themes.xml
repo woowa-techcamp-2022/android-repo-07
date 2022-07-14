@@ -26,6 +26,9 @@
 
     <style name="CornerSize50Percent">
         <item name="cornerSize">50%</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowBackground">@drawable/bg_black</item>
     </style>
 
 </resources>

@@ -57,6 +57,7 @@ object NetworkModule {
             .build()
     }
 
+    // 로그인 시에만 사용하는 거라, 이후 지울 수 있는 방식으로 변경하기
     // 로그인 시에 사용하는 Retrofit
     @AuthRetrofit
     @Provides
@@ -85,6 +86,7 @@ object NetworkModule {
 
         return Retrofit.Builder()
             .baseUrl(BuildConfig.GITHUB_API)
+            .baseUrl(BuildConfig.GITHUB_BASE)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()

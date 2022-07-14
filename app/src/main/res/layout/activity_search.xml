@@ -5,6 +5,11 @@
 
     <data>
 
+        <import type="android.view.View" />
+
+        <variable
+            name="isNotEmpty"
+            type="boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -51,13 +56,26 @@
             app:layout_constraintTop_toBottomOf="@+id/toolbar_search" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clipToPadding="false"
             android:overScrollMode="never"
             android:paddingTop="16dp"
+            android:visibility="@{isNotEmpty? View.VISIBLE : View.GONE}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_search"
-            app:layout_constraintTop_toBottomOf="@+id/et_search" />
+            app:layout_constraintTop_toBottomOf="@+id/et_search"
+            tools:listitem="@layout/item_search" />
+
+        <include
+            android:id="@+id/layout_search_empty"
+            layout="@layout/layout_search_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{isNotEmpty? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_search" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
