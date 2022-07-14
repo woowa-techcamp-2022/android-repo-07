@@ -18,6 +18,7 @@ import org.woowatechcamp.githubapplication.presentation.adapter.ViewpagerAdapter
 import org.woowatechcamp.githubapplication.presentation.issue.IssueFragment
 import org.woowatechcamp.githubapplication.presentation.notifications.NotificationsFragment
 import org.woowatechcamp.githubapplication.presentation.profile.ProfileActivity
+import org.woowatechcamp.githubapplication.presentation.search.SearchActivity
 import org.woowatechcamp.githubapplication.util.showSnackBar
 import kotlin.math.max
 
@@ -77,7 +78,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_main_search -> {
-
+                startActivity(Intent(this, SearchActivity::class.java))
             }
             R.id.menu_main_profile -> {
                 val intent = Intent(this, ProfileActivity::class.java)
