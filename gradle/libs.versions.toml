@@ -14,6 +14,8 @@ okhttp = "4.9.3"
 retrofit = "2.9.0"
 gson = "2.8.9"
 
+paging_version = "3.1.1"
+
 [libraries]
 plugin-androidGradle = { module = "com.android.tools.build:gradle", version.ref = "androidStudioGradlePlugin" }
 plugin-kotlin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
@@ -32,6 +34,8 @@ androidX-security-crypto = "androidx.security:security-crypto:1.0.0"
 androidX-fragment-ktx = { module = "androidx.fragment:fragment-ktx", version.ref = "view_component" }
 androidX-activity-ktx = { module = "androidx.activity:activity-ktx", version.ref = "view_component" }
 androidX-swiperefresh = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+androidX-paging = { module = "androidx.paging:paging-runtime-ktx", version.ref = "paging_version" }
+androidX-paging-common-ktx = { module = "androidx.paging:paging-common-ktx", version.ref = "paging_version" }
 # 3rd-party
 ## material
 material-design = "com.google.android.material:material:1.5.0"
@@ -63,7 +67,7 @@ kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlinKapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 
 [bundles]
-androidx = [ "androidX-arch-coreTesting", "androidX-appcompat", "androidX-core-ktx", "androidX-lifecycle-viewModel", "androidX-lifecycle-runtimeTesting", "androidX-lifecycle-java8", "androidX-recyclerview", "androidX-test-junit", "androidX-security-crypto", "androidX-fragment-ktx", "androidX-activity-ktx", "androidX-swiperefresh" ]
-kotlin = [ "kotlin-coroutine-core", "kotlin-coroutine-android", "kotlin-coroutine-test"]
-dagger = [ "dagger", "dagger-hilt-android" ]
-compiler = [ "dagger-compiler", "dagger-hilt-compiler" ]
+androidx = ["androidX-arch-coreTesting", "androidX-appcompat", "androidX-core-ktx", "androidX-lifecycle-viewModel", "androidX-lifecycle-runtimeTesting", "androidX-lifecycle-java8", "androidX-recyclerview", "androidX-test-junit", "androidX-security-crypto", "androidX-fragment-ktx", "androidX-activity-ktx", "androidX-paging", "androidX-swiperefresh" ]
+kotlin = ["kotlin-coroutine-core", "kotlin-coroutine-android", "kotlin-coroutine-test"]
+dagger = ["dagger", "dagger-hilt-android"]
+compiler = ["dagger-compiler", "dagger-hilt-compiler"]
