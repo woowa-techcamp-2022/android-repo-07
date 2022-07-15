@@ -1,4 +1,4 @@
-package org.woowatechcamp.githubapplication.presentation.issue.adapter
+package org.woowatechcamp.githubapplication.presentation.home.issue.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import org.woowatechcamp.githubapplication.data.issue.model.IssueResponseItem
 import org.woowatechcamp.githubapplication.databinding.ItemIssueBinding
-import org.woowatechcamp.githubapplication.presentation.view_util.ItemDiffCallback
+import org.woowatechcamp.githubapplication.util.ItemDiffCallback
 
 class IssueAdapter : ListAdapter<IssueResponseItem, IssueAdapter.IssueViewHolder>(
     ItemDiffCallback<IssueResponseItem>(
@@ -30,6 +30,7 @@ class IssueAdapter : ListAdapter<IssueResponseItem, IssueAdapter.IssueViewHolder
     inner class IssueViewHolder(private val binding : ItemIssueBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item : IssueResponseItem) {
             binding.issue = item.getModel()
+            binding.ivIssue.setImageResource(item.getModel().state.icon)
         }
     }
 }

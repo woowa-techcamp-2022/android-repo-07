@@ -1,7 +1,8 @@
-package org.woowatechcamp.githubapplication.data.user.model
+package org.woowatechcamp.githubapplication.data.user.entity
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
+import org.woowatechcamp.githubapplication.presentation.user.model.UserModel
 
 @Parcelize
 data class UserResponse(
@@ -44,4 +45,16 @@ data class UserResponse(
     val type: String?,
     val updated_at: String?,
     val url: String?
-) : Parcelable
+) : Parcelable {
+    fun getModel() = UserModel(
+        name = name.orEmpty(),
+        nickname = login.orEmpty(),
+        bio = bio.orEmpty(),
+        location = location.orEmpty(),
+        blog = blog.orEmpty(),
+        email = email.orEmpty(),
+        imgUrl = avatar_url.orEmpty(),
+        followers = followers ?: 0,
+        following = following ?: 0
+    )
+}

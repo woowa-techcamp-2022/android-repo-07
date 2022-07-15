@@ -1,4 +1,4 @@
-package org.woowatechcamp.githubapplication.presentation.issue.model
+package org.woowatechcamp.githubapplication.presentation.home.issue.model
 
 import org.woowatechcamp.githubapplication.R
 

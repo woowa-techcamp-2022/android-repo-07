@@ -1,6 +1,5 @@
-package org.woowatechcamp.githubapplication.presentation.issue
+package org.woowatechcamp.githubapplication.presentation.home.issue
 
-import android.graphics.Bitmap
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -28,7 +27,8 @@ class IssueViewModel @Inject constructor(
             issueRepository.getIssues(state)
         }.onSuccess { res ->
             if (res.body() == null) { _errorMessage.postValue("Issue 를 불러오는 데 오류가 발생했습니다.") }
-            else { _issueList.postValue(res.body()!!.toList()) }
+            else {
+                _issueList.postValue(res.body()!!.toList()) }
 
         }.onFailure { e ->
             _errorMessage.value = e.message

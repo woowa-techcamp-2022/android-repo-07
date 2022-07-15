@@ -1,4 +1,4 @@
-package org.woowatechcamp.githubapplication.presentation.notifications
+package org.woowatechcamp.githubapplication.presentation.home.notifications
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

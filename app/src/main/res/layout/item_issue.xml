@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="org.woowatechcamp.githubapplication.presentation.home.issue.model.IssueModel"/>
         <variable
             name="issue"
-            type="org.woowatechcamp.githubapplication.presentation.issue.model.IssueModel" />
+            type="IssueModel" />
     </data>
 
 
@@ -29,7 +31,6 @@
                 android:id="@+id/iv_issue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@{issue.state.icon}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,11 +54,11 @@
                 android:textColor="@color/grey"
                 android:textSize="14sp"
                 android:text="@{issue.number}"
-                app:layout_constraintBottom_toBottomOf="@id/iv_issue"
+                app:layout_constraintBottom_toBottomOf="@id/tv_issue_name"
                 app:layout_constraintEnd_toStartOf="@+id/tv_issue_date"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
                 app:layout_constraintStart_toEndOf="@+id/tv_issue_name"
-                app:layout_constraintTop_toTopOf="@+id/iv_issue" />
+                app:layout_constraintTop_toTopOf="@+id/tv_issue_name" />
 
             <TextView
                 android:id="@+id/tv_issue_date"

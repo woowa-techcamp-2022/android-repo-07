@@ -10,8 +10,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.woowatechcamp.githubapplication.R
-import org.woowatechcamp.githubapplication.data.user.model.UserResponse
+import org.woowatechcamp.githubapplication.data.user.entity.UserResponse
 import org.woowatechcamp.githubapplication.databinding.ActivityProfileBinding
+import org.woowatechcamp.githubapplication.presentation.user.model.UserModel
 import org.woowatechcamp.githubapplication.util.showSnackBar
 import java.net.URL
 
@@ -25,14 +26,13 @@ class ProfileActivity : AppCompatActivity() {
         setContentView(binding.root)
         setToolbar()
 
-        val item = intent.getParcelableExtra<UserResponse>("profile_item")
+        val item = intent.getParcelableExtra<UserModel>("profile_item")
         item?.let {
             binding.user = it
             binding.tvProfileFollow.text = "${it.followers} Followers ・ ${it.following} Following"
-            val url = it.avatar_url
             CoroutineScope(Dispatchers.IO).launch {
                 kotlin.runCatching {
-                    val mInputStream = URL(it.avatar_url).openStream()
+                    val mInputStream = URL(it.imgUrl).openStream()
                     BitmapFactory.decodeStream(mInputStream)
                 }.onSuccess {
                     withContext(Dispatchers.Main) {

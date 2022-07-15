@@ -1,18 +1,11 @@
-package org.woowatechcamp.githubapplication.presentation.issue.adapter
+package org.woowatechcamp.githubapplication.presentation.home.issue.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.*
-import android.view.MotionEvent.ACTION_DOWN
-import android.view.MotionEvent.ACTION_UP
 import android.view.animation.AnimationUtils
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.lifecycle.DefaultLifecycleObserver
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.findViewTreeLifecycleOwner
-import androidx.lifecycle.withCreated
 import org.woowatechcamp.githubapplication.R
 import org.woowatechcamp.githubapplication.data.issue.IssueCategory
 

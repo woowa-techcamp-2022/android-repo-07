@@ -1,4 +1,4 @@
-package org.woowatechcamp.githubapplication.data.user.model
+package org.woowatechcamp.githubapplication.data.user.entity
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

@@ -44,14 +44,15 @@
 
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/ll_issue_spin"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
             android:dropDownVerticalOffset="8dp"
             android:gravity="end"
             android:orientation="horizontal"
             android:overlapAnchor="false"
-            android:popupBackground="@drawable/bg_spin_issue" />
+            android:popupBackground="@drawable/bg_spin_issue"
+            />
 
     </LinearLayout>
 
@@ -68,7 +69,9 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_issue"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

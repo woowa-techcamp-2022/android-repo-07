@@ -1,7 +1,6 @@
-package org.woowatechcamp.githubapplication.presentation.notifications.adapter
+package org.woowatechcamp.githubapplication.presentation.home.notifications.adapter
 
 import android.graphics.BitmapFactory
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
@@ -12,8 +11,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.woowatechcamp.githubapplication.data.notifications.model.NotiResponseItem
 import org.woowatechcamp.githubapplication.databinding.ItemNotiBinding
-import org.woowatechcamp.githubapplication.presentation.view_util.ItemDiffCallback
-import org.woowatechcamp.githubapplication.util.DateUtil
+import org.woowatechcamp.githubapplication.util.ItemDiffCallback
 import java.net.URL
 
 class NotiAdapter : ListAdapter<NotiResponseItem, NotiAdapter.NotiViewHolder>(
@@ -37,10 +35,8 @@ class NotiAdapter : ListAdapter<NotiResponseItem, NotiAdapter.NotiViewHolder>(
 
     inner class NotiViewHolder(private val binding : ItemNotiBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item : NotiResponseItem) {
+            binding.noti = item.getModel()
             binding.apply {
-                tvNotiName.text = item.repository.name
-                tvNotiTitle.text = item.subject.title
-                tvNotiDate.text = DateUtil.getTimeDiff(item.updated_at)
                 CoroutineScope(Dispatchers.IO).launch {
                     val inputStream = URL(item.repository.owner.avatar_url).openStream()
                     val bitmap = BitmapFactory.decodeStream(inputStream)
@@ -48,15 +44,6 @@ class NotiAdapter : ListAdapter<NotiResponseItem, NotiAdapter.NotiViewHolder>(
                         ivNoti.setImageBitmap(bitmap)
                     }
                 }
-                val urls = item.subject.url.split("issues/")
-                if (urls.size > 1) {
-                    val num = urls[1].toInt()
-                    Log.d("HELLO", "issue num = ${num}")
-                    tvNotiNum.text = "#$num"
-                }
-
-
-
             }
         }
     }
