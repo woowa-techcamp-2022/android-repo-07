@@ -39,7 +39,7 @@ class SearchViewModel @Inject constructor(
         viewModelScope.launch {
             repoSearchUseCase(keyword, 0, 20)
                 .onSuccess {
-                    if(keyword != "")
+                    if(this@SearchViewModel.keyword != "")
                         _searchUiState.value = it.toUiState()
                     else
                         _searchUiState.value = SearchUiState.Empty
