@@ -11,14 +11,13 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import dagger.hilt.android.AndroidEntryPoint
 import org.woowatechcamp.githubapplication.R
-import org.woowatechcamp.githubapplication.data.notifications.model.NotiResponseItem
 import org.woowatechcamp.githubapplication.databinding.FragmentNotificationsBinding
 import org.woowatechcamp.githubapplication.presentation.home.notifications.adapter.NotiAdapter
+import org.woowatechcamp.githubapplication.presentation.home.notifications.model.NotiModel
 import org.woowatechcamp.githubapplication.util.ItemDecorationUtil
 import org.woowatechcamp.githubapplication.util.SwipeCallback
 import org.woowatechcamp.githubapplication.util.SwipeListener
 import org.woowatechcamp.githubapplication.util.ext.getDeliNumber
-import org.woowatechcamp.githubapplication.util.showSnackBar
 
 @AndroidEntryPoint
 class NotificationsFragment : Fragment(), SwipeListener, SwipeRefreshLayout.OnRefreshListener {
@@ -76,7 +75,7 @@ class NotificationsFragment : Fragment(), SwipeListener, SwipeRefreshLayout.OnRe
     }
 
     override fun swipeItem(viewHolder: RecyclerView.ViewHolder, direction: Int, position: Int) {
-        val list = ArrayList<NotiResponseItem>()
+        val list = ArrayList<NotiModel>()
         list.addAll(notiAdapter.currentList)
         val item = list[position]
         list.removeAt(position)

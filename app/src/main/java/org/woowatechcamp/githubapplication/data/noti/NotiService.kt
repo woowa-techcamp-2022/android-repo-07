@@ -2,6 +2,7 @@ package org.woowatechcamp.githubapplication.data.noti
 
 import org.woowatechcamp.githubapplication.data.notifications.model.NotiMarkResponse
 import org.woowatechcamp.githubapplication.data.notifications.model.NotiResponse
+import org.woowatechcamp.githubapplication.data.user.comment.CommentRespose
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.PATCH
@@ -16,4 +17,10 @@ interface NotiService {
     suspend fun markNoti(
         @Path("thread_id") threadId : Long
     ) : Response<NotiMarkResponse>
+
+    @GET("/repos/{repo}/{name}/comments")
+    suspend fun getComments(
+        @Path("repo") url : String,
+        @Path("name") name : String
+    ) : CommentRespose
 }
