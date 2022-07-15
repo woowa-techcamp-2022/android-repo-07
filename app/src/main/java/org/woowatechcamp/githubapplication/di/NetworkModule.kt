@@ -14,6 +14,7 @@ import org.woowatechcamp.githubapplication.GithubApplication
 import org.woowatechcamp.githubapplication.data.auth.AuthService
 import org.woowatechcamp.githubapplication.data.issue.IssueService
 import org.woowatechcamp.githubapplication.data.noti.NotiService
+import org.woowatechcamp.githubapplication.data.remote.service.SearchService
 import org.woowatechcamp.githubapplication.data.user.UserService
 import org.woowatechcamp.githubapplication.network.TokenInterceptor
 import org.woowatechcamp.githubapplication.util.AuthPreferences
@@ -115,4 +116,10 @@ object NetworkModule {
         @GithubRetrofit retrofit: Retrofit
     ) : NotiService = retrofit.create(NotiService::class.java)
 
+
+    @Singleton
+    @Provides
+    fun providesSearchService(
+        @GithubRetrofit retrofit: Retrofit
+    ) : SearchService = retrofit.create(SearchService::class.java)
 }

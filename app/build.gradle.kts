@@ -69,5 +69,6 @@ dependencies {
     implementation(libs.okhttp.loggingInterceptor)
     implementation(libs.junit)
     implementation(libs.material.design)
+    implementation(libs.androidX.paging.common.ktx)
     kapt(libs.bundles.compiler)
 }

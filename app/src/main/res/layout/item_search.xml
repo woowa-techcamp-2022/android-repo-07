@@ -91,12 +91,12 @@
             android:layout_width="@dimen/size_language_type_14dp"
             android:layout_height="0dp"
             android:layout_marginStart="12dp"
+            android:src="@color/purple"
             app:layout_constraintBottom_toBottomOf="@+id/iv_star"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintStart_toEndOf="@+id/tv_star_count"
             app:layout_constraintTop_toTopOf="@+id/iv_star"
-            app:shapeAppearance="@style/CornerSize50Percent"
-            tools:src="@color/purple" />
+            app:shapeAppearance="@style/CornerSize50Percent" />
 
         <TextView
             android:id="@+id/tv_language"
