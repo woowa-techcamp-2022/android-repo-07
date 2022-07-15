@@ -12,14 +12,19 @@
     <string name="search_description">Search all of GitHunb for People,\nRepositories, Organizations, Issues,\nand Pull Requests.</string>
     <string name="search_github">Serch GitHub</string>
 
+    <!-- profile -->
+    <string name="profile">Profile</string>
+    <string name="followers">Followers</string>
+    <string name="following">Following</string>
+    <string name="dot">・</string>
+    <string name="repositories">Repositories</string>
+    <string name="starred">Starred</string>
+
     <!-- tools -->
     <string name="jetbrains">JetBrains</string>
     <string name="search_item_description">The Kotlin Programming Language.</string>
     <string name="star_count">1.4k</string>
     <string name="kotlin">Kotlin</string>
-
-    <!-- profile   -->
-    <string name="profile">Profile</string>
 
     <!-- main -->
     <string name="filter">Filter</string>
@@ -31,4 +36,6 @@
     <string name="open">open</string>
     <string name="closed">closed</string>
     <string name="all">all</string>
+
+    <string name="location">Seoul, Korea</string>
 </resources>
