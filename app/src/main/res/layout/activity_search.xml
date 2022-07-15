@@ -58,6 +58,7 @@
             android:visibility="@{isNotEmpty? View.VISIBLE : View.GONE}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@+id/et_search"
+            tools:itemCount="3"
             tools:listitem="@layout/item_search" />
 
         <include

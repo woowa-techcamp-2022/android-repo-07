@@ -18,7 +18,7 @@ class SearchEditText(
 ) : LinearLayout(context, attrs) {
     private var keyListener: (() -> Unit)? = null
     private var deleteClickListener: (() -> Unit)? = null
-    private var textChangeListener: (() -> Unit)? = null
+    private var textChangeListener: ((Boolean) -> Unit)? = null
     val text: Editable
         get() = layoutAuthEditTextBinding.etSearch.text
     private lateinit var layoutAuthEditTextBinding: LayoutSearchEditBinding
@@ -34,7 +34,7 @@ class SearchEditText(
     }
 
     // textChange 관련 서버통신
-    fun setTextChangeListener(listener: () -> Unit) {
+    fun setTextChangeListener(listener: (Boolean) -> Unit) {
         textChangeListener = listener
     }
 
@@ -65,17 +65,17 @@ class SearchEditText(
         }
     }
 
-    fun clear() {
+    private fun clear() {
         layoutAuthEditTextBinding.etSearch.text.clear()
     }
 
     private fun initTextChaneEvent() {
         with(layoutAuthEditTextBinding) {
             etSearch.addTextChangedListener {
-                textChangeListener?.invoke()
                 with(etSearch.text.isNotEmpty()) {
                     isNotEmpty = this
                     layoutEdit.isSelected = this
+                    textChangeListener?.invoke(this)
                 }
             }
         }
