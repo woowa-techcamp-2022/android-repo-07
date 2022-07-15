@@ -16,6 +16,7 @@
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
         <item name="android:fitsSystemWindows">true</item>
+        <item name="windowNoTitle">true</item>
     </style>
     <style name="TabTextMain" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">14sp</item>

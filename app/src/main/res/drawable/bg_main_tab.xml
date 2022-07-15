@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item android:drawable="@drawable/rectangle_primary_radius_14" android:state_selected="true"/>
-    <item android:drawable="@drawable/rectangle_navy_radius_14" android:state_selected="false"/>
+    <item android:drawable="@drawable/tab_main_selected" android:state_selected="true"/>
+    <item android:drawable="@drawable/tab_main_unselected" android:state_selected="false"/>
 </selector>

@@ -21,5 +21,14 @@
     <!-- profile   -->
     <string name="profile">Profile</string>
 
+    <!-- main -->
     <string name="filter">Filter</string>
+
+    <!-- issue    -->
+    <string name="open_category">Open</string>
+    <string name="closed_category">Closed</string>
+    <string name="all_category">All</string>
+    <string name="open">open</string>
+    <string name="closed">closed</string>
+    <string name="all">all</string>
 </resources>
