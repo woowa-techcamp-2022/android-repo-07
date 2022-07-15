@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity() {
             R.id.menu_main_profile -> {
                 mViewModel.userInfo.value?.let {
                     val intent = Intent(this, ProfileActivity::class.java)
-                    intent.putExtra("profile_item", it.getModel())
+                    intent.putExtra("profile_item", it)
                     startActivity(intent)
                     return true
                 }
