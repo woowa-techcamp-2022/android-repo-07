@@ -14,6 +14,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.subscribe
 import kotlinx.coroutines.launch
 import org.woowatechcamp.githubapplication.BuildConfig
 import org.woowatechcamp.githubapplication.R
@@ -34,8 +35,8 @@ class SignInActivity : AppCompatActivity() {
         observeData()
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
         intent?.data?.let { item ->
             val code = item.getQueryParameter(getString(R.string.code))
             code?.let { viewModel.getToken(it) }

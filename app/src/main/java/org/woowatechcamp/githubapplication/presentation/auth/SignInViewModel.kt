@@ -32,7 +32,7 @@ class SignInViewModel @Inject constructor(
             preferences.accessToken = res.accessToken
             _signInState.value = SignInState.Success(res.accessToken)
         }.onFailure { e ->
-            _signInState.value = SignInState.Error(e.message ?: "오류")
+            _signInState.value = SignInState.Error(e.message ?: "오류 발생")
         }
     }
 }
