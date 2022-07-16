@@ -55,19 +55,19 @@ class SignInActivity : AppCompatActivity() {
         viewModel.signInState.flowWithLifecycle(lifecycle)
             .onEach {
                 when (it) {
-                    is SignInState.Empty -> {
+                    is UiState.Empty -> {
                         binding.btnSignIn.isEnabled = true
                     }
-                    is SignInState.Loading -> {
+                    is UiState.Loading -> {
                         binding.btnSignIn.isEnabled = false
                     }
-                    is SignInState.Success -> {
+                    is UiState.Success -> {
                         val intent = Intent(this@SignInActivity, MainActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(intent)
                     }
-                    is SignInState.Error -> {
-                        showSnackBar(binding.root, it.message, this@SignInActivity)
+                    is UiState.Error -> {
+                        showSnackBar(binding.root, it.msg, this@SignInActivity)
                         binding.btnSignIn.isEnabled = true
                     }
                 }
