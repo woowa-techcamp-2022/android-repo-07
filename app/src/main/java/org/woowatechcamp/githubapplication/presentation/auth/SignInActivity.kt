@@ -15,6 +15,7 @@ import org.woowatechcamp.githubapplication.BuildConfig
 import org.woowatechcamp.githubapplication.R
 import org.woowatechcamp.githubapplication.databinding.ActivitySignInBinding
 import org.woowatechcamp.githubapplication.presentation.home.MainActivity
+import org.woowatechcamp.githubapplication.util.UiState
 import org.woowatechcamp.githubapplication.util.showSnackBar
 
 @AndroidEntryPoint
