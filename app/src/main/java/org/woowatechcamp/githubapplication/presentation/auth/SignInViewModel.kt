@@ -23,17 +23,16 @@ class SignInViewModel @Inject constructor(
         get() = _signInState.asStateFlow()
 
     fun getToken(code: String) = viewModelScope.launch {
-        runCatching {
-            _signInState.value = UiState.Loading
-            repository.getToken(
-                BuildConfig.CLIENT_ID,
-                BuildConfig.CLIENT_SECRETS,
-                code)
-        }.onSuccess { res ->
+        _signInState.value = UiState.Loading
+        repository.getToken(
+            BuildConfig.CLIENT_ID,
+            BuildConfig.CLIENT_SECRETS,
+            code)
+        .onSuccess { res ->
             preferences.accessToken = res.accessToken
             _signInState.value = UiState.Success(res.accessToken)
         }.onFailure { e ->
-            _signInState.value = UiState.Error(e.message ?: "오류 발생")
+            _signInState.value = UiState.Error(e.message ?: "로그인에 실패했습니다.")
         }
     }
 }
