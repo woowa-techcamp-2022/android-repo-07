@@ -1,13 +1,9 @@
 package org.woowatechcamp.githubapplication.presentation.auth
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import org.woowatechcamp.githubapplication.BuildConfig
 import org.woowatechcamp.githubapplication.data.auth.AuthRepository
@@ -20,32 +16,30 @@ class SignInViewModel @Inject constructor(
     private val preferences: AuthPreferences
 ) : ViewModel() {
 
-    private val _code = MutableLiveData<String>()
-    private val _errorMessage = MutableLiveData<String>()
-    private val _accessSuccess = MutableSharedFlow<Boolean>()
+    private val _signInState = MutableStateFlow<SignInState>(SignInState.Empty)
 
-    val code : LiveData<String> = _code
-    val errorMessage : LiveData<String>  = _errorMessage
-    val accessSuccess : SharedFlow<Boolean> = _accessSuccess.asSharedFlow()
-
-    fun setCode(code: String) {
-        _code.postValue(code)
-    }
+    val signInState : StateFlow<SignInState>
+        get() = _signInState.asStateFlow()
 
     fun getToken(code: String) = viewModelScope.launch {
-        kotlin.runCatching {
+        runCatching {
+            _signInState.value = SignInState.Loading
             repository.getToken(
                 BuildConfig.CLIENT_ID,
                 BuildConfig.CLIENT_SECRETS,
                 code)
         }.onSuccess { res ->
-            if (res.body() == null) { _errorMessage.postValue("로그인에 실패했습니다.") }
-            else {
-                preferences.accessToken = res.body()!!.accessToken
-                _accessSuccess.emit(true)
-        }
+            preferences.accessToken = res.accessToken
+            _signInState.value = SignInState.Success(res.accessToken)
         }.onFailure { e ->
-            _errorMessage.postValue(e.message)
+            _signInState.value = SignInState.Error(e.message ?: "오류")
         }
     }
+}
+
+sealed class SignInState {
+    object Empty : SignInState()
+    object Loading : SignInState()
+    data class Success(val token : String) : SignInState()
+    class Error(val message : String) : SignInState()
 }
