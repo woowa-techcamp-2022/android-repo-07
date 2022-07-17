@@ -23,7 +23,7 @@ class NotiViewModel @Inject constructor(
     val markState : SharedFlow<UiState<String>>
         get() = _markState.asSharedFlow()
 
-    // noti 가져오기
+    // TODO 최적화하기
     fun getNoti() = viewModelScope.launch {
         _notiState.value = UiState.Loading
         notiRepository.getNoti()
