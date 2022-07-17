@@ -9,5 +9,6 @@ data class NotiModel(
     val imgUrl : String,
     val num : String,
     val commentNum : Int,
-    val url : String
+    val url : String,
+    val timeDiffNum : Long
 )
