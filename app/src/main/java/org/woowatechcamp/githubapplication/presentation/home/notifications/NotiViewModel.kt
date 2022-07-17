@@ -3,6 +3,7 @@ package org.woowatechcamp.githubapplication.presentation.home.notifications
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import org.woowatechcamp.githubapplication.data.noti.NotiRepository
@@ -15,22 +16,25 @@ class NotiViewModel @Inject constructor(
     private val notiRepository: NotiRepository
 ) : ViewModel() {
 
-    private val _notiState = MutableStateFlow<UiState<List<NotiModel>>>(UiState.Empty)
+    private val _notiState = MutableSharedFlow<UiState<List<NotiModel>>>(
+        replay = 1,
+        onBufferOverflow = BufferOverflow.DROP_OLDEST
+    )
     private val _markState = MutableSharedFlow<UiState<String>>()
 
-    val notiState : StateFlow<UiState<List<NotiModel>>>
-        get() = _notiState.asStateFlow()
+    val notiState : SharedFlow<UiState<List<NotiModel>>>
+        get() = _notiState.asSharedFlow()
     val markState : SharedFlow<UiState<String>>
         get() = _markState.asSharedFlow()
 
-    // noti 가져오기
+    // TODO 최적화하기
     fun getNoti() = viewModelScope.launch {
-        _notiState.value = UiState.Loading
+        _notiState.emit(UiState.Loading)
         notiRepository.getNoti()
             .onSuccess {
-                _notiState.value = UiState.Success(it) }
+                _notiState.emit(UiState.Success(it))             }
             .onFailure { e->
-                _notiState.value = UiState.Error(e.message ?: "알림을 가져오는 데 실패했습니다.") }
+                _notiState.emit(UiState.Error(e.message ?: "알림을 가져오는 데 실패했습니다.")) }
     }
 
     fun markNoti(threadId : String) = viewModelScope.launch {
