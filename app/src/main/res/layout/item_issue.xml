@@ -32,7 +32,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:imageResource="@{issue.state.icon}"/>
 
             <TextView
                 android:id="@+id/tv_issue_name"
@@ -41,7 +42,7 @@
                 android:layout_marginStart="11dp"
                 android:textColor="@color/grey"
                 android:textSize="14sp"
-                android:text="@{issue.name}"
+                android:text="@{issue.fullName}"
                 app:layout_constraintBottom_toBottomOf="@id/iv_issue"
                 app:layout_constraintStart_toEndOf="@+id/iv_issue"
                 app:layout_constraintTop_toTopOf="@+id/iv_issue" />

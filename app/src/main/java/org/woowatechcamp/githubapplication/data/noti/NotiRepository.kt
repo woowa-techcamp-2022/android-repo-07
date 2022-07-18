@@ -1,6 +1,8 @@
 package org.woowatechcamp.githubapplication.data.noti
 
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.woowatechcamp.githubapplication.data.notifications.model.NotiMarkResponse
 import org.woowatechcamp.githubapplication.presentation.home.notifications.model.NotiModel
 import org.woowatechcamp.githubapplication.util.ext.*
@@ -10,6 +12,7 @@ import javax.inject.Inject
 class NotiRepository @Inject constructor(
     private val service : NotiService
 ) {
+
     suspend fun getNoti() : Result<List<NotiModel>> {
         return runCatching {
             val resultNotiList = ArrayList<NotiModel>()
@@ -44,7 +47,7 @@ class NotiRepository @Inject constructor(
         }
     }
 
-    suspend fun markNoti(threadId : String) : Result<Response<NotiMarkResponse>>{
+    suspend fun markNoti(threadId : String) : Result<Response<NotiMarkResponse>> {
         return runCatching {
             service.markNoti(threadId)
         }
