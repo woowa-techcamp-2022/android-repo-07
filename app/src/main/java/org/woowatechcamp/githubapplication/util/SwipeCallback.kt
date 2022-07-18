@@ -48,8 +48,8 @@ class SwipeCallback(
             isCurrentlyActive
         )
         if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
-            val direction = if (dX > 0) 1 else 0
-            if (direction == 0) {
+            val direction = if (dX > 0) MOVE_TO_RIGHT else MOVE_TO_LEFT
+            if (direction == MOVE_TO_LEFT) {
                 viewHolder.itemView.let {
                     val bg = ColorDrawable()
                     bg.apply {
@@ -89,5 +89,10 @@ class SwipeCallback(
         target: RecyclerView.ViewHolder
     ): Boolean {
         return false
+    }
+
+    companion object {
+        private const val MOVE_TO_RIGHT = 1
+        private const val MOVE_TO_LEFT = 0
     }
 }

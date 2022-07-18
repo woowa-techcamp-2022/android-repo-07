@@ -25,3 +25,11 @@ fun Date.getTimeDiff() : String {
         "오류"
     }
 }
+
+fun Date.getTimeDiffNum() : Long {
+    return try {
+        Date().time - this.time
+    } catch (e : Exception) {
+        0
+    }
+}

@@ -12,11 +12,12 @@ fun String.getDate() : Date {
     }
 }
 
-fun String.getDeliNumber(deli : String) : Long {
+fun String.getDeliNumber(deli : String) : Int {
     val urls = this.split(deli)
-    return if (urls.size > 1) {
-        urls[1].toLong()
-    } else {
-        0
-    }
+    return if (urls.size > 1) urls[1].toInt() else 0
+}
+
+fun String.getDeli(deli : String) : String? {
+    val urls = this.split(deli)
+    return if (urls.size > 1) urls[1] else null
 }
