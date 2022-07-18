@@ -19,6 +19,7 @@ import org.woowatechcamp.githubapplication.presentation.home.issue.IssueFragment
 import org.woowatechcamp.githubapplication.presentation.home.notifications.NotificationsFragment
 import org.woowatechcamp.githubapplication.presentation.profile.ProfileActivity
 import org.woowatechcamp.githubapplication.presentation.search.SearchActivity
+import org.woowatechcamp.githubapplication.util.ext.startActivity
 import org.woowatechcamp.githubapplication.util.showSnackBar
 import kotlin.math.max
 
@@ -87,13 +88,11 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_main_search -> {
-                startActivity(Intent(this, SearchActivity::class.java))
+                startActivity<SearchActivity>()
             }
             R.id.menu_main_profile -> {
                 mViewModel.userInfo.value?.let {
-                    val intent = Intent(this, ProfileActivity::class.java)
-                    intent.putExtra("profile_item", it.getModel())
-                    startActivity(intent)
+                    startActivity<ProfileActivity>(Pair("profile_item", it))
                     return true
                 }
                 showSnackBar(binding.root, "데이터를 불러오는 데 실패했습니다.", this)
