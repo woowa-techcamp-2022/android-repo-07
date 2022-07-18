@@ -70,5 +70,6 @@ dependencies {
     implementation(libs.junit)
     implementation(libs.material.design)
     implementation(libs.androidX.paging.common.ktx)
+    implementation(libs.glide)
     kapt(libs.bundles.compiler)
 }

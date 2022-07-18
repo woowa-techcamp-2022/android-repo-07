@@ -13,6 +13,7 @@ kotlin-coroutine = "1.6.3"
 okhttp = "4.9.3"
 retrofit = "2.9.0"
 gson = "2.8.9"
+glide = "4.13.2"
 
 paging_version = "3.1.1"
 
@@ -50,6 +51,10 @@ dagger-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref
 kotlin-coroutine-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlin-coroutine" }
 kotlin-coroutine-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlin-coroutine" }
 kotlin-coroutine-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlin-coroutine" }
+## Glide
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+glide-compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "glide" }
+
 ## etc
 okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
 okhttp-bom = { module = "com.squareup.okhttp3:okhttp-bom", version.ref = "okhttp" }
@@ -70,4 +75,4 @@ kotlinKapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 androidx = ["androidX-arch-coreTesting", "androidX-appcompat", "androidX-core-ktx", "androidX-lifecycle-viewModel", "androidX-lifecycle-runtimeTesting", "androidX-lifecycle-java8", "androidX-recyclerview", "androidX-test-junit", "androidX-security-crypto", "androidX-fragment-ktx", "androidX-activity-ktx", "androidX-paging", "androidX-swiperefresh" ]
 kotlin = ["kotlin-coroutine-core", "kotlin-coroutine-android", "kotlin-coroutine-test"]
 dagger = ["dagger", "dagger-hilt-android"]
-compiler = ["dagger-compiler", "dagger-hilt-compiler"]
+compiler = ["dagger-compiler", "dagger-hilt-compiler", "glide-compiler"]
