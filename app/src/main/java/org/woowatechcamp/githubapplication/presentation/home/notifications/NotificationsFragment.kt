@@ -16,9 +16,7 @@ import kotlinx.coroutines.flow.onEach
 import org.woowatechcamp.githubapplication.R
 import org.woowatechcamp.githubapplication.databinding.FragmentNotificationsBinding
 import org.woowatechcamp.githubapplication.presentation.home.notifications.adapter.NotiAdapter
-import org.woowatechcamp.githubapplication.presentation.home.notifications.model.NotiModel
 import org.woowatechcamp.githubapplication.util.*
-import org.woowatechcamp.githubapplication.util.ext.getDeli
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -66,15 +64,12 @@ class NotificationsFragment : Fragment() {
                 direction: Int,
                 position: Int
             ) {
-                val list = mutableListOf<NotiModel>()
-                list.addAll(notiAdapter.currentList)
-
+                val list = notiAdapter.currentList.toMutableList()
                 val item = list[position]
                 list.removeAt(position)
-                notiAdapter.submitList(list.toList())
+                notiAdapter.submitList(list)
 
-                val threadId = item.url.getDeli("threads/")
-                threadId?.let{ viewModel.markNoti(it) }
+                item.threadId?.let { viewModel.markNoti(it) }
             }
         }
 
@@ -95,6 +90,24 @@ class NotificationsFragment : Fragment() {
                     is UiState.Error -> {
                         showSnackBar(binding.root, it.msg, requireActivity())
                         binding.swipeNoti.isRefreshing = false }
+                    else -> {}
+                }
+            }.launchIn(lifecycleScope)
+
+        viewModel.notiCommentState.flowWithLifecycle(viewLifecycleOwner.lifecycle)
+            .onEach {
+                when (it) {
+                    is UiState.Success -> {
+                        val item = it.value
+                        with(notiAdapter.currentList) {
+                            find { noti -> noti.id == item.id }?.let { found ->
+                                found.commentNum = item.commentNum
+                                notiAdapter.notifyItemChanged(indexOf(found))
+                            }
+                        }
+                    }
+                    is UiState.Error -> {
+                        showSnackBar(binding.root, it.msg, requireActivity()) }
                     else -> {}
                 }
             }.launchIn(lifecycleScope)

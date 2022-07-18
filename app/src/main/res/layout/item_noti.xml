@@ -91,11 +91,11 @@
                 android:id="@+id/tv_noti_comment"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:background="@drawable/rectangle_white_radius_3"
+                android:background='@{noti.commentNum >= 0 ? @drawable/rectangle_white_radius_3 : @drawable/rectangle_grey_radius_3}'
                 android:gravity="center"
                 android:textColor="@color/primary"
                 android:textSize="12sp"
-                android:text="@{String.valueOf(noti.commentNum)}"
+                android:text='@{noti.commentNum >= 0 ? String.valueOf(noti.commentNum) : ""}'
                 app:layout_constraintBaseline_toBaselineOf="@+id/tv_noti_title"
                 app:layout_constraintEnd_toEndOf="parent" />
 

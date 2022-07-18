@@ -8,7 +8,16 @@ data class NotiModel(
     val timeDiff : String,
     val imgUrl : String,
     val num : String,
-    val commentNum : Int,
+    var commentNum : Int,
     val url : String,
-    val timeDiffNum : Long
-)
+    val timeDiffNum : Long,
+    val repo : String,
+    val threadId : String?
+) {
+    fun refreshComment(comments : Int) : NotiModel {
+        return NotiModel(
+            id, name, fullName, title, timeDiff, imgUrl,
+            num, comments, url, timeDiffNum, repo, threadId
+        )
+    }
+}

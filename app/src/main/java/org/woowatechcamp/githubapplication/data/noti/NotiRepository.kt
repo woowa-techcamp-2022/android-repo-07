@@ -1,7 +1,7 @@
 package org.woowatechcamp.githubapplication.data.noti
 
-import kotlinx.coroutines.*
 import org.woowatechcamp.githubapplication.data.notifications.model.NotiMarkResponse
+import org.woowatechcamp.githubapplication.data.user.comment.CommentResponse
 import org.woowatechcamp.githubapplication.presentation.home.notifications.model.NotiModel
 import org.woowatechcamp.githubapplication.util.ext.*
 import retrofit2.Response
@@ -12,39 +12,35 @@ class NotiRepository @Inject constructor(
 ) {
     suspend fun getNoti() : Result<List<NotiModel>> {
         return runCatching {
-            val resultNotiList = ArrayList<NotiModel>()
-            withContext(Dispatchers.IO) {
-                val notiList = service.getNoti()
-                notiList.forEach { noti ->
-                    launch {
-                        val issue = service.getComments(
-                            noti.repository.owner.login,
-                            noti.repository.name)
-                        resultNotiList.add(
-                            NotiModel(
-                                id = noti.id,
-                                name = noti.repository.name,
-                                fullName = noti.repository.full_name,
-                                title = noti.subject.title,
-                                timeDiff = noti.updated_at.getDate().getTimeDiff(),
-                                imgUrl = noti.repository.owner.avatar_url,
-                                num = noti.subject.url.getDeliNumber("issues/").getIndexString(),
-                                commentNum = issue.size,
-                                url = noti.url,
-                                timeDiffNum = noti.updated_at.getDate().getTimeDiffNum()
-                            )
-                        )
-                    }
+            val notiList = service.getNoti()
+            notiList.map { noti ->
+                with(noti) {
+                    NotiModel(
+                        id = id,
+                        name = repository.name,
+                        fullName = repository.full_name,
+                        title = subject.title,
+                        timeDiff = updated_at.getDate().getTimeDiff(),
+                        imgUrl = repository.owner.avatar_url,
+                        num = subject.url.getDeliNumber("issues/").getIndexString(),
+                        commentNum = -1,
+                        url = url,
+                        timeDiffNum = updated_at.getDate().getTimeDiffNum(),
+                        repo = repository.owner.login,
+                        threadId = url.getDeli("threads/")
+                    )
                 }
-            }
-            withContext(Dispatchers.Default) {
-                resultNotiList.sortBy { it.timeDiffNum }
-            }
-            resultNotiList
+            }.sortedBy { noti -> noti.timeDiffNum }
         }
     }
 
-    suspend fun markNoti(threadId : String) : Result<Response<NotiMarkResponse>>{
+    suspend fun getComment(noti : NotiModel) : Result<List<CommentResponse>> {
+        return runCatching {
+            service.getComments(noti.repo, noti.name)
+        }
+    }
+
+    suspend fun markNoti(threadId : String) : Result<Response<NotiMarkResponse>> {
         return runCatching {
             service.markNoti(threadId)
         }

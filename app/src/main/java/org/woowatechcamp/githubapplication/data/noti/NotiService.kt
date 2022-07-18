@@ -2,7 +2,7 @@ package org.woowatechcamp.githubapplication.data.noti
 
 import org.woowatechcamp.githubapplication.data.noti.model.NotiResponse
 import org.woowatechcamp.githubapplication.data.notifications.model.NotiMarkResponse
-import org.woowatechcamp.githubapplication.data.user.comment.CommentRespose
+import org.woowatechcamp.githubapplication.data.user.comment.CommentResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.PATCH
@@ -20,7 +20,7 @@ interface NotiService {
     // Comment 개수 가져오기
     @GET("/repos/{repo}/{name}/comments")
     suspend fun getComments(
-        @Path("repo") url : String,
+        @Path("repo") repo : String,
         @Path("name") name : String
-    ) : List<CommentRespose>
+    ) : List<CommentResponse>
 }
