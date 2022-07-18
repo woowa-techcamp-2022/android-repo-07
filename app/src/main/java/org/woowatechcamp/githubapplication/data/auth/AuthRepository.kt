@@ -13,6 +13,5 @@ class AuthRepository @Inject constructor(private val service : AuthService)  {
       return runCatching {
           service.getToken(clientId, clientSecrets, code)
       }
-
     }
 }
