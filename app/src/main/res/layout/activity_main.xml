@@ -45,7 +45,7 @@
         app:tabSelectedTextColor="@color/white"
         app:tabTextAppearance="@style/TabTextMain"
         app:tabGravity="fill"
-        />
+        app:tabMode="fixed"/>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vp_main"

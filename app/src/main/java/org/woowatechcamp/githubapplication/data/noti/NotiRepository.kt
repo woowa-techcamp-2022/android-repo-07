@@ -10,4 +10,6 @@ class NotiRepository @Inject constructor(
     suspend fun getNoti() = service.getNoti()
 
     suspend fun markNoti(threadId : Long) = service.markNoti(threadId)
+
+    suspend fun getComments(repo : String, name : String) = service.getComments(repo, name)
 }

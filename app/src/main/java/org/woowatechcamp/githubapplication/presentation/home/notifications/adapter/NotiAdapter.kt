@@ -9,13 +9,13 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.woowatechcamp.githubapplication.data.notifications.model.NotiResponseItem
 import org.woowatechcamp.githubapplication.databinding.ItemNotiBinding
+import org.woowatechcamp.githubapplication.presentation.home.notifications.model.NotiModel
 import org.woowatechcamp.githubapplication.util.ItemDiffCallback
 import java.net.URL
 
-class NotiAdapter : ListAdapter<NotiResponseItem, NotiAdapter.NotiViewHolder>(
-    ItemDiffCallback<NotiResponseItem>(
+class NotiAdapter : ListAdapter<NotiModel, NotiAdapter.NotiViewHolder>(
+    ItemDiffCallback<NotiModel>(
         onContentsTheSame = { old, new -> old == new },
         onItemsTheSame = { old, new -> old.id == new.id }
     )
@@ -34,11 +34,11 @@ class NotiAdapter : ListAdapter<NotiResponseItem, NotiAdapter.NotiViewHolder>(
     }
 
     inner class NotiViewHolder(private val binding : ItemNotiBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item : NotiResponseItem) {
-            binding.noti = item.getModel()
+        fun bind(item : NotiModel) {
+            binding.noti = item
             binding.apply {
                 CoroutineScope(Dispatchers.IO).launch {
-                    val inputStream = URL(item.repository.owner.avatar_url).openStream()
+                    val inputStream = URL(item.imgUrl).openStream()
                     val bitmap = BitmapFactory.decodeStream(inputStream)
                     withContext(Dispatchers.Main) {
                         ivNoti.setImageBitmap(bitmap)

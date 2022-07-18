@@ -48,7 +48,7 @@
             app:layout_constraintGuide_end="24dp" />
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/iv_profile_img"
+            android:id="@+id/iv_profile"
             android:layout_width="80dp"
             android:layout_height="80dp"
             app:layout_constraintStart_toStartOf="@id/guideline_start"
@@ -66,7 +66,7 @@
             android:lineHeight="27.72sp"
             android:layout_marginStart="16dp"
             app:layout_constraintVertical_chainStyle="spread"
-            app:layout_constraintStart_toEndOf="@+id/iv_profile_img"
+            app:layout_constraintStart_toEndOf="@+id/iv_profile"
             app:layout_constraintTop_toBottomOf="@+id/toolbar_profile"
             app:layout_constraintBottom_toTopOf="@+id/tv_profile_nickname"/>
 
@@ -98,7 +98,7 @@
             android:background="@drawable/rectangle_navy_radius_7"
             app:layout_constraintStart_toStartOf="@+id/tv_profile_name"
             app:layout_constraintTop_toBottomOf="@+id/tv_profile_nickname"
-            app:layout_constraintBottom_toBottomOf="@id/iv_profile_img"/>
+            app:layout_constraintBottom_toBottomOf="@id/iv_profile"/>
 
         <View
             android:id="@+id/line_profile"
@@ -108,7 +108,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:background="@color/navy"
             android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/iv_profile_img"/>
+            app:layout_constraintTop_toBottomOf="@+id/iv_profile"/>
 
         <TextView
             android:id="@+id/tv_profile_location"
@@ -157,7 +157,7 @@
             app:drawableTint="@color/grey" />
 
         <TextView
-            android:id="@+id/tv_profile_follow"
+            android:id="@+id/tv_person"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="17dp"
@@ -172,6 +172,94 @@
 
 
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/rectangle_navy_radius_14"
+            android:padding="16dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_person"
+            app:layout_constraintTop_toBottomOf="@+id/tv_person">
+
+            <ImageView
+                android:id="@+id/iv_repo"
+                android:layout_width="@dimen/size_icon_40"
+                android:layout_height="0dp"
+                android:background="@drawable/rectangle_primary_radius_14"
+                android:padding="8dp"
+                android:scaleType="center"
+                android:src="@drawable/ic_bookmark_24"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_repo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/repositories"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_repo"
+                app:layout_constraintStart_toEndOf="@+id/iv_repo"
+                app:layout_constraintTop_toTopOf="@+id/iv_repo" />
+
+            <ImageView
+                android:id="@+id/iv_starred"
+                android:layout_width="@dimen/size_icon_40"
+                android:layout_height="0dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/rectangle_primary_radius_14"
+                android:padding="8dp"
+                android:scaleType="center"
+                android:src="@drawable/ic_star_border_24"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_repo"
+                app:tint="@color/white" />
+
+            <TextView
+                android:id="@+id/tv_starred"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/starred"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_starred"
+                app:layout_constraintStart_toStartOf="@+id/tv_repo"
+                app:layout_constraintTop_toTopOf="@+id/iv_starred" />
+
+            <TextView
+                android:id="@+id/tv_repo_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:text="@{String.valueOf(user.repoNum)}"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_repo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_repo"
+                tools:text="@string/star_count" />
+
+            <TextView
+                android:id="@+id/tv_star_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:text="@{String.valueOf(user.starredNum)}"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_starred"
+                app:layout_constraintEnd_toEndOf="@+id/tv_repo_count"
+                app:layout_constraintTop_toTopOf="@+id/tv_starred"
+                tools:text="@string/star_count" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 

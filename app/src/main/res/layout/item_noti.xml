@@ -95,7 +95,7 @@
                 android:gravity="center"
                 android:textColor="@color/primary"
                 android:textSize="12sp"
-                android:text="1"
+                android:text="@{String.valueOf(noti.commentNum)}"
                 app:layout_constraintBaseline_toBaselineOf="@+id/tv_noti_title"
                 app:layout_constraintEnd_toEndOf="parent" />
 

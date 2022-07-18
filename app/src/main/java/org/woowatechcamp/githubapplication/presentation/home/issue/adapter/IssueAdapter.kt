@@ -1,5 +1,6 @@
 package org.woowatechcamp.githubapplication.presentation.home.issue.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
@@ -29,6 +30,9 @@ class IssueAdapter : ListAdapter<IssueResponseItem, IssueAdapter.IssueViewHolder
 
     inner class IssueViewHolder(private val binding : ItemIssueBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item : IssueResponseItem) {
+            item.updated_at
+            Log.d("WHIY", "origin\n${item.updated_at}")
+            Log.d("WHIY", "origin\n${item.getModel().timeDiff}")
             binding.issue = item.getModel()
             binding.ivIssue.setImageResource(item.getModel().state.icon)
         }

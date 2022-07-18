@@ -5,7 +5,7 @@ import java.util.*
 
 fun String.getDate() : Date {
     return try {
-        val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+        val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX")
         format.parse(this)
     } catch (e : Exception) {
         return Date()

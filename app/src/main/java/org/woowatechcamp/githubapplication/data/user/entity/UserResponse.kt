@@ -45,16 +45,4 @@ data class UserResponse(
     val type: String?,
     val updated_at: String?,
     val url: String?
-) : Parcelable {
-    fun getModel() = UserModel(
-        name = name.orEmpty(),
-        nickname = login.orEmpty(),
-        bio = bio.orEmpty(),
-        location = location.orEmpty(),
-        blog = blog.orEmpty(),
-        email = email.orEmpty(),
-        imgUrl = avatar_url.orEmpty(),
-        followers = followers ?: 0,
-        following = following ?: 0
-    )
-}
+) : Parcelable
