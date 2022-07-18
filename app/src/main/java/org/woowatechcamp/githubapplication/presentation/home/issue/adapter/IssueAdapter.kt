@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import org.woowatechcamp.githubapplication.data.issue.model.IssueResponseItem
+import org.woowatechcamp.githubapplication.data.issue.model.IssueResponse
 import org.woowatechcamp.githubapplication.databinding.ItemIssueBinding
 import org.woowatechcamp.githubapplication.util.ItemDiffCallback
 
-class IssueAdapter : ListAdapter<IssueResponseItem, IssueAdapter.IssueViewHolder>(
-    ItemDiffCallback<IssueResponseItem>(
+class IssueAdapter : ListAdapter<IssueResponse, IssueAdapter.IssueViewHolder>(
+    ItemDiffCallback<IssueResponse>(
         onContentsTheSame = { old, new -> old == new },
         onItemsTheSame = { old, new -> old.id == new.id }
     )
@@ -29,7 +29,7 @@ class IssueAdapter : ListAdapter<IssueResponseItem, IssueAdapter.IssueViewHolder
     }
 
     inner class IssueViewHolder(private val binding : ItemIssueBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item : IssueResponseItem) {
+        fun bind(item : IssueResponse) {
             item.updated_at
             Log.d("WHIY", "origin\n${item.updated_at}")
             Log.d("WHIY", "origin\n${item.getModel().timeDiff}")
