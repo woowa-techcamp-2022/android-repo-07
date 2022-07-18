@@ -11,5 +11,5 @@ interface UserService {
     @GET("/users/{name}/starred")
     suspend fun getStarred(
         @Path("name") name : String
-    ) : StarredResponse
+    ) : List<StarredResponse>
 }
