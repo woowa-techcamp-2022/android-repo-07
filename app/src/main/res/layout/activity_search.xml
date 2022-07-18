@@ -38,7 +38,6 @@
 
         </androidx.appcompat.widget.Toolbar>
 
-        <!--TODO : 해당 부분 커스텀 뷰로 바꿀 예정-->
         <org.woowatechcamp.githubapplication.presentation.search.custom.SearchEditText
             android:id="@+id/et_search"
             android:layout_width="0dp"
@@ -59,6 +58,7 @@
             android:visibility="@{isNotEmpty? View.VISIBLE : View.GONE}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@+id/et_search"
+            tools:itemCount="3"
             tools:listitem="@layout/item_search" />
 
         <include

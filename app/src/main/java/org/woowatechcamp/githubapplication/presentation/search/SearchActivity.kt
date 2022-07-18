@@ -30,9 +30,13 @@ class SearchActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_search)
+        binding.toolbarSearch.setNavigationOnClickListener {
+            finish()
+        }
         binding.lifecycleOwner = this
         setContentView(binding.root)
-
+        getRepoSearch(viewModel.keyword)
+        initTextChangeEvent()
         initAdapter()
         observeData()
     }
@@ -43,7 +47,7 @@ class SearchActivity : AppCompatActivity() {
                 when (it) {
                     is SearchViewModel.SearchUiState.Success -> {
                         isRepoNotEmpty(true)
-                        searchAdapter.submitList(it.data)
+                        searchAdapter.submitList(it.data.toList())
                     }
                     is SearchViewModel.SearchUiState.Empty -> {
                         isRepoNotEmpty(false)
@@ -56,6 +60,27 @@ class SearchActivity : AppCompatActivity() {
                     }
                 }
             }.launchIn(lifecycleScope)
+    }
+
+    private fun getRepoSearch(kewyord: String) {
+        // TODO : 페이징 수정 예정
+//        viewModel.getRepoSearch(viewModel.keyword).flowWithLifecycle(lifecycle)
+//            .onEach {
+//                searchAdapter.submitData(it)
+//            }
+//            .launchIn(lifecycleScope)
+    }
+
+    private fun initTextChangeEvent() {
+        binding.etSearch.setTextChangeListener {
+            viewModel.setLoading()
+            viewModel.textChangeAction.invoke(binding.etSearch.text.toString())
+            isRepoNotEmpty(it)
+        }
+
+        binding.etSearch.setDeleteClickListener {
+            viewModel.setEmpty()
+        }
     }
 
     private fun isRepoNotEmpty(isNotEmpty: Boolean) {
