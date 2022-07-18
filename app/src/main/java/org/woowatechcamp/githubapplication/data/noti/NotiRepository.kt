@@ -47,7 +47,7 @@ class NotiRepository @Inject constructor(
         }
     }
 
-    suspend fun markNoti(threadId : String) : Result<Response<NotiMarkResponse>>{
+    suspend fun markNoti(threadId : String) : Result<Response<NotiMarkResponse>> {
         return runCatching {
             service.markNoti(threadId)
         }

@@ -10,17 +10,17 @@ fun Date.getTimeDiff() : String {
         val diffDay = diffHour / 24
         val diffMonth = diffDay / 30
 
-        if (diffHour < 1) {
+        if (diffHour < 1)
             "${diffMin}분 전"
-        } else if (diffHour < 24) {
+        else if (diffHour < 24)
             "${diffHour}시간 전"
-        } else if (diffDay < 30) {
+        else if (diffDay < 30)
             "${diffDay}일 전"
-        } else if (diffMonth < 12) {
+        else if (diffMonth < 12)
             "${diffMonth}달 전"
-        } else {
+        else
             "${diffMonth / 12}년 전"
-        }
+
     } catch (e : Exception) {
         "오류"
     }

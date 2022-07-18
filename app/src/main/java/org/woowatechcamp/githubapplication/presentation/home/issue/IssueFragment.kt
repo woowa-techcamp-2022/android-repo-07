@@ -21,10 +21,12 @@ import org.woowatechcamp.githubapplication.presentation.home.issue.adapter.Issue
 import org.woowatechcamp.githubapplication.presentation.home.issue.adapter.IssueSpinAdapter
 import org.woowatechcamp.githubapplication.util.ItemDecorationUtil
 import org.woowatechcamp.githubapplication.util.UiState
+import org.woowatechcamp.githubapplication.util.ResolutionMetrics
 import org.woowatechcamp.githubapplication.util.showSnackBar
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class IssueFragment : Fragment(){
+class IssueFragment : Fragment() {
 
     private var _binding : FragmentIssueBinding? = null
     private val binding get() = _binding!!
@@ -32,6 +34,9 @@ class IssueFragment : Fragment(){
     private var option = "open"
 
     private val viewModel by viewModels<IssueViewModel>()
+
+    @Inject
+    lateinit var metrics: ResolutionMetrics
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,7 +60,8 @@ class IssueFragment : Fragment(){
         issueAdapter = IssueAdapter()
         binding.rvIssue.apply {
             adapter = issueAdapter
-            addItemDecoration(ItemDecorationUtil.ItemDividerDecoration(1f, 0f, requireActivity().getColor(R.color.navy)))
+            addItemDecoration(ItemDecorationUtil.ItemDividerDecoration(
+                metrics.toPixel(1), 0f, requireActivity().getColor(R.color.navy)))
         }
         val spinItems = listOf(
             IssueCategory(getString(R.string.open_category), false),
@@ -71,9 +77,8 @@ class IssueFragment : Fragment(){
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                     p1?.let {
                         option = when (p2) {
-                            0 -> { getString(R.string.open) }
-                            1 -> { getString(R.string.closed) }
-                            2 -> { getString(R.string.all) }
+                            STATE_CLOSED -> { getString(R.string.closed) }
+                            STATE_ALL -> { getString(R.string.all) }
                             else -> { getString(R.string.open) }
                         }
                         for (i in spinItems.indices) {
@@ -109,5 +114,11 @@ class IssueFragment : Fragment(){
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
+    }
+
+    companion object {
+        private const val STATE_OPEN = 0
+        private const val STATE_CLOSED = 1
+        private const val STATE_ALL = 2
     }
 }
