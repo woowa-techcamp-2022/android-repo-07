@@ -19,15 +19,13 @@
     <string name="dot">・</string>
     <string name="repositories">Repositories</string>
     <string name="starred">Starred</string>
+    <string name="filter">Filter</string>
 
     <!-- tools -->
     <string name="jetbrains">JetBrains</string>
     <string name="search_item_description">The Kotlin Programming Language.</string>
     <string name="star_count">1.4k</string>
     <string name="kotlin">Kotlin</string>
-
-    <!-- main -->
-    <string name="filter">Filter</string>
 
     <!-- issue    -->
     <string name="open_category">Open</string>
@@ -36,6 +34,5 @@
     <string name="open">open</string>
     <string name="closed">closed</string>
     <string name="all">all</string>
-
     <string name="location">Seoul, Korea</string>
 </resources>
