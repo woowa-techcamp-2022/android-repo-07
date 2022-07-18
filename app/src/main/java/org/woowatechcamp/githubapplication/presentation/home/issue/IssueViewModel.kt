@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import org.woowatechcamp.githubapplication.data.issue.IssueRepository
-import org.woowatechcamp.githubapplication.data.issue.model.IssueResponseItem
+import org.woowatechcamp.githubapplication.data.issue.model.IssueResponse
 import javax.inject.Inject
 
 @HiltViewModel
@@ -15,11 +15,11 @@ class IssueViewModel @Inject constructor(
     private val issueRepository: IssueRepository
 ) : ViewModel() {
 
-    private val _issueList = MutableLiveData<List<IssueResponseItem>>()
+    private val _issueList = MutableLiveData<List<IssueResponse>>()
     private val _errorMessage = MutableLiveData<String>()
 
     val errorMessage : LiveData<String> = _errorMessage
-    val issueList : LiveData<List<IssueResponseItem>> = _issueList
+    val issueList : LiveData<List<IssueResponse>> = _issueList
 
     // 이슈 가져오기
     fun getIssues(state : String) = viewModelScope.launch {

@@ -1,7 +1,7 @@
 package org.woowatechcamp.githubapplication.data.noti
 
+import org.woowatechcamp.githubapplication.data.noti.model.NotiResponse
 import org.woowatechcamp.githubapplication.data.notifications.model.NotiMarkResponse
-import org.woowatechcamp.githubapplication.data.notifications.model.NotiResponse
 import org.woowatechcamp.githubapplication.data.user.comment.CommentRespose
 import retrofit2.Response
 import retrofit2.http.GET
@@ -11,7 +11,7 @@ import retrofit2.http.Path
 interface NotiService {
     // Notifications 가져오기
     @GET("/notifications")
-    suspend fun getNoti() : NotiResponse
+    suspend fun getNoti() : List<NotiResponse>
     // 특정 Notifications 제거
     @PATCH("/notifications/threads/{thread_id}")
     suspend fun markNoti(
@@ -22,5 +22,5 @@ interface NotiService {
     suspend fun getComments(
         @Path("repo") url : String,
         @Path("name") name : String
-    ) : CommentRespose
+    ) : List<CommentRespose>
 }
