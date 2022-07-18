@@ -5,7 +5,7 @@
     <string name="sign_in_btn">GitHub 로그인</string>
     <string name="main_tab_title_issue">Issue</string>
     <string name="main_tab_title_notifications">Notifications</string>
-
+    <string name="code">code</string>
     <!-- search -->
     <string name="search">Search</string>
     <string name="search_find_your_stuff">Find Your Stuff</string>

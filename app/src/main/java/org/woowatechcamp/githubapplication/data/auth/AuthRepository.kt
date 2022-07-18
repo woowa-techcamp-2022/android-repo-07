@@ -9,5 +9,9 @@ class AuthRepository @Inject constructor(private val service : AuthService)  {
         clientId : String,
         clientSecrets : String,
         code: String
-    ) = service.getToken(clientId, clientSecrets, code)
+    ) : Result<AuthResponse> {
+      return runCatching {
+          service.getToken(clientId, clientSecrets, code)
+      }
+    }
 }
