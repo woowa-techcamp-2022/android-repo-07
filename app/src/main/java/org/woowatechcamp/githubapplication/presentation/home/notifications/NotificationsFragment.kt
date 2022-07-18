@@ -19,6 +19,7 @@ import org.woowatechcamp.githubapplication.presentation.home.notifications.adapt
 import org.woowatechcamp.githubapplication.presentation.home.notifications.model.NotiModel
 import org.woowatechcamp.githubapplication.util.*
 import org.woowatechcamp.githubapplication.util.ext.getDeli
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class NotificationsFragment : Fragment() {
@@ -30,6 +31,9 @@ class NotificationsFragment : Fragment() {
     private lateinit var swipeListener : SwipeListener
 
     private val viewModel by viewModels<NotiViewModel>()
+
+    @Inject
+    lateinit var metrics: ResolutionMetrics
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,7 +57,7 @@ class NotificationsFragment : Fragment() {
         binding.rvNoti.apply {
             adapter = notiAdapter
             addItemDecoration(ItemDecorationUtil.ItemDividerDecoration(
-                1f, 0f, requireActivity().getColor(R.color.navy)))
+                metrics.toPixel(1), 0f, requireActivity().getColor(R.color.navy)))
         }
 
         swipeListener = object : SwipeListener {
@@ -62,7 +66,7 @@ class NotificationsFragment : Fragment() {
                 direction: Int,
                 position: Int
             ) {
-                val list = ArrayList<NotiModel>()
+                val list = mutableListOf<NotiModel>()
                 list.addAll(notiAdapter.currentList)
 
                 val item = list[position]
@@ -82,29 +86,27 @@ class NotificationsFragment : Fragment() {
     }
 
     private fun observeData() {
-        viewModel.notiState.flowWithLifecycle(lifecycle)
+        viewModel.notiState.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach {
                 when (it) {
-                    is UiState.Empty -> {}
-                    is UiState.Loading -> {}
                     is UiState.Success -> {
                         notiAdapter.submitList(it.value)
                         binding.swipeNoti.isRefreshing = false }
                     is UiState.Error -> {
                         showSnackBar(binding.root, it.msg, requireActivity())
                         binding.swipeNoti.isRefreshing = false }
+                    else -> {}
                 }
             }.launchIn(lifecycleScope)
 
-        viewModel.markState.flowWithLifecycle(lifecycle)
+        viewModel.markState.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach {
                 when (it) {
-                    is UiState.Empty -> {}
-                    is UiState.Loading -> {}
                     is UiState.Success -> {
                         showSnackBar(binding.root, it.value, requireActivity()) }
                     is UiState.Error -> {
                         showSnackBar(binding.root, it.msg, requireActivity()) }
+                    else -> {}
                 }
             }.launchIn(lifecycleScope)
     }
