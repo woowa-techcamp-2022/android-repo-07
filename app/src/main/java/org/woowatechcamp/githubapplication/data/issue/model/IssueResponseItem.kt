@@ -38,13 +38,4 @@ data class IssueResponseItem(
     val updated_at: String,
     val url: String,
     val user: User
-) {
-    fun getModel() = IssueModel(
-        state = IssueState.getIssueState(state),
-        name = repository.name,
-        fullName = repository.full_name,
-        number = number.getIndexString(),
-        title = title,
-        timeDiff = updated_at.getDate().getTimeDiff()
-    )
-}
+)
