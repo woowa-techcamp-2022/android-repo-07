@@ -10,6 +10,7 @@ import javax.inject.Inject
 class NotiRepository @Inject constructor(
     private val service : NotiService
 ) {
+
     suspend fun getNoti() : Result<List<NotiModel>> {
         return runCatching {
             val notiList = service.getNoti()
