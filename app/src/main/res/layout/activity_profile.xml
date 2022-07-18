@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="org.woowatechcamp.githubapplication.data.user.model.UserResponse"/>
+        <import type="org.woowatechcamp.githubapplication.presentation.user.model.UserModel"/>
         <variable
             name="user"
-            type="UserResponse" />
+            type="UserModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -74,7 +74,7 @@
             android:id="@+id/tv_profile_nickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{user.login}"
+            android:text="@{user.nickname}"
             android:textColor="@color/grey"
             android:textSize="16sp"
             android:lineHeight="16sp"

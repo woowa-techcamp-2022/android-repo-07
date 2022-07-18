@@ -1,4 +1,4 @@
-package org.woowatechcamp.githubapplication.presentation.view_util
+package org.woowatechcamp.githubapplication.util
 
 import androidx.recyclerview.widget.RecyclerView
 

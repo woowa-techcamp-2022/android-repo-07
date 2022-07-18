@@ -7,11 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 import org.woowatechcamp.githubapplication.BuildConfig
 import org.woowatechcamp.githubapplication.databinding.ActivitySignInBinding
-import org.woowatechcamp.githubapplication.presentation.MainActivity
+import org.woowatechcamp.githubapplication.presentation.home.MainActivity
 import org.woowatechcamp.githubapplication.util.showSnackBar
 
 @AndroidEntryPoint

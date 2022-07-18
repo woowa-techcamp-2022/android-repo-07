@@ -1,12 +1,10 @@
-package org.woowatechcamp.githubapplication.presentation
+package org.woowatechcamp.githubapplication.presentation.home
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.view.MotionEvent
 import androidx.activity.viewModels
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import androidx.viewpager2.widget.ViewPager2
@@ -15,7 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.woowatechcamp.githubapplication.R
 import org.woowatechcamp.githubapplication.databinding.ActivityMainBinding
 import org.woowatechcamp.githubapplication.presentation.adapter.ViewpagerAdapter
-import org.woowatechcamp.githubapplication.presentation.issue.IssueFragment
+import org.woowatechcamp.githubapplication.presentation.home.issue.IssueFragment
 import org.woowatechcamp.githubapplication.presentation.notifications.NotificationsFragment
 import org.woowatechcamp.githubapplication.presentation.profile.ProfileActivity
 import org.woowatechcamp.githubapplication.presentation.search.SearchActivity

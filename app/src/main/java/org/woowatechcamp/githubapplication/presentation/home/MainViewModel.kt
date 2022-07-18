@@ -1,4 +1,4 @@
-package org.woowatechcamp.githubapplication.presentation
+package org.woowatechcamp.githubapplication.presentation.home
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -8,15 +8,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.woowatechcamp.githubapplication.data.issue.IssueRepository
-import org.woowatechcamp.githubapplication.data.issue.model.IssueResponseItem
 import org.woowatechcamp.githubapplication.data.user.UserRepository
-import org.woowatechcamp.githubapplication.data.user.model.UserResponse
-import retrofit2.http.Url
-import java.io.InputStream
+import org.woowatechcamp.githubapplication.data.user.entity.UserResponse
 import java.net.URL
 import javax.inject.Inject
 

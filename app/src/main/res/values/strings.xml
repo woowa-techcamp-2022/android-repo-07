@@ -19,6 +19,7 @@
     <string name="dot">・</string>
     <string name="repositories">Repositories</string>
     <string name="starred">Starred</string>
+    <string name="filter">Filter</string>
 
     <!-- tools -->
     <string name="jetbrains">JetBrains</string>
