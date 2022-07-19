@@ -2,7 +2,6 @@ package org.woowatechcamp.githubapplication.data.user.entity
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
-import org.woowatechcamp.githubapplication.presentation.user.model.UserModel
 
 @Parcelize
 data class UserResponse(
@@ -25,7 +24,7 @@ data class UserResponse(
     val html_url: String?,
     val id: Int?,
     val location: String?,
-    val login: String?,
+    val login: String,
     val name: String?,
     val node_id: String?,
     val organizations_url: String?,

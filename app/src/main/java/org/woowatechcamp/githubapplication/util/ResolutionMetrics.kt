@@ -3,7 +3,6 @@ package org.woowatechcamp.githubapplication.util
 import android.util.DisplayMetrics
 import androidx.annotation.Px
 import javax.inject.Inject
-import kotlin.math.roundToInt
 
 class ResolutionMetrics @Inject constructor(private val displayMetrics: DisplayMetrics) {
     val screenWidth: Int

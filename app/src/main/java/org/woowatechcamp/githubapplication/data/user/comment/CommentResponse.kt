@@ -1,6 +1,6 @@
 package org.woowatechcamp.githubapplication.data.user.comment
 
-data class CommentRespose(
+data class CommentResponse(
     val author_association: String,
     val body: String,
     val commit_id: String,

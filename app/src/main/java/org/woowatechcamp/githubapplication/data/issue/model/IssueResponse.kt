@@ -1,11 +1,5 @@
 package org.woowatechcamp.githubapplication.data.issue.model
 
-import org.woowatechcamp.githubapplication.presentation.home.issue.model.IssueModel
-import org.woowatechcamp.githubapplication.presentation.home.issue.model.IssueState
-import org.woowatechcamp.githubapplication.util.ext.getDate
-import org.woowatechcamp.githubapplication.util.ext.getIndexString
-import org.woowatechcamp.githubapplication.util.ext.getTimeDiff
-
 data class IssueResponse(
     val active_lock_reason: Any,
     val assignee: Assignee,
@@ -27,7 +21,7 @@ data class IssueResponse(
     val node_id: String,
     val number: Int,
     val performed_via_github_app: Any,
-    val pull_request: PullRequest,
+    val pull_request: PullRequest?,
     val reactions: Reactions,
     val repository: Repository,
     val repository_url: String,

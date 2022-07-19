@@ -1,55 +1,72 @@
 package org.woowatechcamp.githubapplication.data.noti
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import org.woowatechcamp.githubapplication.data.notifications.model.NotiMarkResponse
 import org.woowatechcamp.githubapplication.presentation.home.notifications.model.NotiModel
+import org.woowatechcamp.githubapplication.util.UiState
 import org.woowatechcamp.githubapplication.util.ext.*
-import retrofit2.Response
 import javax.inject.Inject
 
 class NotiRepository @Inject constructor(
-    private val service : NotiService
+    private val service: NotiService
 ) {
 
-    suspend fun getNoti() : Result<List<NotiModel>> {
-        return runCatching {
-            val resultNotiList = ArrayList<NotiModel>()
-            withContext(Dispatchers.IO) {
-                val notiList = service.getNoti()
-                notiList.forEach { noti ->
-                    launch {
-                        val issue = service.getComments(
-                            noti.repository.owner.login,
-                            noti.repository.name)
-                        resultNotiList.add(
-                            NotiModel(
-                                id = noti.id,
-                                name = noti.repository.name,
-                                fullName = noti.repository.full_name,
-                                title = noti.subject.title,
-                                timeDiff = noti.updated_at.getDate().getTimeDiff(),
-                                imgUrl = noti.repository.owner.avatar_url,
-                                num = noti.subject.url.getDeliNumber("issues/").getIndexString(),
-                                commentNum = issue.size,
-                                url = noti.url,
-                                timeDiffNum = noti.updated_at.getDate().getTimeDiffNum()
-                            )
+    suspend fun getNoti(): UiState<List<NotiModel>> {
+        return try {
+            UiState.Success(
+                service.getNoti().map { noti ->
+                    with(noti) {
+                        NotiModel(
+                            id = id,
+                            name = repository.name,
+                            fullName = repository.full_name,
+                            title = subject.title,
+                            timeDiff = updated_at.getDate().getTimeDiff(),
+                            imgUrl = repository.owner.avatar_url,
+                            num = subject.url.getDeliNumber("issues/").getIndexString(),
+                            url = url,
+                            timeDiffNum = updated_at.getDate().getTimeDiffNum(),
+                            repo = repository.owner.login,
+                            threadId = url.getDeli("threads/")
                         )
                     }
-                }
-            }
-            withContext(Dispatchers.Default) {
-                resultNotiList.sortBy { it.timeDiffNum }
-            }
-            resultNotiList
+                }.sortedBy { noti -> noti.timeDiffNum }
+            )
+        } catch (e: Exception) {
+            UiState.Error(e.message ?: "알림을 가져오는 데 실패했습니다.")
         }
     }
 
-    suspend fun markNoti(threadId : String) : Result<Response<NotiMarkResponse>> {
-        return runCatching {
-            service.markNoti(threadId)
+    suspend fun getComment(noti: NotiModel): UiState<NotiModel> {
+        return try {
+            UiState.Success(
+                noti.refreshComment(
+                    service.getComments(noti.repo, noti.name).size
+                )
+            )
+        } catch (e: Exception) {
+            UiState.Error(e.message ?: "Comment 개수를 가져오는 데 실패했습니다.")
+        }
+    }
+
+    suspend fun markNoti(threadId: String): UiState<String> {
+        try {
+            with(service.markNoti(threadId)) {
+                return when (code()) {
+                    205 -> {
+                        UiState.Success("Success")
+                    }
+                    304 -> {
+                        UiState.Error("Not Modified")
+                    }
+                    403 -> {
+                        UiState.Error("Forbidden")
+                    }
+                    else -> {
+                        UiState.Error("알림 읽음을 처리하는 데 오류가 발생했습니다.")
+                    }
+                }
+            }
+        } catch (e: Exception) {
+            return UiState.Error(e.message ?: "알림 읽음을 처리하는 데 실패했습니다.")
         }
     }
 }

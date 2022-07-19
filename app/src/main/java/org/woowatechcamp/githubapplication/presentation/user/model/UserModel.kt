@@ -5,15 +5,15 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class UserModel(
-    val name : String,
-    val nickname : String,
-    val bio : String,
-    val location : String,
-    val blog : String,
-    val email : String,
-    val imgUrl : String,
+    val name: String,
+    val nickname: String,
+    val bio: String,
+    val location: String,
+    val blog: String,
+    val email: String,
+    val imgUrl: String,
     val followers: Int,
     val following: Int,
-    val repoNum : Int,
-    val starredNum : Int
+    val repoNum: Int,
+    val starredNum: Int
 ) : Parcelable

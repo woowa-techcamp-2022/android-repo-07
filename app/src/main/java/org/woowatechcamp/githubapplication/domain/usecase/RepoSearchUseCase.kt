@@ -1,6 +1,5 @@
 package org.woowatechcamp.githubapplication.domain.usecase
 
-import android.util.Log
 import org.woowatechcamp.githubapplication.data.remote.service.SearchService
 import org.woowatechcamp.githubapplication.domain.entity.SearchInfo
 import javax.inject.Inject
