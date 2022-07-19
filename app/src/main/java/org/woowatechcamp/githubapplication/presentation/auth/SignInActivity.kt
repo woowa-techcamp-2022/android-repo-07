@@ -21,8 +21,8 @@ import org.woowatechcamp.githubapplication.util.showSnackBar
 @AndroidEntryPoint
 class SignInActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivitySignInBinding
-    private val viewModel : SignInViewModel by viewModels()
+    private lateinit var binding: ActivitySignInBinding
+    private val viewModel: SignInViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,7 +47,7 @@ class SignInActivity : AppCompatActivity() {
 
     fun getCode() {
         val scope = "user+repo"
-        val uri =  "${BuildConfig.GITHUB_AUTH}?client_id=${BuildConfig.CLIENT_ID}&scope=$scope"
+        val uri = "${BuildConfig.GITHUB_AUTH}?client_id=${BuildConfig.CLIENT_ID}&scope=$scope"
         val intent = Intent(Intent.ACTION_VIEW, uri.toUri())
         startActivity(intent)
     }
@@ -58,7 +58,8 @@ class SignInActivity : AppCompatActivity() {
                 when (it) {
                     is UiState.Success -> {
                         val intent = Intent(this@SignInActivity, MainActivity::class.java)
-                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        intent.flags =
+                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(intent)
                     }
                     is UiState.Error -> {
@@ -66,6 +67,6 @@ class SignInActivity : AppCompatActivity() {
                     }
                     else -> {}
                 }
-        }.launchIn(lifecycleScope)
+            }.launchIn(lifecycleScope)
     }
 }

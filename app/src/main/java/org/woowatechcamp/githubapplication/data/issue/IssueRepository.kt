@@ -6,13 +6,11 @@ import org.woowatechcamp.githubapplication.util.ext.getDate
 import org.woowatechcamp.githubapplication.util.ext.getIndexString
 import org.woowatechcamp.githubapplication.util.ext.getTimeDiff
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
 class IssueRepository @Inject constructor(
-    private val service : IssueService
+    private val service: IssueService
 ) {
-    suspend fun getIssues(state : String) : Result<List<IssueModel>> {
+    suspend fun getIssues(state: String): Result<List<IssueModel>> {
         return runCatching {
             service.getIssues(state).map { issue ->
                 IssueModel(
