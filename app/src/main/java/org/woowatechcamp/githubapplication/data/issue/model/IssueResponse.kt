@@ -21,7 +21,7 @@ data class IssueResponse(
     val node_id: String,
     val number: Int,
     val performed_via_github_app: Any,
-    val pull_request: PullRequest,
+    val pull_request: PullRequest?,
     val reactions: Reactions,
     val repository: Repository,
     val repository_url: String,

@@ -14,7 +14,9 @@ class IssueRepository @Inject constructor(
     suspend fun getIssues(state: String): UiState<List<IssueModel>> {
         try {
             return UiState.Success(
-                service.getIssues(state).map { issue ->
+                service.getIssues(state)
+                    .filter { item -> item.pull_request == null }
+                    .map { issue ->
                     IssueModel(
                         id = issue.id,
                         state = IssueState.getIssueState(issue.state),
