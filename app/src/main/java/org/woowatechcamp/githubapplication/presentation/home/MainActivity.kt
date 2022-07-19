@@ -23,10 +23,11 @@ import org.woowatechcamp.githubapplication.presentation.home.issue.IssueFragment
 import org.woowatechcamp.githubapplication.presentation.home.notifications.NotificationsFragment
 import org.woowatechcamp.githubapplication.presentation.profile.ProfileActivity
 import org.woowatechcamp.githubapplication.presentation.search.SearchActivity
-import org.woowatechcamp.githubapplication.util.UiState
 import org.woowatechcamp.githubapplication.util.ext.getRoundDrawable
 import org.woowatechcamp.githubapplication.util.ext.setBitmapWithCoil
 import org.woowatechcamp.githubapplication.util.ext.startActivity
+import org.woowatechcamp.githubapplication.util.onError
+import org.woowatechcamp.githubapplication.util.onSuccess
 import org.woowatechcamp.githubapplication.util.showSnackBar
 
 @AndroidEntryPoint
@@ -39,7 +40,7 @@ class MainActivity : AppCompatActivity() {
 
     private val viewModel by viewModels<MainViewModel>()
 
-    private var profileIntent : Intent? = null
+    private var profileIntent: Intent? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +51,9 @@ class MainActivity : AppCompatActivity() {
         initAdapter()
         observeData()
 
-        if (savedInstanceState == null) { viewModel.getUser() }
+        if (savedInstanceState == null) {
+            viewModel.getUser()
+        }
     }
 
     private fun initAdapter() {
@@ -72,21 +75,20 @@ class MainActivity : AppCompatActivity() {
 
     private fun observeData() {
         viewModel.mainState.flowWithLifecycle(lifecycle)
-            .onEach {
-                when (it) {
-                    is UiState.Success -> {
+            .onEach { state ->
+                with(state) {
+                    onSuccess {
                         CoroutineScope(Dispatchers.IO).launch {
-                            it.value.imgUrl.setBitmapWithCoil(this@MainActivity) { bitmap ->
+                            it.imgUrl.setBitmapWithCoil(this@MainActivity) { bitmap ->
                                 menu.getItem(1).icon = bitmap.getRoundDrawable(resources)
                             }
                         }
                         profileIntent = Intent(this@MainActivity, ProfileActivity::class.java)
-                            .putExtra(getString(R.string.profile_item), it.value)
+                            .putExtra(getString(R.string.profile_item), it)
                     }
-                    is UiState.Error -> {
-                        showSnackBar(binding.root, it.msg, this@MainActivity)
+                    onError {
+                        showSnackBar(binding.root, it, this@MainActivity)
                     }
-                    else -> {}
                 }
             }.launchIn(lifecycleScope)
     }

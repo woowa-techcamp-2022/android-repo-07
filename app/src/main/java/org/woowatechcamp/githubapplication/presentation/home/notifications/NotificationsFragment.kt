@@ -88,17 +88,16 @@ class NotificationsFragment : Fragment() {
 
     private fun observeData() {
         viewModel.notiState.flowWithLifecycle(viewLifecycleOwner.lifecycle)
-            .onEach {
-                when (it) {
-                    is UiState.Success -> {
-                        notiAdapter.submitList(it.value)
+            .onEach { state ->
+                with(state) {
+                    onSuccess {
+                        notiAdapter.submitList(it)
                         binding.swipeNoti.isRefreshing = false
                     }
-                    is UiState.Error -> {
-                        showSnackBar(binding.root, it.msg, requireActivity())
+                    onError {
+                        showSnackBar(binding.root, it, requireActivity())
                         binding.swipeNoti.isRefreshing = false
                     }
-                    else -> {}
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
 

@@ -15,7 +15,9 @@ import org.woowatechcamp.githubapplication.BuildConfig
 import org.woowatechcamp.githubapplication.R
 import org.woowatechcamp.githubapplication.databinding.ActivitySignInBinding
 import org.woowatechcamp.githubapplication.presentation.home.MainActivity
-import org.woowatechcamp.githubapplication.util.UiState
+import org.woowatechcamp.githubapplication.util.ext.startAction
+import org.woowatechcamp.githubapplication.util.onError
+import org.woowatechcamp.githubapplication.util.onSuccess
 import org.woowatechcamp.githubapplication.util.showSnackBar
 
 @AndroidEntryPoint
@@ -47,25 +49,24 @@ class SignInActivity : AppCompatActivity() {
 
     fun getCode() {
         val scope = "user+repo"
-        val uri = "${BuildConfig.GITHUB_AUTH}?client_id=${BuildConfig.CLIENT_ID}&scope=$scope"
-        val intent = Intent(Intent.ACTION_VIEW, uri.toUri())
-        startActivity(intent)
+        with("${BuildConfig.GITHUB_AUTH}?client_id=${BuildConfig.CLIENT_ID}&scope=$scope") {
+            startAction(Pair(Intent.ACTION_VIEW, toUri()))
+        }
     }
 
     private fun observeData() {
         viewModel.signInState.flowWithLifecycle(lifecycle)
-            .onEach {
-                when (it) {
-                    is UiState.Success -> {
+            .onEach { state ->
+                with(state) {
+                    onSuccess {
                         val intent = Intent(this@SignInActivity, MainActivity::class.java)
                         intent.flags =
                             Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(intent)
                     }
-                    is UiState.Error -> {
-                        showSnackBar(binding.root, it.msg, this@SignInActivity)
+                    onError {
+                        showSnackBar(binding.root, it, this@SignInActivity)
                     }
-                    else -> {}
                 }
             }.launchIn(lifecycleScope)
     }
