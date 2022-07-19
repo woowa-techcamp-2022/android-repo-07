@@ -28,8 +28,9 @@ class IssueSpinAdapter(
         ivIssueIcon.stateListAnimator = AnimatorInflater.loadStateListAnimator(
             view.context, R.xml.anim_spin_icon
         )
-
-        setItem(view, IssueCategory("Option", true))
+        getItem(position)?.let { item ->
+            setTitleItem(view, item)
+        }
         return view
     }
 
@@ -46,6 +47,14 @@ class IssueSpinAdapter(
     private fun initInflater(parent: ViewGroup) {
         if (!::inflater.isInitialized)
             inflater = LayoutInflater.from(parent.context)
+    }
+
+    private fun setTitleItem(view: View, item: IssueCategory) {
+        val tvIssueTitle = view.findViewById<TextView>(R.id.tv_issue_title)
+        val ivIssueIcon = view.findViewById<ImageView>(R.id.iv_issue_icon)
+        tvIssueTitle.text = item.title
+        ivIssueIcon.visibility = View.VISIBLE
+        tvIssueTitle.setTextColor(view.context.getColor(R.color.white))
     }
 
     private fun setItem(view: View, item: IssueCategory) {
