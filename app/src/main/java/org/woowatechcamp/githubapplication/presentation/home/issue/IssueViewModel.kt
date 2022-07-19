@@ -28,12 +28,8 @@ class IssueViewModel @Inject constructor(
 
     // 이슈 가져오기
     fun getIssues(state: String) = viewModelScope.launch {
-        issueRepository.getIssues(state)
-            .onSuccess {
-                _issueState.emit(UiState.Success(it.toList()))
-            }
-            .onFailure { e ->
-                _issueState.emit(UiState.Error(e.message ?: "Issue 를 불러오는 데 실패했습니다."))
-            }
+        _issueState.emit(
+            issueRepository.getIssues(state)
+        )
     }
 }
