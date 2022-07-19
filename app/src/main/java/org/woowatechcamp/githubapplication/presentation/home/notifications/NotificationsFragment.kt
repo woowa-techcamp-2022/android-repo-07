@@ -22,11 +22,11 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class NotificationsFragment : Fragment() {
 
-    private var _binding : FragmentNotificationsBinding? = null
+    private var _binding: FragmentNotificationsBinding? = null
     private val binding get() = _binding!!
-    private lateinit var notiAdapter : NotiAdapter
+    private lateinit var notiAdapter: NotiAdapter
     private lateinit var swipeCallback: SwipeCallback
-    private lateinit var swipeListener : SwipeListener
+    private lateinit var swipeListener: SwipeListener
 
     private val viewModel by viewModels<NotiViewModel>()
 
@@ -47,15 +47,20 @@ class NotificationsFragment : Fragment() {
         initAdapter()
         observeData()
 
-        if (savedInstanceState == null) { viewModel.getNoti() }
+        if (savedInstanceState == null) {
+            viewModel.getNoti()
+        }
     }
 
     private fun initAdapter() {
         notiAdapter = NotiAdapter()
         binding.rvNoti.apply {
             adapter = notiAdapter
-            addItemDecoration(ItemDecorationUtil.ItemDividerDecoration(
-                metrics.toPixel(1), 0f, requireActivity().getColor(R.color.navy)))
+            addItemDecoration(
+                ItemDecorationUtil.ItemDividerDecoration(
+                    metrics.toPixel(1), 0f, requireActivity().getColor(R.color.navy)
+                )
+            )
         }
 
         swipeListener = object : SwipeListener {
@@ -64,12 +69,13 @@ class NotificationsFragment : Fragment() {
                 direction: Int,
                 position: Int
             ) {
-                val list = notiAdapter.currentList.toMutableList()
-                val item = list[position]
-                list.removeAt(position)
-                notiAdapter.submitList(list)
-
-                item.threadId?.let { viewModel.markNoti(it) }
+                with(notiAdapter) {
+                    val item = currentList[position]
+                    submitList(
+                        currentList.filter { noti -> noti.id != item.id }
+                    )
+                    item.threadId?.let { viewModel.markNoti(it) }
+                }
             }
         }
 
@@ -86,13 +92,15 @@ class NotificationsFragment : Fragment() {
                 when (it) {
                     is UiState.Success -> {
                         notiAdapter.submitList(it.value)
-                        binding.swipeNoti.isRefreshing = false }
+                        binding.swipeNoti.isRefreshing = false
+                    }
                     is UiState.Error -> {
                         showSnackBar(binding.root, it.msg, requireActivity())
-                        binding.swipeNoti.isRefreshing = false }
+                        binding.swipeNoti.isRefreshing = false
+                    }
                     else -> {}
                 }
-            }.launchIn(lifecycleScope)
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
 
         viewModel.notiCommentState.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach {
@@ -107,21 +115,24 @@ class NotificationsFragment : Fragment() {
                         }
                     }
                     is UiState.Error -> {
-                        showSnackBar(binding.root, it.msg, requireActivity()) }
+                        showSnackBar(binding.root, it.msg, requireActivity())
+                    }
                     else -> {}
                 }
-            }.launchIn(lifecycleScope)
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
 
         viewModel.markState.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach {
                 when (it) {
                     is UiState.Success -> {
-                        showSnackBar(binding.root, it.value, requireActivity()) }
+                        showSnackBar(binding.root, it.value, requireActivity())
+                    }
                     is UiState.Error -> {
-                        showSnackBar(binding.root, it.msg, requireActivity()) }
+                        showSnackBar(binding.root, it.msg, requireActivity())
+                    }
                     else -> {}
                 }
-            }.launchIn(lifecycleScope)
+            }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
     override fun onDestroyView() {
