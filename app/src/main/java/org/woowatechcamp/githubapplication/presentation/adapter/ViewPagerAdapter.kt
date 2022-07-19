@@ -7,16 +7,14 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 class ViewpagerAdapter(fragmentActivity: FragmentActivity) :
     FragmentStateAdapter(fragmentActivity) {
 
-    private val fragmentList = ArrayList<Fragment>()
-    private val titleList = ArrayList<String>()
+    private val fragmentList = mutableListOf<Pair<Fragment, String>>()
 
     fun addFragment(fm: Fragment, name: String) {
-        fragmentList.add(fm)
-        titleList.add(name)
+        fragmentList.add(Pair(fm, name))
     }
 
     fun getTitle(position: Int): String {
-        return titleList[position]
+        return fragmentList[position].second
     }
 
     override fun getItemCount(): Int {
@@ -24,6 +22,6 @@ class ViewpagerAdapter(fragmentActivity: FragmentActivity) :
     }
 
     override fun createFragment(position: Int): Fragment {
-        return fragmentList[position]
+        return fragmentList[position].first
     }
 }
