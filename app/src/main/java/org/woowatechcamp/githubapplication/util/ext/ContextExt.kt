@@ -3,10 +3,12 @@ package org.woowatechcamp.githubapplication.util.ext
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.os.bundleOf
+import java.net.URI
 
 fun Context.showKeyboard(view: View) {
     val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -29,6 +31,13 @@ inline fun <reified T : Activity> Context.startActivity(
 ) {
     startActivity(buildIntent<T>(*argument))
 }
+
+fun Context.startAction(
+    argument: Pair<String, Uri>
+) {
+    startActivity(Intent(argument.first, argument.second))
+}
+
 
 fun Context.stringListFrom(id: Int): List<String> =
     resources.getStringArray(id).toList()
