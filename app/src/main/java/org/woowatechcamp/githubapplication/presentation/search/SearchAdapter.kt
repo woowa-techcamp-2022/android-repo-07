@@ -12,7 +12,6 @@ import kotlinx.coroutines.withContext
 import org.woowatechcamp.githubapplication.databinding.ItemSearchBinding
 import org.woowatechcamp.githubapplication.domain.entity.SearchInfo
 import org.woowatechcamp.githubapplication.util.ItemDiffCallback
-import org.woowatechcamp.githubapplication.util.showSnackBar
 import java.net.URL
 
 class SearchAdapter : ListAdapter<SearchInfo, SearchAdapter.SearchViewHolder>(

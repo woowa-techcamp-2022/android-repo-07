@@ -2,7 +2,7 @@ package org.woowatechcamp.githubapplication.util.ext
 
 import java.util.*
 
-fun Date.getTimeDiff() : String {
+fun Date.getTimeDiff(): String {
     return try {
         val diff = Date().time - this.time
         val diffMin = diff / 1000 / 60
@@ -21,15 +21,15 @@ fun Date.getTimeDiff() : String {
         else
             "${diffMonth / 12}년 전"
 
-    } catch (e : Exception) {
+    } catch (e: Exception) {
         "오류"
     }
 }
 
-fun Date.getTimeDiffNum() : Long {
+fun Date.getTimeDiffNum(): Long {
     return try {
         Date().time - this.time
-    } catch (e : Exception) {
+    } catch (e: Exception) {
         0
     }
 }

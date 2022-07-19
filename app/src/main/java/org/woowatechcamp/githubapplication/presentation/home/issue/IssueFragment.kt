@@ -2,7 +2,6 @@ package org.woowatechcamp.githubapplication.presentation.home.issue
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,17 +19,17 @@ import org.woowatechcamp.githubapplication.databinding.FragmentIssueBinding
 import org.woowatechcamp.githubapplication.presentation.home.issue.adapter.IssueAdapter
 import org.woowatechcamp.githubapplication.presentation.home.issue.adapter.IssueSpinAdapter
 import org.woowatechcamp.githubapplication.util.ItemDecorationUtil
-import org.woowatechcamp.githubapplication.util.UiState
 import org.woowatechcamp.githubapplication.util.ResolutionMetrics
+import org.woowatechcamp.githubapplication.util.UiState
 import org.woowatechcamp.githubapplication.util.showSnackBar
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class IssueFragment : Fragment() {
 
-    private var _binding : FragmentIssueBinding? = null
+    private var _binding: FragmentIssueBinding? = null
     private val binding get() = _binding!!
-    private lateinit var issueAdapter : IssueAdapter
+    private lateinit var issueAdapter: IssueAdapter
     private var option = "open"
 
     private val viewModel by viewModels<IssueViewModel>()
@@ -60,8 +59,11 @@ class IssueFragment : Fragment() {
         issueAdapter = IssueAdapter()
         binding.rvIssue.apply {
             adapter = issueAdapter
-            addItemDecoration(ItemDecorationUtil.ItemDividerDecoration(
-                metrics.toPixel(1), 0f, requireActivity().getColor(R.color.navy)))
+            addItemDecoration(
+                ItemDecorationUtil.ItemDividerDecoration(
+                    metrics.toPixel(1), 0f, requireActivity().getColor(R.color.navy)
+                )
+            )
         }
         val spinItems = listOf(
             IssueCategory(getString(R.string.open_category), false),
@@ -77,9 +79,15 @@ class IssueFragment : Fragment() {
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                     p1?.let {
                         option = when (p2) {
-                            STATE_CLOSED -> { getString(R.string.closed) }
-                            STATE_ALL -> { getString(R.string.all) }
-                            else -> { getString(R.string.open) }
+                            STATE_CLOSED -> {
+                                getString(R.string.closed)
+                            }
+                            STATE_ALL -> {
+                                getString(R.string.all)
+                            }
+                            else -> {
+                                getString(R.string.open)
+                            }
                         }
                         for (i in spinItems.indices) {
                             spinItems[i].selected = (i == p2)
@@ -87,6 +95,7 @@ class IssueFragment : Fragment() {
                         viewModel.getIssues(option)
                     }
                 }
+
                 override fun onNothingSelected(p0: AdapterView<*>?) {}
             }
         }

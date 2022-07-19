@@ -20,6 +20,7 @@
     <string name="repositories">Repositories</string>
     <string name="starred">Starred</string>
     <string name="filter">Filter</string>
+    <string name="profile_item">profile_item</string>
 
     <!-- tools -->
     <string name="jetbrains">JetBrains</string>

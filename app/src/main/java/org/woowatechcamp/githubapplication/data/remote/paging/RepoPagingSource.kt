@@ -1,6 +1,5 @@
 package org.woowatechcamp.githubapplication.data.remote.paging
 
-import android.util.Log
 import org.woowatechcamp.githubapplication.domain.entity.SearchInfo
 import org.woowatechcamp.githubapplication.domain.usecase.RepoSearchUseCase
 import org.woowatechcamp.githubapplication.util.OffsetPagingSource

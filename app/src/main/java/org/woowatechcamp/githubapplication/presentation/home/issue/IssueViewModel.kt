@@ -23,11 +23,11 @@ class IssueViewModel @Inject constructor(
         onBufferOverflow = BufferOverflow.DROP_OLDEST
     )
 
-    val issueState : SharedFlow<UiState<List<IssueModel>>>
+    val issueState: SharedFlow<UiState<List<IssueModel>>>
         get() = _issueState.asSharedFlow()
 
     // 이슈 가져오기
-    fun getIssues(state : String) = viewModelScope.launch {
+    fun getIssues(state: String) = viewModelScope.launch {
         issueRepository.getIssues(state)
             .onSuccess {
                 _issueState.emit(UiState.Success(it.toList()))

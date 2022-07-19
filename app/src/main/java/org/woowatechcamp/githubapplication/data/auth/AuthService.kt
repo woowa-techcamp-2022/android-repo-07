@@ -6,8 +6,8 @@ import retrofit2.http.Query
 interface AuthService {
     @POST("/login/oauth/access_token")
     suspend fun getToken(
-        @Query("client_id") clientId : String,
-        @Query("client_secret") clientSecret : String,
-        @Query("code") code : String
-    ) : AuthResponse
+        @Query("client_id") clientId: String,
+        @Query("client_secret") clientSecret: String,
+        @Query("code") code: String
+    ): AuthResponse
 }
