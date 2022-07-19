@@ -4,14 +4,14 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class AuthRepository @Inject constructor(private val service : AuthService)  {
+class AuthRepository @Inject constructor(private val service: AuthService) {
     suspend fun getToken(
-        clientId : String,
-        clientSecrets : String,
+        clientId: String,
+        clientSecrets: String,
         code: String
-    ) : Result<AuthResponse> {
-      return runCatching {
-          service.getToken(clientId, clientSecrets, code)
-      }
+    ): Result<AuthResponse> {
+        return runCatching {
+            service.getToken(clientId, clientSecrets, code)
+        }
     }
 }

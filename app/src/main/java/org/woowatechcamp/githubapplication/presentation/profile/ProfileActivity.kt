@@ -2,7 +2,6 @@ package org.woowatechcamp.githubapplication.presentation.profile
 
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import kotlinx.coroutines.CoroutineScope

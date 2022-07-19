@@ -34,8 +34,9 @@ class NotiAdapter : ListAdapter<NotiModel, NotiAdapter.NotiViewHolder>(
         holder.bind(getItem(position))
     }
 
-    inner class NotiViewHolder(private val binding : ItemNotiBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item : NotiModel) {
+    inner class NotiViewHolder(private val binding: ItemNotiBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: NotiModel) {
             binding.noti = item
             binding.apply {
                 Glide.with(binding.root)
