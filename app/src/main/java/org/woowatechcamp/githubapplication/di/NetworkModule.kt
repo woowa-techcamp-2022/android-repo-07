@@ -10,7 +10,6 @@ import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.woowatechcamp.githubapplication.BuildConfig
-import org.woowatechcamp.githubapplication.GithubApplication
 import org.woowatechcamp.githubapplication.data.auth.AuthService
 import org.woowatechcamp.githubapplication.data.issue.IssueService
 import org.woowatechcamp.githubapplication.data.noti.NotiService
@@ -43,13 +42,13 @@ object NetworkModule {
     @TokenInter
     @Provides
     fun providesTokenInterceptor(
-        preferences : AuthPreferences
-    ) : Interceptor = TokenInterceptor(preferences)
+        preferences: AuthPreferences
+    ): Interceptor = TokenInterceptor(preferences)
 
     @Provides
     fun providesOkHttpClient(
-        @TokenInter tokenInterceptor : Interceptor
-    ) : OkHttpClient {
+        @TokenInter tokenInterceptor: Interceptor
+    ): OkHttpClient {
         return OkHttpClient.Builder()
             .readTimeout(5000, TimeUnit.MILLISECONDS)
             .connectTimeout(5000, TimeUnit.MILLISECONDS)
@@ -63,9 +62,9 @@ object NetworkModule {
     @AuthRetrofit
     @Provides
     fun providesAuthRetrofit(
-       okHttpClient: OkHttpClient
-    ) : Retrofit {
-        val gson : Gson = GsonBuilder()
+        okHttpClient: OkHttpClient
+    ): Retrofit {
+        val gson: Gson = GsonBuilder()
             .setLenient()
             .create()
 
@@ -75,13 +74,14 @@ object NetworkModule {
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }
+
     // API 연동을 위한 Retrofit
     @GithubRetrofit
     @Provides
     fun providesGithubRetrofit(
         okHttpClient: OkHttpClient
-    ) : Retrofit {
-        val gson : Gson = GsonBuilder()
+    ): Retrofit {
+        val gson: Gson = GsonBuilder()
             .setLenient()
             .create()
 
@@ -95,31 +95,32 @@ object NetworkModule {
     @Singleton
     @Provides
     fun providesAuthService(
-        @AuthRetrofit retrofit : Retrofit) : AuthService =
+        @AuthRetrofit retrofit: Retrofit
+    ): AuthService =
         retrofit.create(AuthService::class.java)
 
     @Singleton
     @Provides
     fun providesIssueService(
-        @GithubRetrofit retrofit : Retrofit
-    ) : IssueService = retrofit.create(IssueService::class.java)
+        @GithubRetrofit retrofit: Retrofit
+    ): IssueService = retrofit.create(IssueService::class.java)
 
     @Singleton
     @Provides
     fun providesUserService(
-        @GithubRetrofit retrofit : Retrofit
-    ) : UserService = retrofit.create(UserService::class.java)
+        @GithubRetrofit retrofit: Retrofit
+    ): UserService = retrofit.create(UserService::class.java)
 
     @Singleton
     @Provides
     fun providesNotiService(
         @GithubRetrofit retrofit: Retrofit
-    ) : NotiService = retrofit.create(NotiService::class.java)
+    ): NotiService = retrofit.create(NotiService::class.java)
 
 
     @Singleton
     @Provides
     fun providesSearchService(
         @GithubRetrofit retrofit: Retrofit
-    ) : SearchService = retrofit.create(SearchService::class.java)
+    ): SearchService = retrofit.create(SearchService::class.java)
 }

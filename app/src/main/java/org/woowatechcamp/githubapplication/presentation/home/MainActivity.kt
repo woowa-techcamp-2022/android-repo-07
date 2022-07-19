@@ -1,12 +1,11 @@
 package org.woowatechcamp.githubapplication.presentation.home
 
-import android.content.Intent
 import android.graphics.Bitmap
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.drawable.RoundedBitmapDrawable
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import androidx.viewpager2.widget.ViewPager2
@@ -25,10 +24,10 @@ import kotlin.math.max
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding : ActivityMainBinding
-    private lateinit var viewpagerAdapter : ViewpagerAdapter
-    private lateinit var menu : Menu
-    private val issueFragment : IssueFragment by lazy { IssueFragment() }
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var viewpagerAdapter: ViewpagerAdapter
+    private lateinit var menu: Menu
+    private val issueFragment: IssueFragment by lazy { IssueFragment() }
     private val notificationsFragment: NotificationsFragment by lazy { NotificationsFragment() }
 
     private val mViewModel by viewModels<MainViewModel>()
@@ -48,7 +47,10 @@ class MainActivity : AppCompatActivity() {
     private fun initAdapter() {
         viewpagerAdapter = ViewpagerAdapter(this)
         viewpagerAdapter.addFragment(issueFragment, getString(R.string.main_tab_title_issue))
-        viewpagerAdapter.addFragment(notificationsFragment, getString(R.string.main_tab_title_notifications))
+        viewpagerAdapter.addFragment(
+            notificationsFragment,
+            getString(R.string.main_tab_title_notifications)
+        )
         binding.vpMain.apply {
             adapter = viewpagerAdapter
             orientation = ViewPager2.ORIENTATION_HORIZONTAL
@@ -70,7 +72,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun getRoundDrawable(bitmap : Bitmap) : RoundedBitmapDrawable {
+    private fun getRoundDrawable(bitmap: Bitmap): RoundedBitmapDrawable {
         val round = RoundedBitmapDrawableFactory.create(resources, bitmap)
         round.cornerRadius = max(bitmap.width, bitmap.height) / 2f
         return round
@@ -100,4 +102,5 @@ class MainActivity : AppCompatActivity() {
             else -> return true
         }
         return super.onOptionsItemSelected(item)
-    }}
+    }
+}

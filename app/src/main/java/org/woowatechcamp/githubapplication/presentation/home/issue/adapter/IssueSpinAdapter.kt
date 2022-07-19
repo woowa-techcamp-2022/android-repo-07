@@ -2,9 +2,7 @@ package org.woowatechcamp.githubapplication.presentation.home.issue.adapter
 
 import android.animation.AnimatorInflater
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
@@ -14,12 +12,12 @@ import org.woowatechcamp.githubapplication.R
 import org.woowatechcamp.githubapplication.data.issue.IssueCategory
 
 class IssueSpinAdapter(
-    context : Context,
-    resource : Int,
+    context: Context,
+    resource: Int,
     items: List<IssueCategory>
 ) : ArrayAdapter<IssueCategory>(context, resource, items) {
 
-    private lateinit var inflater : LayoutInflater
+    private lateinit var inflater: LayoutInflater
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         initInflater(parent)
@@ -28,7 +26,8 @@ class IssueSpinAdapter(
 
         val ivIssueIcon = view.findViewById<ImageView>(R.id.iv_issue_icon)
         ivIssueIcon.stateListAnimator = AnimatorInflater.loadStateListAnimator(
-            view.context, R.xml.anim_spin_icon)
+            view.context, R.xml.anim_spin_icon
+        )
 
         setItem(view, IssueCategory("Option", true))
         return view
@@ -49,7 +48,7 @@ class IssueSpinAdapter(
             inflater = LayoutInflater.from(parent.context)
     }
 
-    private fun setItem(view: View, item : IssueCategory) {
+    private fun setItem(view: View, item: IssueCategory) {
         val tvIssueTitle = view.findViewById<TextView>(R.id.tv_issue_title)
         val ivIssueIcon = view.findViewById<ImageView>(R.id.iv_issue_icon)
         tvIssueTitle.text = item.title

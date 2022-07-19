@@ -8,13 +8,17 @@ import com.google.android.material.snackbar.Snackbar
 import org.woowatechcamp.githubapplication.R
 
 
-fun showSnackBar(view : View, message : String, context : Context) {
+fun showSnackBar(view: View, message: String, context: Context) {
     Snackbar.make(view, message, Snackbar.LENGTH_SHORT)
         .setTextColor(
             ColorStateList.valueOf(
-                ContextCompat.getColor(context, R.color.white)))
+                ContextCompat.getColor(context, R.color.white)
+            )
+        )
         .setBackgroundTintList(
             ColorStateList.valueOf(
-                ContextCompat.getColor(context, R.color.navy)))
+                ContextCompat.getColor(context, R.color.navy)
+            )
+        )
         .show()
 }
