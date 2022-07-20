@@ -9,4 +9,13 @@ interface IssueService {
     suspend fun getIssues(
         @Query("state") state: String
     ): List<IssueResponse>?
+
+    @GET("/user/issues")
+    suspend fun getIssuePaging(
+        @Query("state") state: String,
+        @Query("sort") sort: String,
+        @Query("order") order: String,
+        @Query("per_page") perPage: Int,
+        @Query("page") page: Int
+    ) : List<IssueResponse>
 }

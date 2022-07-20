@@ -18,6 +18,7 @@ import org.woowatechcamp.githubapplication.data.issue.IssueCategory
 import org.woowatechcamp.githubapplication.databinding.FragmentIssueBinding
 import org.woowatechcamp.githubapplication.presentation.home.issue.adapter.IssueAdapter
 import org.woowatechcamp.githubapplication.presentation.home.issue.adapter.IssueSpinAdapter
+import org.woowatechcamp.githubapplication.presentation.home.issue.paging.IssuePagingAdapter
 import org.woowatechcamp.githubapplication.util.*
 import javax.inject.Inject
 
@@ -26,8 +27,8 @@ class IssueFragment : Fragment() {
 
     private var _binding: FragmentIssueBinding? = null
     private val binding get() = _binding!!
-    private lateinit var issueAdapter: IssueAdapter
     private var option = "open"
+    private val issuePagingAdapter = IssuePagingAdapter()
 
     private val viewModel by viewModels<IssueViewModel>()
 
@@ -42,7 +43,6 @@ class IssueFragment : Fragment() {
         return binding.root
     }
 
-    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -53,9 +53,8 @@ class IssueFragment : Fragment() {
     }
 
     private fun initAdapter() {
-        issueAdapter = IssueAdapter()
         binding.rvIssue.apply {
-            adapter = issueAdapter
+            adapter = issuePagingAdapter
             addItemDecoration(
                 ItemDecorationUtil.ItemDividerDecoration(
                     metrics.toPixel(1), 0f, requireActivity().getColor(R.color.navy)
@@ -89,7 +88,7 @@ class IssueFragment : Fragment() {
                         for (i in spinItems.indices) {
                             spinItems[i].selected = (i == p2)
                         }
-                        viewModel.getIssues(option)
+                        getIssuePaging(option)
                     }
                 }
 
@@ -103,7 +102,7 @@ class IssueFragment : Fragment() {
             .onEach { state ->
                 with(state) {
                     onSuccess {
-                        issueAdapter.submitList(it)
+//                        issueAdapter.submitList(it)
                         binding.swipeIssue.isRefreshing = false
                     }
                     onError {
@@ -113,6 +112,14 @@ class IssueFragment : Fragment() {
                 }
             }
             .launchIn(viewLifecycleOwner.lifecycleScope)
+    }
+
+    private fun getIssuePaging(state: String) {
+        viewModel.getIssuePaging(state).flowWithLifecycle(lifecycle)
+            .onEach {
+                issuePagingAdapter.submitData(it)
+            }
+            .launchIn(lifecycleScope)
     }
 
     override fun onDestroyView() {
