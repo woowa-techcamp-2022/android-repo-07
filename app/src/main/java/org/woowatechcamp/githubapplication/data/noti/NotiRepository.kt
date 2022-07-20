@@ -2,7 +2,6 @@ package org.woowatechcamp.githubapplication.data.noti
 
 import org.woowatechcamp.githubapplication.presentation.home.notifications.model.NotiModel
 import org.woowatechcamp.githubapplication.util.UiState
-import org.woowatechcamp.githubapplication.util.ext.*
 import javax.inject.Inject
 
 class NotiRepository @Inject constructor(
@@ -13,21 +12,7 @@ class NotiRepository @Inject constructor(
         return try {
             UiState.Success(
                 service.getNoti().map { noti ->
-                    with(noti) {
-                        NotiModel(
-                            id = id,
-                            name = repository.name,
-                            fullName = repository.full_name,
-                            title = subject.title,
-                            timeDiff = updated_at.getDate().getTimeDiff(),
-                            imgUrl = repository.owner.avatar_url,
-                            num = subject.url.getDeliNumber("issues/").getIndexString(),
-                            url = url,
-                            timeDiffNum = updated_at.getDate().getTimeDiffNum(),
-                            repo = repository.owner.login,
-                            threadId = url.getDeli("threads/")
-                        )
-                    }
+                    noti.getNotiModel()
                 }.sortedBy { noti -> noti.timeDiffNum }
             )
         } catch (e: Exception) {

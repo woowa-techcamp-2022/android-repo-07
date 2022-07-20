@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
     private val viewModel by viewModels<MainViewModel>()
 
-    private var profileIntent : Intent? = null
+    private var profileIntent: Intent? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +50,9 @@ class MainActivity : AppCompatActivity() {
         initAdapter()
         observeData()
 
-        if (savedInstanceState == null) { viewModel.getUser() }
+        if (savedInstanceState == null) {
+            viewModel.getUser()
+        }
     }
 
     private fun initAdapter() {

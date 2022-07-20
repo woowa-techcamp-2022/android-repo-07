@@ -3,9 +3,7 @@ package org.woowatechcamp.githubapplication.data.auth
 import org.woowatechcamp.githubapplication.util.AuthPreferences
 import org.woowatechcamp.githubapplication.util.UiState
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
 class AuthRepository @Inject constructor(
     private val service: AuthService,
     private val preferences: AuthPreferences
