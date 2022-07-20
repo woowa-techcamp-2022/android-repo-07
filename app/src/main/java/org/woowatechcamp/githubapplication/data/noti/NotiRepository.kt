@@ -1,5 +1,7 @@
 package org.woowatechcamp.githubapplication.data.noti
 
+import org.woowatechcamp.githubapplication.data.notifications.model.NotiMarkResponse
+import org.woowatechcamp.githubapplication.data.user.comment.CommentResponse
 import org.woowatechcamp.githubapplication.presentation.home.notifications.model.NotiModel
 import org.woowatechcamp.githubapplication.util.UiState
 import org.woowatechcamp.githubapplication.util.ext.*

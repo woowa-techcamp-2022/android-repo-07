@@ -33,7 +33,7 @@ suspend fun String.setBitmapWithCoil(
         .build()
     val result = (loading.execute(request) as SuccessResult).drawable
     val bitmap = (result as BitmapDrawable).bitmap
-    CoroutineScope(Dispatchers.Main).launch {
+    withContext(Dispatchers.Main) {
         completed(bitmap)
     }
 }

@@ -5,11 +5,7 @@ import org.woowatechcamp.githubapplication.util.UiState
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@Singleton
-class AuthRepository @Inject constructor(
-    private val service: AuthService,
-    private val preferences: AuthPreferences
-) {
+class AuthRepository @Inject constructor(private val service: AuthService) {
     suspend fun getToken(
         clientId: String,
         clientSecrets: String,
@@ -17,7 +13,6 @@ class AuthRepository @Inject constructor(
     ): UiState<String> {
         try {
             with(service.getToken(clientId, clientSecrets, code)) {
-                preferences.accessToken = accessToken
                 return UiState.Success(accessToken)
             }
         } catch (e: Exception) {
