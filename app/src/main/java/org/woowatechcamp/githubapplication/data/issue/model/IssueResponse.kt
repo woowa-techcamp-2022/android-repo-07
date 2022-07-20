@@ -1,5 +1,11 @@
 package org.woowatechcamp.githubapplication.data.issue.model
 
+import org.woowatechcamp.githubapplication.presentation.home.issue.model.IssueModel
+import org.woowatechcamp.githubapplication.presentation.home.issue.model.IssueState
+import org.woowatechcamp.githubapplication.util.ext.getDate
+import org.woowatechcamp.githubapplication.util.ext.getIndexString
+import org.woowatechcamp.githubapplication.util.ext.getTimeDiff
+
 data class IssueResponse(
     val active_lock_reason: Any,
     val assignee: Assignee,
@@ -32,4 +38,16 @@ data class IssueResponse(
     val updated_at: String,
     val url: String,
     val user: User
-)
+) {
+    fun getIssueModel(): IssueModel {
+        return IssueModel(
+            id = id,
+            state = IssueState.getIssueState(state),
+            name = repository.name,
+            fullName = repository.full_name,
+            number = number.getIndexString(),
+            title = title,
+            timeDiff = updated_at.getDate().getTimeDiff()
+        )
+    }
+}

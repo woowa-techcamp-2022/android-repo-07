@@ -12,24 +12,16 @@ class IssueRepository @Inject constructor(
     private val service: IssueService
 ) {
     suspend fun getIssues(state: String): UiState<List<IssueModel>> {
-        try {
-            return UiState.Success(
+        return try {
+            UiState.Success(
                 service.getIssues(state)
                     .filter { item -> item.pull_request == null }
                     .map { issue ->
-                        IssueModel(
-                            id = issue.id,
-                            state = IssueState.getIssueState(issue.state),
-                            name = issue.repository.name,
-                            fullName = issue.repository.full_name,
-                            number = issue.number.getIndexString(),
-                            title = issue.title,
-                            timeDiff = issue.updated_at.getDate().getTimeDiff()
-                        )
+                        issue.getIssueModel()
                     }
             )
         } catch (e: Exception) {
-            return UiState.Error(e.message ?: "Issue 를 불러오는 데 실패했습니다.")
+            UiState.Error(e.message ?: "Issue 를 불러오는 데 실패했습니다.")
         }
     }
 }

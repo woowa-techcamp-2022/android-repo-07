@@ -105,11 +105,10 @@ class IssueFragment : Fragment() {
                 with(state) {
                     onSuccess {
                         issueAdapter.submitList(it)
-                        binding.swipeIssue.isRefreshing = false
-                    }
-                    onError {
-                        showSnackBar(binding.root, it, requireActivity())
-                        binding.swipeIssue.isRefreshing = false
+                        onError {
+                            showSnackBar(binding.root, it, requireActivity())
+                            binding.swipeIssue.isRefreshing = false
+                        }
                     }
                 }
             }

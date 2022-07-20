@@ -7,6 +7,7 @@ import javax.inject.Inject
 class UserRepository @Inject constructor(
     private val service: UserService
 ) {
+
     suspend fun getUser(): UiState<UserModel> {
         try {
             val user = service.getUser()
