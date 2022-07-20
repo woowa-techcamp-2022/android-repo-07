@@ -25,8 +25,6 @@ class NotificationsFragment : Fragment() {
     private var _binding: FragmentNotificationsBinding? = null
     private val binding get() = _binding!!
     private lateinit var notiAdapter: NotiAdapter
-    private lateinit var swipeCallback: SwipeCallback
-    private lateinit var swipeListener: SwipeListener
 
     private val viewModel by viewModels<NotiViewModel>()
 
@@ -63,24 +61,18 @@ class NotificationsFragment : Fragment() {
             )
         }
 
-        swipeListener = object : SwipeListener {
-            override fun swipeItem(
-                viewHolder: RecyclerView.ViewHolder,
-                direction: Int,
-                position: Int
-            ) {
-                with(notiAdapter) {
-                    val item = currentList[position]
-                    submitList(
-                        currentList.filter { noti -> noti.id != item.id }
-                    )
-                    item.threadId?.let { viewModel.markNoti(it) }
-                }
+        val swipeCallback = SwipeCallback(
+            0,
+            ItemTouchHelper.LEFT,
+            requireActivity()) { position ->
+            with(notiAdapter) {
+                val item = currentList[position]
+                submitList(
+                    currentList.filter { noti -> noti.id != item.id }
+                )
+                item.threadId?.let { viewModel.markNoti(it) }
             }
         }
-
-        swipeCallback = SwipeCallback(0, ItemTouchHelper.LEFT, requireActivity())
-        swipeCallback.setListener(swipeListener)
         ItemTouchHelper(swipeCallback).attachToRecyclerView(binding.rvNoti)
 
         binding.swipeNoti.setOnRefreshListener { viewModel.getNoti() }
