@@ -49,7 +49,10 @@ class IssueFragment : Fragment() {
         initAdapter()
         observeData()
 
-        binding.swipeIssue.setOnRefreshListener { viewModel.getIssues(option) }
+        binding.swipeIssue.setOnRefreshListener {
+//            viewModel.getIssues(option)
+            getIssuePaging(option)
+        }
     }
 
     private fun initAdapter() {

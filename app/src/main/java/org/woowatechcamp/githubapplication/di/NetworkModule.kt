@@ -16,6 +16,7 @@ import org.woowatechcamp.githubapplication.data.auth.AuthService
 import org.woowatechcamp.githubapplication.data.issue.IssueRepository
 import org.woowatechcamp.githubapplication.data.issue.IssueRepositoryImpl
 import org.woowatechcamp.githubapplication.data.issue.IssueService
+import org.woowatechcamp.githubapplication.data.issue.IssueUseCase
 import org.woowatechcamp.githubapplication.data.noti.NotiRepository
 import org.woowatechcamp.githubapplication.data.noti.NotiRepositoryImpl
 import org.woowatechcamp.githubapplication.data.noti.NotiService
@@ -24,6 +25,7 @@ import org.woowatechcamp.githubapplication.data.user.UserRepository
 import org.woowatechcamp.githubapplication.data.user.UserRepositoryImpl
 import org.woowatechcamp.githubapplication.data.user.UserService
 import org.woowatechcamp.githubapplication.network.TokenInterceptor
+import org.woowatechcamp.githubapplication.presentation.home.issue.paging.IssueUseCaseImpl
 import org.woowatechcamp.githubapplication.util.AuthPreferences
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -155,4 +157,10 @@ object NetworkModule {
         service: AuthService,
         preferences: AuthPreferences
     ): AuthRepository = AuthRepositoryImpl(service, preferences)
+
+    @Singleton
+    @Provides
+    fun provideIssueUseCase(
+        service: IssueService
+    ) : IssueUseCase = IssueUseCaseImpl(service)
 }

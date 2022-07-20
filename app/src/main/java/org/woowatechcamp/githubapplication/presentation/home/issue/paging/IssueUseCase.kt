@@ -1,19 +1,22 @@
 package org.woowatechcamp.githubapplication.presentation.home.issue.paging
 
 import org.woowatechcamp.githubapplication.data.issue.IssueService
+import org.woowatechcamp.githubapplication.data.issue.IssueUseCase
 import org.woowatechcamp.githubapplication.presentation.home.issue.model.IssueModel
+import org.woowatechcamp.githubapplication.presentation.home.issue.model.IssueState
 import javax.inject.Inject
 
-class IssueUseCase @Inject constructor(
+class IssueUseCaseImpl @Inject constructor(
     private val service : IssueService
-) {
-    suspend operator fun invoke(
+) : IssueUseCase {
+    override suspend operator fun invoke(
         state: String,
         index: Int,
-        pagingUnit: Int = 10
+        pagingUnit: Int
     ) : Result<List<IssueModel>> =
         runCatching {
             service.getIssuePaging(state,"created", "desc", pagingUnit, index)
+                .filter { issue -> issue.pull_request == null }
                 .map {
                     it.getIssueModel()
                 }

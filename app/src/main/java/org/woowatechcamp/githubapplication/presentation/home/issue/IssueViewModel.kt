@@ -12,9 +12,9 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import org.woowatechcamp.githubapplication.data.issue.IssueRepository
+import org.woowatechcamp.githubapplication.data.issue.IssueUseCase
 import org.woowatechcamp.githubapplication.presentation.home.issue.model.IssueModel
 import org.woowatechcamp.githubapplication.presentation.home.issue.paging.IssuePagingSource
-import org.woowatechcamp.githubapplication.presentation.home.issue.paging.IssueUseCase
 import org.woowatechcamp.githubapplication.util.UiState
 import javax.inject.Inject
 
@@ -46,7 +46,4 @@ class IssueViewModel @Inject constructor(
         ),
         pagingSourceFactory = { IssuePagingSource(issueUseCase, state) }
     ).flow.cachedIn(viewModelScope)
-
-
-
 }

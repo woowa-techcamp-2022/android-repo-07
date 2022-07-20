@@ -19,6 +19,7 @@ class TestIssueViewModel {
 
     private lateinit var issueViewModel: IssueViewModel
     private lateinit var issueRepository : FakeIssueRepository
+    private lateinit var issueUseCase: FakeIssueUseCase
 
     @ExperimentalCoroutinesApi
     @get:Rule
@@ -30,7 +31,8 @@ class TestIssueViewModel {
     @Before
     fun setUp() {
         issueRepository = FakeIssueRepository()
-        issueViewModel = IssueViewModel(issueRepository)
+        issueUseCase = FakeIssueUseCase()
+        issueViewModel = IssueViewModel(issueRepository, issueUseCase)
     }
 
     @Test
@@ -76,6 +78,8 @@ class TestIssueViewModel {
                 timeDiff = "2일 전"
             )
         )
+
+        issueUseCase.addIssues(issues)
 
         issueViewModel.issueState.test {
             // null test

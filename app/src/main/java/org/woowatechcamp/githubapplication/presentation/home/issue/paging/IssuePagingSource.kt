@@ -1,5 +1,6 @@
 package org.woowatechcamp.githubapplication.presentation.home.issue.paging
 
+import org.woowatechcamp.githubapplication.data.issue.IssueUseCase
 import org.woowatechcamp.githubapplication.presentation.home.issue.model.IssueModel
 import org.woowatechcamp.githubapplication.util.OffsetPagingSource
 import org.woowatechcamp.githubapplication.util.START_POSITION_INDEX
