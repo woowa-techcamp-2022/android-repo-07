@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -38,13 +39,10 @@ class NotiAdapter : ListAdapter<NotiModel, NotiAdapter.NotiViewHolder>(
         fun bind(item: NotiModel) {
             binding.noti = item
             binding.apply {
-                CoroutineScope(Dispatchers.IO).launch {
-                    val inputStream = URL(item.imgUrl).openStream()
-                    val bitmap = BitmapFactory.decodeStream(inputStream)
-                    withContext(Dispatchers.Main) {
-                        ivNoti.setImageBitmap(bitmap)
-                    }
-                }
+                Glide.with(binding.root)
+                    .load(item.imgUrl)
+                    .centerCrop()
+                    .into(binding.ivNoti)
             }
         }
     }
