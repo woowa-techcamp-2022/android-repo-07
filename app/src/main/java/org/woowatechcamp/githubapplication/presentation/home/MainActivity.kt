@@ -82,6 +82,7 @@ class MainActivity : AppCompatActivity() {
                         CoroutineScope(Dispatchers.IO).launch {
                             it.imgUrl.setBitmapWithCoil(this@MainActivity) { bitmap ->
                                 menu.getItem(1).icon = bitmap.getRoundDrawable(resources)
+                                this.cancel()
                             }
                         }
                         profileIntent = Intent(this@MainActivity, ProfileActivity::class.java)
