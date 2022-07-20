@@ -6,7 +6,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 fun <T> debounce(
-    timeMillis: Long = 500L,
+    timeMillis: Long = 150L,
     coroutineScope: CoroutineScope,
     block: (T) -> Unit
 ): (T) -> Unit {
