@@ -27,7 +27,7 @@ class IssueAdapter : ListAdapter<IssueModel, IssueAdapter.IssueViewHolder>(
         holder.bind(getItem(position))
     }
 
-    inner class IssueViewHolder(private val binding: ItemIssueBinding) :
+    class IssueViewHolder(private val binding: ItemIssueBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: IssueModel) {
             binding.issue = item

@@ -18,10 +18,7 @@ import org.woowatechcamp.githubapplication.data.issue.IssueCategory
 import org.woowatechcamp.githubapplication.databinding.FragmentIssueBinding
 import org.woowatechcamp.githubapplication.presentation.home.issue.adapter.IssueAdapter
 import org.woowatechcamp.githubapplication.presentation.home.issue.adapter.IssueSpinAdapter
-import org.woowatechcamp.githubapplication.util.ItemDecorationUtil
-import org.woowatechcamp.githubapplication.util.ResolutionMetrics
-import org.woowatechcamp.githubapplication.util.UiState
-import org.woowatechcamp.githubapplication.util.showSnackBar
+import org.woowatechcamp.githubapplication.util.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -103,14 +100,14 @@ class IssueFragment : Fragment() {
 
     private fun observeData() {
         viewModel.issueState.flowWithLifecycle(viewLifecycleOwner.lifecycle)
-            .onEach {
-                when (it) {
-                    is UiState.Success -> {
-                        issueAdapter.submitList(it.value)
+            .onEach { state ->
+                with(state) {
+                    onSuccess {
+                        issueAdapter.submitList(it)
                         binding.swipeIssue.isRefreshing = false
                     }
-                    is UiState.Error -> {
-                        showSnackBar(binding.root, it.msg, requireActivity())
+                    onError {
+                        showSnackBar(binding.root, it, requireActivity())
                         binding.swipeIssue.isRefreshing = false
                     }
                 }
