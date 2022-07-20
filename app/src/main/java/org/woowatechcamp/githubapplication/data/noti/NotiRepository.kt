@@ -2,6 +2,7 @@ package org.woowatechcamp.githubapplication.data.noti
 
 import org.woowatechcamp.githubapplication.presentation.home.notifications.model.NotiModel
 import org.woowatechcamp.githubapplication.util.UiState
+import org.woowatechcamp.githubapplication.util.getOrError
 import javax.inject.Inject
 
 class NotiRepository @Inject constructor(
@@ -11,9 +12,10 @@ class NotiRepository @Inject constructor(
     suspend fun getNoti(): UiState<List<NotiModel>> {
         return try {
             UiState.Success(
-                service.getNoti().map { noti ->
-                    noti.getNotiModel()
-                }.sortedBy { noti -> noti.timeDiffNum }
+                service.getNoti().getOrError("알림 정보에 대한 응답을 받지 못했습니다.")
+                    .map { noti ->
+                        noti.getNotiModel()
+                    }.sortedBy { noti -> noti.timeDiffNum }
             )
         } catch (e: Exception) {
             UiState.Error(e.message ?: "알림을 가져오는 데 실패했습니다.")
@@ -24,7 +26,9 @@ class NotiRepository @Inject constructor(
         return try {
             UiState.Success(
                 noti.refreshComment(
-                    service.getComments(noti.repo, noti.name).size
+                    service.getComments(noti.repo, noti.name)
+                        .getOrError("Comment 정보에 대한 응답을 받지 못했습니다.")
+                        .size
                 )
             )
         } catch (e: Exception) {
@@ -34,7 +38,7 @@ class NotiRepository @Inject constructor(
 
     suspend fun markNoti(threadId: String): UiState<String> {
         try {
-            with(service.markNoti(threadId)) {
+            with(service.markNoti(threadId).getOrError("읽음 처리에 대한 응답을 받지 못했습니다.")) {
                 return when (code()) {
                     205 -> {
                         UiState.Success("Success")

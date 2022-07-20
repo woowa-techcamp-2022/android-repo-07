@@ -9,7 +9,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -25,8 +24,6 @@ class NotificationsFragment : Fragment() {
     private var _binding: FragmentNotificationsBinding? = null
     private val binding get() = _binding!!
     private lateinit var notiAdapter: NotiAdapter
-    private lateinit var swipeCallback: SwipeCallback
-    private lateinit var swipeListener: SwipeListener
 
     private val viewModel by viewModels<NotiViewModel>()
 
@@ -63,24 +60,19 @@ class NotificationsFragment : Fragment() {
             )
         }
 
-        swipeListener = object : SwipeListener {
-            override fun swipeItem(
-                viewHolder: RecyclerView.ViewHolder,
-                direction: Int,
-                position: Int
-            ) {
-                with(notiAdapter) {
-                    val item = currentList[position]
-                    submitList(
-                        currentList.filter { noti -> noti.id != item.id }
-                    )
-                    item.threadId?.let { viewModel.markNoti(it) }
-                }
+        val swipeCallback = SwipeCallback(
+            0,
+            ItemTouchHelper.LEFT,
+            requireActivity()
+        ) { position ->
+            with(notiAdapter) {
+                val item = currentList[position]
+                submitList(
+                    currentList.filter { noti -> noti.id != item.id }
+                )
+                item.threadId?.let { viewModel.markNoti(it) }
             }
         }
-
-        swipeCallback = SwipeCallback(0, ItemTouchHelper.LEFT, requireActivity())
-        swipeCallback.setListener(swipeListener)
         ItemTouchHelper(swipeCallback).attachToRecyclerView(binding.rvNoti)
 
         binding.swipeNoti.setOnRefreshListener { viewModel.getNoti() }
@@ -88,49 +80,45 @@ class NotificationsFragment : Fragment() {
 
     private fun observeData() {
         viewModel.notiState.flowWithLifecycle(viewLifecycleOwner.lifecycle)
-            .onEach {
-                when (it) {
-                    is UiState.Success -> {
-                        notiAdapter.submitList(it.value)
+            .onEach { state ->
+                with(state) {
+                    onSuccess {
+                        notiAdapter.submitList(it)
                         binding.swipeNoti.isRefreshing = false
                     }
-                    is UiState.Error -> {
-                        showSnackBar(binding.root, it.msg, requireActivity())
+                    onError {
+                        showSnackBar(binding.root, it, requireActivity())
                         binding.swipeNoti.isRefreshing = false
                     }
-                    else -> {}
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
 
         viewModel.notiCommentState.flowWithLifecycle(viewLifecycleOwner.lifecycle)
-            .onEach {
-                when (it) {
-                    is UiState.Success -> {
-                        val item = it.value
+            .onEach { state ->
+                with(state) {
+                    onSuccess {
                         with(notiAdapter.currentList) {
-                            find { noti -> noti.id == item.id }?.let { found ->
-                                found.commentNum = item.commentNum
+                            find { noti -> noti.id == it.id }?.let { found ->
+                                found.commentNum = it.commentNum
                                 notiAdapter.notifyItemChanged(indexOf(found))
                             }
                         }
                     }
-                    is UiState.Error -> {
-                        showSnackBar(binding.root, it.msg, requireActivity())
+                    onError {
+                        showSnackBar(binding.root, it, requireActivity())
                     }
-                    else -> {}
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
 
         viewModel.markState.flowWithLifecycle(viewLifecycleOwner.lifecycle)
-            .onEach {
-                when (it) {
-                    is UiState.Success -> {
-                        showSnackBar(binding.root, it.value, requireActivity())
+            .onEach { state ->
+                with(state) {
+                    onSuccess {
+                        showSnackBar(binding.root, it, requireActivity())
                     }
-                    is UiState.Error -> {
-                        showSnackBar(binding.root, it.msg, requireActivity())
+                    onError {
+                        showSnackBar(binding.root, it, requireActivity())
                     }
-                    else -> {}
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
     }

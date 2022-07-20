@@ -2,6 +2,7 @@ package org.woowatechcamp.githubapplication.data.issue
 
 import org.woowatechcamp.githubapplication.presentation.home.issue.model.IssueModel
 import org.woowatechcamp.githubapplication.util.UiState
+import org.woowatechcamp.githubapplication.util.getOrError
 import javax.inject.Inject
 
 class IssueRepository @Inject constructor(
@@ -10,7 +11,7 @@ class IssueRepository @Inject constructor(
     suspend fun getIssues(state: String): UiState<List<IssueModel>> {
         return try {
             UiState.Success(
-                service.getIssues(state)
+                service.getIssues(state).getOrError("Issue 정보에 대한 응답을 받지 못헀습니다.")
                     .filter { item -> item.pull_request == null }
                     .map { issue ->
                         issue.getIssueModel()

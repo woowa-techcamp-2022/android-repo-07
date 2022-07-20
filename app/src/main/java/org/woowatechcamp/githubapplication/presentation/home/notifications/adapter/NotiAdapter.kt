@@ -28,7 +28,7 @@ class NotiAdapter : ListAdapter<NotiModel, NotiAdapter.NotiViewHolder>(
         holder.bind(getItem(position))
     }
 
-    inner class NotiViewHolder(private val binding: ItemNotiBinding) :
+    class NotiViewHolder(private val binding: ItemNotiBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: NotiModel) {
             binding.noti = item

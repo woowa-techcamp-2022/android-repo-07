@@ -13,19 +13,14 @@ import org.woowatechcamp.githubapplication.R
 class SwipeCallback(
     private val dragDirs: Int,
     private val swipeDirs: Int,
-    private val context: Context
+    private val context: Context,
+    private val swipeListener: (position: Int) -> Unit
 ) : ItemTouchHelper.SimpleCallback(dragDirs, swipeDirs) {
-
-    private var listener: SwipeListener? = null
-
-    fun setListener(listener: SwipeListener) {
-        this.listener = listener
-    }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
         val position = viewHolder.absoluteAdapterPosition
         if (direction == ItemTouchHelper.LEFT) {
-            listener?.let { it.swipeItem(viewHolder, direction, position) }
+            swipeListener(position)
         }
     }
 

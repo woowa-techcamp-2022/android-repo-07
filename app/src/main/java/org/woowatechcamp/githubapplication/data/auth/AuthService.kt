@@ -9,5 +9,5 @@ interface AuthService {
         @Query("client_id") clientId: String,
         @Query("client_secret") clientSecret: String,
         @Query("code") code: String
-    ): AuthResponse
+    ): AuthResponse?
 }

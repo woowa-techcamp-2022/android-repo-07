@@ -8,5 +8,5 @@ interface IssueService {
     @GET("/user/issues")
     suspend fun getIssues(
         @Query("state") state: String
-    ): List<IssueResponse>
+    ): List<IssueResponse>?
 }
