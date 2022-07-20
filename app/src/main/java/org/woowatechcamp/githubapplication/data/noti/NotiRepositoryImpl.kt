@@ -3,6 +3,7 @@ package org.woowatechcamp.githubapplication.data.noti
 import org.woowatechcamp.githubapplication.presentation.home.notifications.model.NotiModel
 import org.woowatechcamp.githubapplication.util.UiState
 import org.woowatechcamp.githubapplication.util.getOrError
+import java.util.concurrent.CancellationException
 import javax.inject.Inject
 
 class NotiRepositoryImpl @Inject constructor(
@@ -17,6 +18,8 @@ class NotiRepositoryImpl @Inject constructor(
                         noti.getNotiModel()
                     }.sortedBy { noti -> noti.timeDiffNum }
             )
+        } catch (ce: CancellationException) {
+            UiState.Empty
         } catch (e: Exception) {
             UiState.Error(e.message ?: "알림을 가져오는 데 실패했습니다.")
         }
@@ -31,6 +34,8 @@ class NotiRepositoryImpl @Inject constructor(
                         .size
                 )
             )
+        } catch (ce: CancellationException) {
+            UiState.Empty
         } catch (e: Exception) {
             UiState.Error(e.message ?: "Comment 개수를 가져오는 데 실패했습니다.")
         }
