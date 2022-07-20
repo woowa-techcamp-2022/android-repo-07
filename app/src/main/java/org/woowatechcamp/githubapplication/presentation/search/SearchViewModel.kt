@@ -1,12 +1,12 @@
 package org.woowatechcamp.githubapplication.presentation.search
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import org.woowatechcamp.githubapplication.data.remote.paging.RepoPagingSource
 import org.woowatechcamp.githubapplication.domain.entity.SearchInfo
 import org.woowatechcamp.githubapplication.domain.usecase.RepoSearchUseCase
 import org.woowatechcamp.githubapplication.util.debounce
@@ -35,7 +35,7 @@ class SearchViewModel @Inject constructor(
         viewModelScope.launch {
             repoSearchUseCase(keyword, 0, 20)
                 .onSuccess {
-                    if(this@SearchViewModel.keyword != "")
+                    if (this@SearchViewModel.keyword != "")
                         _searchUiState.value = it.toUiState()
                     else
                         _searchUiState.value = SearchUiState.Empty

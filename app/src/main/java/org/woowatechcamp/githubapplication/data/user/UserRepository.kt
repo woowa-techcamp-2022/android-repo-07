@@ -5,9 +5,9 @@ import javax.inject.Singleton
 
 @Singleton
 class UserRepository @Inject constructor(
-    private val service : UserService
+    private val service: UserService
 ) {
     suspend fun getUser() = service.getUser()
 
-    suspend fun getStarred(name : String) = service.getStarred(name)
+    suspend fun getStarred(name: String) = service.getStarred(name)
 }

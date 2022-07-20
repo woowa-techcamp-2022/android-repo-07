@@ -11,12 +11,12 @@ import androidx.recyclerview.widget.RecyclerView
 import org.woowatechcamp.githubapplication.R
 
 class SwipeCallback(
-    private val dragDirs : Int,
-    private val swipeDirs : Int,
-    private val context : Context
+    private val dragDirs: Int,
+    private val swipeDirs: Int,
+    private val context: Context
 ) : ItemTouchHelper.SimpleCallback(dragDirs, swipeDirs) {
 
-    private var listener : SwipeListener? = null
+    private var listener: SwipeListener? = null
 
     fun setListener(listener: SwipeListener) {
         this.listener = listener
@@ -59,14 +59,21 @@ class SwipeCallback(
                     }
                     val marginEnd = TypedValue.applyDimension(
                         TypedValue.COMPLEX_UNIT_DIP, 38f,
-                        context.resources.displayMetrics)
-                    val icon = ContextCompat.getDrawable(recyclerView.context, R.drawable.ic_check_24)
+                        context.resources.displayMetrics
+                    )
+                    val icon =
+                        ContextCompat.getDrawable(recyclerView.context, R.drawable.ic_check_24)
                     icon?.let { ic ->
-                        if (dX < - marginEnd - ic.intrinsicWidth) {
+                        if (dX < -marginEnd - ic.intrinsicWidth) {
                             val halfIcon = ic.intrinsicHeight / 2
                             val top = it.top + ((it.bottom - it.top) / 2 - halfIcon)
                             val left = it.right - halfIcon * 2
-                            ic.setBounds(left - marginEnd.toInt(), top, it.right - marginEnd.toInt(), top + ic.intrinsicHeight)
+                            ic.setBounds(
+                                left - marginEnd.toInt(),
+                                top,
+                                it.right - marginEnd.toInt(),
+                                top + ic.intrinsicHeight
+                            )
                             ic.draw(c)
                         }
                     }
