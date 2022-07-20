@@ -46,19 +46,19 @@ data class UserResponse(
     val updated_at: String?,
     val url: String?
 ) : Parcelable {
-        fun refreshStarred(starredNum: Int) : UserModel {
-            return UserModel(
-                name = name.orEmpty(),
-                nickname = login,
-                bio = bio.orEmpty(),
-                location = location.orEmpty(),
-                blog = blog.orEmpty(),
-                email = email.orEmpty(),
-                imgUrl = avatar_url.orEmpty(),
-                followers = followers ?: 0,
-                following = following ?: 0,
-                repoNum = (public_repos ?: 0) + (total_private_repos ?: 0),
-                starredNum = starredNum
-            )
-        }
+    fun refreshStarred(starredNum: Int): UserModel {
+        return UserModel(
+            name = name.orEmpty(),
+            nickname = login,
+            bio = bio.orEmpty(),
+            location = location.orEmpty(),
+            blog = blog.orEmpty(),
+            email = email.orEmpty(),
+            imgUrl = avatar_url.orEmpty(),
+            followers = followers ?: 0,
+            following = following ?: 0,
+            repoNum = (public_repos ?: 0) + (total_private_repos ?: 0),
+            starredNum = starredNum
+        )
     }
+}
