@@ -47,7 +47,6 @@ class SearchActivity : AppCompatActivity() {
                 when (it) {
                     is SearchViewModel.SearchUiState.Success -> {
                         isRepoNotEmpty(true)
-                        searchAdapter.submitList(it.data.toList())
                     }
                     is SearchViewModel.SearchUiState.Empty -> {
                         isRepoNotEmpty(false)
@@ -62,17 +61,18 @@ class SearchActivity : AppCompatActivity() {
             }.launchIn(lifecycleScope)
     }
 
-    private fun getRepoSearch(kewyord: String) {
+    private fun getRepoSearch(keyword: String) {
         // TODO : 페이징 수정 예정
-//        viewModel.getRepoSearch(viewModel.keyword).flowWithLifecycle(lifecycle)
-//            .onEach {
-//                searchAdapter.submitData(it)
-//            }
-//            .launchIn(lifecycleScope)
+        viewModel.getRepoSearch(viewModel.keyword).flowWithLifecycle(lifecycle)
+            .onEach {
+                searchAdapter.submitData(it)
+            }
+            .launchIn(lifecycleScope)
     }
 
     private fun initTextChangeEvent() {
         binding.etSearch.setTextChangeListener {
+            getRepoSearch(binding.etSearch.text.toString())
             viewModel.setLoading()
             viewModel.textChangeAction.invoke(binding.etSearch.text.toString())
             isRepoNotEmpty(it)
