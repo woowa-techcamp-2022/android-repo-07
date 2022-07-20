@@ -102,34 +102,31 @@ class NotificationsFragment : Fragment() {
             }.launchIn(viewLifecycleOwner.lifecycleScope)
 
         viewModel.notiCommentState.flowWithLifecycle(viewLifecycleOwner.lifecycle)
-            .onEach {
-                when (it) {
-                    is UiState.Success -> {
-                        val item = it.value
+            .onEach { state ->
+                with(state) {
+                    onSuccess {
                         with(notiAdapter.currentList) {
-                            find { noti -> noti.id == item.id }?.let { found ->
-                                found.commentNum = item.commentNum
+                            find { noti -> noti.id == it.id }?.let { found ->
+                                found.commentNum = it.commentNum
                                 notiAdapter.notifyItemChanged(indexOf(found))
                             }
                         }
                     }
-                    is UiState.Error -> {
-                        showSnackBar(binding.root, it.msg, requireActivity())
+                    onError {
+                        showSnackBar(binding.root, it, requireActivity())
                     }
-                    else -> {}
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
 
         viewModel.markState.flowWithLifecycle(viewLifecycleOwner.lifecycle)
-            .onEach {
-                when (it) {
-                    is UiState.Success -> {
-                        showSnackBar(binding.root, it.value, requireActivity())
+            .onEach { state ->
+                with(state) {
+                    onSuccess {
+                        showSnackBar(binding.root, it, requireActivity())
                     }
-                    is UiState.Error -> {
-                        showSnackBar(binding.root, it.msg, requireActivity())
+                    onError {
+                        showSnackBar(binding.root, it, requireActivity())
                     }
-                    else -> {}
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
     }
