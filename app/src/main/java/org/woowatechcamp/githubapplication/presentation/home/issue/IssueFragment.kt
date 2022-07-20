@@ -102,11 +102,9 @@ class IssueFragment : Fragment() {
     }
 
     private fun observeData() {
-        viewModel.issueState.flowWithLifecycle(lifecycle)
+        viewModel.issueState.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach {
                 when (it) {
-                    is UiState.Empty -> {}
-                    is UiState.Loading -> {}
                     is UiState.Success -> {
                         issueAdapter.submitList(it.value)
                         binding.swipeIssue.isRefreshing = false
@@ -117,7 +115,7 @@ class IssueFragment : Fragment() {
                     }
                 }
             }
-            .launchIn(lifecycleScope)
+            .launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
     override fun onDestroyView() {

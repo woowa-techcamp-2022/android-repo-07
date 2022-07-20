@@ -9,14 +9,12 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.woowatechcamp.githubapplication.BuildConfig
 import org.woowatechcamp.githubapplication.data.auth.AuthRepository
-import org.woowatechcamp.githubapplication.util.AuthPreferences
 import org.woowatechcamp.githubapplication.util.UiState
 import javax.inject.Inject
 
 @HiltViewModel
 class SignInViewModel @Inject constructor(
-    private val repository: AuthRepository,
-    private val preferences: AuthPreferences
+    private val repository: AuthRepository
 ) : ViewModel() {
 
     private val _signInState = MutableStateFlow<UiState<String>>(UiState.Empty)
@@ -26,16 +24,10 @@ class SignInViewModel @Inject constructor(
 
     fun getToken(code: String) = viewModelScope.launch {
         _signInState.value = UiState.Loading
-        repository.getToken(
+        _signInState.value = repository.getToken(
             BuildConfig.CLIENT_ID,
             BuildConfig.CLIENT_SECRETS,
             code
         )
-            .onSuccess { res ->
-                preferences.accessToken = res.accessToken
-                _signInState.value = UiState.Success(res.accessToken)
-            }.onFailure { e ->
-                _signInState.value = UiState.Error(e.message ?: "로그인에 실패했습니다.")
-            }
     }
 }

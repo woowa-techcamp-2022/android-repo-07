@@ -1,19 +1,13 @@
 package org.woowatechcamp.githubapplication.presentation.home.notifications.adapter
 
-import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import coil.load
 import org.woowatechcamp.githubapplication.databinding.ItemNotiBinding
 import org.woowatechcamp.githubapplication.presentation.home.notifications.model.NotiModel
 import org.woowatechcamp.githubapplication.util.ItemDiffCallback
-import java.net.URL
 
 class NotiAdapter : ListAdapter<NotiModel, NotiAdapter.NotiViewHolder>(
     ItemDiffCallback<NotiModel>(
@@ -38,12 +32,7 @@ class NotiAdapter : ListAdapter<NotiModel, NotiAdapter.NotiViewHolder>(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: NotiModel) {
             binding.noti = item
-            binding.apply {
-                Glide.with(binding.root)
-                    .load(item.imgUrl)
-                    .centerCrop()
-                    .into(binding.ivNoti)
-            }
+            binding.ivNoti.load(item.imgUrl)
         }
     }
 }
