@@ -16,8 +16,10 @@ class AuthRepository @Inject constructor(
         code: String
     ): UiState<String> {
         try {
-            with(service.getToken(clientId, clientSecrets, code)
-                .getOrError("로그인 응답을 받지 못했습니다.")) {
+            with(
+                service.getToken(clientId, clientSecrets, code)
+                    .getOrError("로그인 응답을 받지 못했습니다.")
+            ) {
                 preferences.accessToken = accessToken
                 return UiState.Success(accessToken)
             }

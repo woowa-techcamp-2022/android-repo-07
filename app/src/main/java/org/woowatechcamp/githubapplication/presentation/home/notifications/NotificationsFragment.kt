@@ -9,7 +9,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.RecyclerView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -64,7 +63,8 @@ class NotificationsFragment : Fragment() {
         val swipeCallback = SwipeCallback(
             0,
             ItemTouchHelper.LEFT,
-            requireActivity()) { position ->
+            requireActivity()
+        ) { position ->
             with(notiAdapter) {
                 val item = currentList[position]
                 submitList(

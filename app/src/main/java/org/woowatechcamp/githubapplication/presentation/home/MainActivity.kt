@@ -2,7 +2,6 @@ package org.woowatechcamp.githubapplication.presentation.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
@@ -25,7 +24,6 @@ import org.woowatechcamp.githubapplication.presentation.home.issue.IssueFragment
 import org.woowatechcamp.githubapplication.presentation.home.notifications.NotificationsFragment
 import org.woowatechcamp.githubapplication.presentation.profile.ProfileActivity
 import org.woowatechcamp.githubapplication.presentation.search.SearchActivity
-import org.woowatechcamp.githubapplication.util.UiState
 import org.woowatechcamp.githubapplication.util.ext.getRoundDrawable
 import org.woowatechcamp.githubapplication.util.ext.setBitmapWithCoil
 import org.woowatechcamp.githubapplication.util.ext.startActivity

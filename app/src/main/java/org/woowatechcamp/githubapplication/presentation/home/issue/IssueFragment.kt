@@ -20,7 +20,6 @@ import org.woowatechcamp.githubapplication.presentation.home.issue.adapter.Issue
 import org.woowatechcamp.githubapplication.presentation.home.issue.adapter.IssueSpinAdapter
 import org.woowatechcamp.githubapplication.util.*
 import javax.inject.Inject
-import kotlin.onSuccess
 
 @AndroidEntryPoint
 class IssueFragment : Fragment() {

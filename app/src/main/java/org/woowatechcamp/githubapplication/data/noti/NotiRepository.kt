@@ -14,8 +14,8 @@ class NotiRepository @Inject constructor(
             UiState.Success(
                 service.getNoti().getOrError("알림 정보에 대한 응답을 받지 못했습니다.")
                     .map { noti ->
-                    noti.getNotiModel()
-                }.sortedBy { noti -> noti.timeDiffNum }
+                        noti.getNotiModel()
+                    }.sortedBy { noti -> noti.timeDiffNum }
             )
         } catch (e: Exception) {
             UiState.Error(e.message ?: "알림을 가져오는 데 실패했습니다.")

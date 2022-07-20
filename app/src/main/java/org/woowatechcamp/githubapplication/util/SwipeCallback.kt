@@ -14,7 +14,7 @@ class SwipeCallback(
     private val dragDirs: Int,
     private val swipeDirs: Int,
     private val context: Context,
-    private val swipeListener : (position: Int) -> Unit
+    private val swipeListener: (position: Int) -> Unit
 ) : ItemTouchHelper.SimpleCallback(dragDirs, swipeDirs) {
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {

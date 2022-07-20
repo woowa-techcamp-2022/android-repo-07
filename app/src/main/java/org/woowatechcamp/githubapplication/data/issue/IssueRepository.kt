@@ -1,11 +1,7 @@
 package org.woowatechcamp.githubapplication.data.issue
 
 import org.woowatechcamp.githubapplication.presentation.home.issue.model.IssueModel
-import org.woowatechcamp.githubapplication.presentation.home.issue.model.IssueState
 import org.woowatechcamp.githubapplication.util.UiState
-import org.woowatechcamp.githubapplication.util.ext.getDate
-import org.woowatechcamp.githubapplication.util.ext.getIndexString
-import org.woowatechcamp.githubapplication.util.ext.getTimeDiff
 import org.woowatechcamp.githubapplication.util.getOrError
 import javax.inject.Inject
 
