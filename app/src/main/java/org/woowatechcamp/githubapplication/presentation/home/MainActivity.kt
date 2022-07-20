@@ -2,6 +2,7 @@ package org.woowatechcamp.githubapplication.presentation.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
@@ -40,8 +41,6 @@ class MainActivity : AppCompatActivity() {
     private val notificationsFragment: NotificationsFragment by lazy { NotificationsFragment() }
 
     private val viewModel by viewModels<MainViewModel>()
-
-    private var profileIntent: Intent? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,14 +81,26 @@ class MainActivity : AppCompatActivity() {
                         CoroutineScope(Dispatchers.IO).launch {
                             it.imgUrl.setBitmapWithCoil(this@MainActivity) { bitmap ->
                                 menu.getItem(1).icon = bitmap.getRoundDrawable(resources)
-                                this.cancel()
+                                cancel()
                             }
                         }
-                        profileIntent = Intent(this@MainActivity, ProfileActivity::class.java)
-                            .putExtra(getString(R.string.profile_item), it)
                     }
                     onError {
                         showSnackBar(binding.root, it, this@MainActivity)
+                    }
+                }
+            }.launchIn(lifecycleScope)
+
+        viewModel.profile.flowWithLifecycle(lifecycle)
+            .onEach { state ->
+                with(state) {
+                    onSuccess {
+                        val intent = Intent(this@MainActivity, ProfileActivity::class.java)
+                        intent.putExtra(getString(R.string.profile_item), it)
+                        startActivity(intent)
+                    }
+                    onError {
+                        showSnackBar(binding.root, "데이터를 불러오는 데 실패했습니다.", this@MainActivity)
                     }
                 }
             }.launchIn(lifecycleScope)
@@ -107,11 +118,7 @@ class MainActivity : AppCompatActivity() {
                 startActivity<SearchActivity>()
             }
             R.id.menu_main_profile -> {
-                if (profileIntent == null) {
-                    showSnackBar(binding.root, "데이터를 불러오는 데 실패했습니다.", this@MainActivity)
-                } else {
-                    startActivity(profileIntent)
-                }
+                viewModel.getProfile()
             }
             else -> return true
         }
