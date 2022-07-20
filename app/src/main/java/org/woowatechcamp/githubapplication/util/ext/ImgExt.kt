@@ -17,14 +17,14 @@ import kotlinx.coroutines.withContext
 import java.net.URL
 import kotlin.math.max
 
-fun Bitmap.getRoundDrawable(res : Resources) : RoundedBitmapDrawable {
+fun Bitmap.getRoundDrawable(res: Resources): RoundedBitmapDrawable {
     val round = RoundedBitmapDrawableFactory.create(res, this)
     round.cornerRadius = max(width, height) / 2f
     return round
 }
 
 suspend fun String.setBitmapWithCoil(
-    context : Context,
+    context: Context,
     completed: (Bitmap) -> Unit
 ) {
     val loading = ImageLoader(context)
@@ -33,19 +33,19 @@ suspend fun String.setBitmapWithCoil(
         .build()
     val result = (loading.execute(request) as SuccessResult).drawable
     val bitmap = (result as BitmapDrawable).bitmap
-    CoroutineScope(Dispatchers.Main).launch {
+    withContext(Dispatchers.Main) {
         completed(bitmap)
     }
 }
 
 fun String.setBitmap(
-    completed : (Bitmap) -> Unit
+    completed: (Bitmap) -> Unit
 ) {
-   CoroutineScope(Dispatchers.IO).launch {
-       val inputStream = URL(this@setBitmap).openStream()
-       val bitmap = BitmapFactory.decodeStream(inputStream)
-       withContext(Dispatchers.Main) {
-           completed(bitmap)
-       }
-   }
+    CoroutineScope(Dispatchers.IO).launch {
+        val inputStream = URL(this@setBitmap).openStream()
+        val bitmap = BitmapFactory.decodeStream(inputStream)
+        withContext(Dispatchers.Main) {
+            completed(bitmap)
+        }
+    }
 }
