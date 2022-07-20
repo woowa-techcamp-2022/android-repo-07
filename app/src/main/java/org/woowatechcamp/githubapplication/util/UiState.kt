@@ -30,3 +30,8 @@ inline fun <reified T : Any> UiState<T>.onLoading(action: (UiState<T>) -> Unit) 
         action(this)
     }
 }
+
+fun <T> T?.getOrError(message : String) : T {
+    if (this == null) throw Exception(message)
+    return this
+}

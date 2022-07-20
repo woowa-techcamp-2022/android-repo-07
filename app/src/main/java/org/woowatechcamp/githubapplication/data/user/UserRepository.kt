@@ -2,6 +2,7 @@ package org.woowatechcamp.githubapplication.data.user
 
 import org.woowatechcamp.githubapplication.presentation.user.model.UserModel
 import org.woowatechcamp.githubapplication.util.UiState
+import org.woowatechcamp.githubapplication.util.getOrError
 import javax.inject.Inject
 
 class UserRepository @Inject constructor(
@@ -10,23 +11,11 @@ class UserRepository @Inject constructor(
 
     suspend fun getUser(): UiState<UserModel> {
         try {
-            val user = service.getUser()
-            val starred = service.getStarred(user.login)
+            val user = service.getUser().getOrError("사용자 정보에 대한 응답을 받지 못했습니다.")
+            val starred = service.getStarred(user.login).getOrError("Star 정보에 대한 응답을 받지 못했습니다.")
             with(user) {
                 return UiState.Success(
-                    UserModel(
-                        name = name.orEmpty(),
-                        nickname = login,
-                        bio = bio.orEmpty(),
-                        location = location.orEmpty(),
-                        blog = blog.orEmpty(),
-                        email = email.orEmpty(),
-                        imgUrl = avatar_url.orEmpty(),
-                        followers = followers ?: 0,
-                        following = following ?: 0,
-                        repoNum = (public_repos ?: 0) + (total_private_repos ?: 0),
-                        starredNum = starred.size
-                    )
+                    refreshStarred(starred.size)
                 )
             }
         } catch (e: Exception) {
