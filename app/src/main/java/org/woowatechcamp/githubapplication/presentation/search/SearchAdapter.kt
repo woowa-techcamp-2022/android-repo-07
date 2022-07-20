@@ -37,20 +37,6 @@ class SearchAdapter : PagingDataAdapter<SearchInfo, SearchAdapter.SearchViewHold
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: SearchInfo) {
             binding.data = data
-            CoroutineScope(Dispatchers.IO).launch {
-                runCatching {
-                    val mInputStream = URL(data.profileImg).openStream()
-                    BitmapFactory.decodeStream(mInputStream)
-                }.onSuccess {
-                    withContext(Dispatchers.Main) {
-                        binding.ivProfile.setImageBitmap(it)
-                        cancel()
-                    }
-                }.onFailure {
-                    // Todo : 서치 뷰홀더 에러 잡기
-                    cancel()
-                }
-            }
         }
     }
 }
