@@ -13,6 +13,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -32,7 +33,6 @@ import org.woowatechcamp.githubapplication.util.showSnackBar
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var viewpagerAdapter: ViewpagerAdapter
     private lateinit var menu: Menu
     private val issueFragment: IssueFragment by lazy { IssueFragment() }
     private val notificationsFragment: NotificationsFragment by lazy { NotificationsFragment() }
@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initAdapter() {
-        viewpagerAdapter = ViewpagerAdapter(this)
+        val viewpagerAdapter = ViewpagerAdapter(this)
         viewpagerAdapter.addFragment(issueFragment, getString(R.string.main_tab_title_issue))
         viewpagerAdapter.addFragment(
             notificationsFragment,
@@ -80,6 +80,7 @@ class MainActivity : AppCompatActivity() {
                         CoroutineScope(Dispatchers.IO).launch {
                             it.value.imgUrl.setBitmapWithCoil(this@MainActivity) { bitmap ->
                                 menu.getItem(1).icon = bitmap.getRoundDrawable(resources)
+                                this.cancel()
                             }
                         }
                         profileIntent = Intent(this@MainActivity, ProfileActivity::class.java)
