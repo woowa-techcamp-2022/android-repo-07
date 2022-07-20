@@ -14,7 +14,7 @@ class RepoPagingSource(
     ): LoadResult<Int, SearchInfo> {
         val currentPosition = params.key ?: START_POSITION_INDEX
 
-        val result = repoSearchUseCase("kotlin", currentPosition, 10)
+        val result = repoSearchUseCase(query, currentPosition, 10)
             .getOrElse {
                 return LoadResult.Error(it)
             }
