@@ -3,6 +3,7 @@ package org.woowatechcamp.githubapplication.util.ext
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.ACTION_SEND
 import android.net.Uri
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -32,11 +33,26 @@ inline fun <reified T : Activity> Context.startActivity(
 }
 
 fun Context.startAction(
-    argument: Pair<String, Uri>
+    intent: Pair<String, Uri>,
+    vararg argument: Pair<String, Any?>
 ) {
-    startActivity(Intent(argument.first, argument.second))
+    startActivity(
+        Intent(intent.first, intent.second).apply {
+            putExtras(bundleOf(*argument))
+        }
+    )
 }
 
+fun Context.startMail(
+    vararg argument: Pair<String, Any?>
+) {
+    startActivity(
+        Intent(ACTION_SEND).apply {
+            type = "plain/text"
+            putExtras(bundleOf(*argument))
+        }
+    )
+}
 
 fun Context.stringListFrom(id: Int): List<String> =
     resources.getStringArray(id).toList()
