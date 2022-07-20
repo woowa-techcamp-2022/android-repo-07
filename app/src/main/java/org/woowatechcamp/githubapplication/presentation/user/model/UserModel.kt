@@ -12,8 +12,7 @@ data class UserModel(
     val blog: String,
     val email: String,
     val imgUrl: String,
-    val followers: Int,
-    val following: Int,
+    val followInfo: String,
     val repoNum: Int,
     val starredNum: Int
 ) : Parcelable
