@@ -2,8 +2,6 @@ package org.woowatechcamp.githubapplication.data.noti
 
 import org.woowatechcamp.githubapplication.presentation.home.notifications.model.NotiModel
 import org.woowatechcamp.githubapplication.util.UiState
-import org.woowatechcamp.githubapplication.util.getOrError
-import javax.inject.Inject
 
 interface NotiRepository {
 

@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 class IssueRepositoryImpl @Inject constructor(
     private val service: IssueService
-    ) : IssueRepository {
+) : IssueRepository {
 
     override suspend fun getIssues(state: String): UiState<List<IssueModel>> {
         return try {

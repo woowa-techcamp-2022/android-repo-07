@@ -9,7 +9,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
 import org.woowatechcamp.githubapplication.data.remote.paging.RepoPagingSource
 import org.woowatechcamp.githubapplication.domain.entity.SearchInfo
 import org.woowatechcamp.githubapplication.domain.usecase.RepoSearchUseCase
@@ -26,8 +25,9 @@ class SearchViewModel @Inject constructor(
         get() = _searchUiState.asStateFlow()
 
     var keyword = ""
+
     // 페이징 수정 요망
-    fun getRepoSearch(keyword : String) = Pager(
+    fun getRepoSearch(keyword: String) = Pager(
         config = PagingConfig(
             pageSize = 10,
             initialLoadSize = 5 * 2

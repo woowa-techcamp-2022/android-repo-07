@@ -134,25 +134,25 @@ object NetworkModule {
     @Singleton
     @Provides
     fun providesIssueRepository(
-        service : IssueService
-    ) : IssueRepository = IssueRepositoryImpl(service)
+        service: IssueService
+    ): IssueRepository = IssueRepositoryImpl(service)
 
     @Singleton
     @Provides
     fun providesUserRepository(
-        service : UserService
-    ) : UserRepository = UserRepositoryImpl(service)
+        service: UserService
+    ): UserRepository = UserRepositoryImpl(service)
 
     @Singleton
     @Provides
     fun providesNotiRepository(
-        service : NotiService
-    ) : NotiRepository = NotiRepositoryImpl(service)
+        service: NotiService
+    ): NotiRepository = NotiRepositoryImpl(service)
 
     @Singleton
     @Provides
     fun providesAuthRepository(
-        service : AuthService,
-        preferences : AuthPreferences
-    ) : AuthRepository = AuthRepositoryImpl(service, preferences)
+        service: AuthService,
+        preferences: AuthPreferences
+    ): AuthRepository = AuthRepositoryImpl(service, preferences)
 }
