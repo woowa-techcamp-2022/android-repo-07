@@ -1,15 +1,12 @@
 package org.woowatechcamp.githubapplication.presentation.search
 
-import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.coroutines.*
 import org.woowatechcamp.githubapplication.databinding.ItemSearchBinding
 import org.woowatechcamp.githubapplication.domain.entity.SearchInfo
 import org.woowatechcamp.githubapplication.util.ItemDiffCallback
-import java.net.URL
 
 class SearchAdapter : PagingDataAdapter<SearchInfo, SearchAdapter.SearchViewHolder>(
     ItemDiffCallback(
@@ -36,7 +33,13 @@ class SearchAdapter : PagingDataAdapter<SearchInfo, SearchAdapter.SearchViewHold
     class SearchViewHolder(private val binding: ItemSearchBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: SearchInfo) {
-            binding.data = data
+            with(binding) {
+                this.data = data
+                isLanguageVisible = data.colorInt != null
+                data.colorInt?.let {
+                    ivType.setBackgroundColor(it)
+                }
+            }
         }
     }
 }
