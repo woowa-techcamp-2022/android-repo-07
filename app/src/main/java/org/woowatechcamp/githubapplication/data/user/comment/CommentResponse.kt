@@ -1,18 +1,20 @@
 package org.woowatechcamp.githubapplication.data.user.comment
 
+import com.google.gson.annotations.SerializedName
+
 data class CommentResponse(
-    val author_association: String,
+    @SerializedName("author_association") val authorAssociation: String,
     val body: String,
-    val commit_id: String,
-    val created_at: String,
-    val html_url: String,
+    @SerializedName("commit_id") val commitId: String,
+    @SerializedName("created_at") val createdAt: String,
+    @SerializedName("html_url") val htmlUrl: String,
     val id: Int,
     val line: Int,
-    val node_id: String,
+    @SerializedName("node_id") val nodeId: String,
     val path: String,
     val position: Int,
     val reactions: Reactions,
-    val updated_at: String,
+    @SerializedName("updated_at") val updatedAt: String,
     val url: String,
     val user: User
 )

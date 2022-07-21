@@ -1,9 +1,11 @@
 package org.woowatechcamp.githubapplication.data.user.starred
 
+import com.google.gson.annotations.SerializedName
+
 data class License(
     val key: String,
     val name: String,
-    val node_id: String,
-    val spdx_id: String,
+    @SerializedName("node_id") val nodeId: String,
+    @SerializedName("spdx_id") val spdxId: String,
     val url: String
 )
