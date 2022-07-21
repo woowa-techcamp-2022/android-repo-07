@@ -1,22 +1,21 @@
-package org.woowatechcamp.githubapplication.data.remote.paging
+package org.woowatechcamp.githubapplication.presentation.home.issue.paging
 
 import android.util.Log
-import org.woowatechcamp.githubapplication.domain.entity.SearchInfo
-import org.woowatechcamp.githubapplication.domain.usecase.RepoSearchUseCase
+import org.woowatechcamp.githubapplication.data.issue.IssueUseCase
+import org.woowatechcamp.githubapplication.presentation.home.issue.model.IssueModel
 import org.woowatechcamp.githubapplication.util.OffsetPagingSource
 import org.woowatechcamp.githubapplication.util.START_POSITION_INDEX
 
-class RepoPagingSource(
-    private val repoSearchUseCase: RepoSearchUseCase,
-    private val query: String
-) : OffsetPagingSource<SearchInfo>() {
-    override suspend fun load(
-        params: LoadParams<Int>
-    ): LoadResult<Int, SearchInfo> {
+class IssuePagingSource(
+    private val issueUseCase: IssueUseCase,
+    private val state : String
+) : OffsetPagingSource<IssueModel>() {
 
+    override suspend fun load(
+        params: LoadParams<Int>): LoadResult<Int, IssueModel> {
         val currentPosition = params.key ?: START_POSITION_INDEX
 
-        val result = repoSearchUseCase(query, currentPosition, 10)
+        val result = issueUseCase(state, currentPosition, 10)
             .getOrElse {
                 return LoadResult.Error(it)
             }
@@ -34,5 +33,6 @@ class RepoPagingSource(
         }.getOrElse {
             LoadResult.Error(it)
         }
+
     }
 }

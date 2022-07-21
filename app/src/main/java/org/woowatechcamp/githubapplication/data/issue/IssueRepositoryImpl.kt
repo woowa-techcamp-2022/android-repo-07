@@ -13,7 +13,7 @@ class IssueRepositoryImpl @Inject constructor(
         return try {
             UiState.Success(
                 service.getIssues(state).getOrError("Issue 정보에 대한 응답을 받지 못헀습니다.")
-                    .filter { item -> item.pull_request == null }
+                    .filter { item -> item.pullRequest == null }
                     .map { issue ->
                         issue.getIssueModel()
                     }
