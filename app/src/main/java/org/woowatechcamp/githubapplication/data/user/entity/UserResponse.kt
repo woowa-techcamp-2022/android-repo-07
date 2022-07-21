@@ -56,8 +56,7 @@ data class UserResponse(
             blog = blog.orEmpty(),
             email = email.orEmpty(),
             imgUrl = avatarUrl.orEmpty(),
-            followers = followers ?: 0,
-            following = following ?: 0,
+            followInfo = "$followers Followers ・ $following Following",
             repoNum = (publicRepos ?: 0) + (totalPrivateRepos ?: 0),
             starredNum = starredNum
         )

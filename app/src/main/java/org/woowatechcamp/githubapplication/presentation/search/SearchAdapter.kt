@@ -3,19 +3,16 @@ package org.woowatechcamp.githubapplication.presentation.search
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.ListAdapter
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import org.woowatechcamp.githubapplication.databinding.ItemSearchBinding
 import org.woowatechcamp.githubapplication.domain.entity.SearchInfo
 import org.woowatechcamp.githubapplication.util.ItemDiffCallback
 import java.net.URL
 
-class SearchAdapter : ListAdapter<SearchInfo, SearchAdapter.SearchViewHolder>(
-    ItemDiffCallback<SearchInfo>(
+class SearchAdapter : PagingDataAdapter<SearchInfo, SearchAdapter.SearchViewHolder>(
+    ItemDiffCallback(
         onContentsTheSame = { old, new -> old == new },
         onItemsTheSame = { old, new -> old.id == new.id }
     )
@@ -40,18 +37,6 @@ class SearchAdapter : ListAdapter<SearchInfo, SearchAdapter.SearchViewHolder>(
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: SearchInfo) {
             binding.data = data
-            CoroutineScope(Dispatchers.IO).launch {
-                kotlin.runCatching {
-                    val mInputStream = URL(data.profileImg).openStream()
-                    BitmapFactory.decodeStream(mInputStream)
-                }.onSuccess {
-                    withContext(Dispatchers.Main) {
-                        binding.ivProfile.setImageBitmap(it)
-                    }
-                }.onFailure {
-
-                }
-            }
         }
     }
 }
