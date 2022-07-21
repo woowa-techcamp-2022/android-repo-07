@@ -15,7 +15,7 @@
 
 #### 🏃  Android 7
 
-|[안광민](https://shimmering-cougar-07b.notion.site/2-3-38124d9047a64c2dadc20aca7382c834)|[문다빈](https://github.com/Haemin-Park)|
+|[안광민](https://shimmering-cougar-07b.notion.site/2-3-38124d9047a64c2dadc20aca7382c834)|[문다빈]()|
 |------------------------------------|-------------------------------------|
 
 #### 🚉   scrum &etrospect
