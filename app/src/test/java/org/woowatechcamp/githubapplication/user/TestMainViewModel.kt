@@ -41,8 +41,7 @@ class TestMainViewModel {
             blog = "blog",
             email = "email",
             imgUrl = "imgUrl",
-            followers = 0,
-            following = 1,
+            followInfo = "follow",
             repoNum = 12,
             starredNum = 3
         )
