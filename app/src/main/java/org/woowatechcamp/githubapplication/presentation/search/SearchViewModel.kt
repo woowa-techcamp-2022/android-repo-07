@@ -40,7 +40,8 @@ class SearchViewModel @Inject constructor(
     val textChangeAction = debounce<String>(150L, viewModelScope,
         block = {
             keyword = it
-            getRepoSearch(keyword)
+            if(keyword != "")
+                getRepoSearch(keyword)
         }
     )
 
