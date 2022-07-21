@@ -20,12 +20,14 @@ import org.woowatechcamp.githubapplication.data.issue.IssueUseCase
 import org.woowatechcamp.githubapplication.data.noti.NotiRepository
 import org.woowatechcamp.githubapplication.data.noti.NotiRepositoryImpl
 import org.woowatechcamp.githubapplication.data.noti.NotiService
+import org.woowatechcamp.githubapplication.data.noti.NotiUseCase
 import org.woowatechcamp.githubapplication.data.remote.service.SearchService
 import org.woowatechcamp.githubapplication.data.user.UserRepository
 import org.woowatechcamp.githubapplication.data.user.UserRepositoryImpl
 import org.woowatechcamp.githubapplication.data.user.UserService
 import org.woowatechcamp.githubapplication.network.TokenInterceptor
 import org.woowatechcamp.githubapplication.presentation.home.issue.paging.IssueUseCaseImpl
+import org.woowatechcamp.githubapplication.presentation.home.notifications.paging.NotiUseCaseImpl
 import org.woowatechcamp.githubapplication.util.AuthPreferences
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -160,7 +162,13 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideIssueUseCase(
+    fun providesIssueUseCase(
         service: IssueService
-    ) : IssueUseCase = IssueUseCaseImpl(service)
+    ): IssueUseCase = IssueUseCaseImpl(service)
+
+    @Singleton
+    @Provides
+    fun providesNotiUseCase(
+        service: NotiService
+    ): NotiUseCase = NotiUseCaseImpl(service)
 }

@@ -37,12 +37,15 @@
 
             <TextView
                 android:id="@+id/tv_issue_name"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="11dp"
                 android:textColor="@color/grey"
                 android:textSize="14sp"
-                android:text="@{issue.name}"
+                android:text="@{issue.fullName}"
+                android:gravity="start"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintEnd_toStartOf="@id/tv_issue_num"
                 app:layout_constraintBottom_toBottomOf="@id/iv_issue"
                 app:layout_constraintStart_toEndOf="@+id/iv_issue"
                 app:layout_constraintTop_toTopOf="@+id/iv_issue" />
@@ -55,11 +58,12 @@
                 android:textColor="@color/grey"
                 android:textSize="14sp"
                 android:text="@{issue.number}"
-                app:layout_constraintBottom_toBottomOf="@id/tv_issue_name"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_issue_date"
                 app:layout_constraintEnd_toStartOf="@+id/tv_issue_date"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
                 app:layout_constraintStart_toEndOf="@+id/tv_issue_name"
-                app:layout_constraintTop_toTopOf="@+id/tv_issue_name" />
+                app:layout_constraintTop_toTopOf="@+id/tv_issue_date" />
 
             <TextView
                 android:id="@+id/tv_issue_date"

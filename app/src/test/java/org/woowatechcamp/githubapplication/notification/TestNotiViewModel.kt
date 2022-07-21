@@ -11,6 +11,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.woowatechcamp.githubapplication.data.noti.NotiRepository
 import org.woowatechcamp.githubapplication.data.noti.NotiRepositoryImpl
+import org.woowatechcamp.githubapplication.data.noti.NotiUseCase
 import org.woowatechcamp.githubapplication.issue.FakeIssueRepository
 import org.woowatechcamp.githubapplication.presentation.home.issue.IssueViewModel
 import org.woowatechcamp.githubapplication.presentation.home.issue.model.IssueModel
@@ -25,6 +26,7 @@ class TestNotiViewModel {
 
     private lateinit var notiViewModel : NotiViewModel
     private lateinit var notiRepository: FakeNotiRepository
+    private lateinit var notiUseCase : FakeNotiUseCase
 
     @ExperimentalCoroutinesApi
     @get:Rule
@@ -36,7 +38,9 @@ class TestNotiViewModel {
     @Before
     fun setUp() {
         notiRepository = FakeNotiRepository()
-        notiViewModel = NotiViewModel(notiRepository)
+        notiUseCase = FakeNotiUseCase()
+
+        notiViewModel = NotiViewModel(notiRepository, notiUseCase)
     }
 
     @Test
@@ -118,14 +122,12 @@ class TestNotiViewModel {
 
             // value test
             notiRepository.addCommentNoti(refreshNotiModel)
-            notiViewModel.getComments(notiList)
-            assertEquals(UiState.Success(refreshNotiModel), awaitItem())
+            notiViewModel.getComments(refreshNotiModel)
             assertEquals(UiState.Success(refreshNotiModel), awaitItem())
 
             // error test
             notiRepository.setReturnError(true)
-            notiViewModel.getComments(notiList)
-            assertEquals(UiState.Error("Test Error"), awaitItem())
+            notiViewModel.getComments(refreshNotiModel)
             assertEquals(UiState.Error("Test Error"), awaitItem())
         }
         notiRepository.setReturnError(false)

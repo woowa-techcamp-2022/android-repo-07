@@ -10,11 +10,16 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import org.woowatechcamp.githubapplication.R
 import org.woowatechcamp.githubapplication.databinding.FragmentNotificationsBinding
-import org.woowatechcamp.githubapplication.presentation.home.notifications.adapter.NotiAdapter
+import org.woowatechcamp.githubapplication.presentation.home.notifications.model.NotiModel
+import org.woowatechcamp.githubapplication.presentation.home.notifications.paging.NotiPagingAdapter
 import org.woowatechcamp.githubapplication.util.*
 import javax.inject.Inject
 
@@ -23,7 +28,9 @@ class NotificationsFragment : Fragment() {
 
     private var _binding: FragmentNotificationsBinding? = null
     private val binding get() = _binding!!
-    private lateinit var notiAdapter: NotiAdapter
+    private val notiPagingAdapter by lazy { NotiPagingAdapter() }
+
+    private val refreshItems = mutableListOf<NotiModel>()
 
     private val viewModel by viewModels<NotiViewModel>()
 
@@ -45,14 +52,14 @@ class NotificationsFragment : Fragment() {
         observeData()
 
         if (savedInstanceState == null) {
-            viewModel.getNoti()
+            getNotiPaging()
         }
     }
 
     private fun initAdapter() {
-        notiAdapter = NotiAdapter()
         binding.rvNoti.apply {
-            adapter = notiAdapter
+            adapter = notiPagingAdapter
+//            itemAnimator = null
             addItemDecoration(
                 ItemDecorationUtil.ItemDividerDecoration(
                     metrics.toPixel(1), 0f, requireActivity().getColor(R.color.navy)
@@ -65,42 +72,43 @@ class NotificationsFragment : Fragment() {
             ItemTouchHelper.LEFT,
             requireActivity()
         ) { position ->
-            with(notiAdapter) {
-                val item = currentList[position]
-                submitList(
-                    currentList.filter { noti -> noti.id != item.id }
-                )
-                item.threadId?.let { viewModel.markNoti(it) }
+            with(notiPagingAdapter.snapshot().items[position]) {
+                viewModel.removeItem(this)
+                threadId?.let { viewModel.markNoti(it) }
             }
         }
         ItemTouchHelper(swipeCallback).attachToRecyclerView(binding.rvNoti)
 
-        binding.swipeNoti.setOnRefreshListener { viewModel.getNoti() }
+        binding.swipeNoti.setOnRefreshListener {
+            notiPagingAdapter.refresh()
+            binding.swipeNoti.isRefreshing = false
+        }
+
+        notiPagingAdapter.addOnPagesUpdatedListener {
+            CoroutineScope(Dispatchers.IO).launch {
+                with(notiPagingAdapter.snapshot().items
+                    .filter { noti -> noti !in refreshItems }
+                ) {
+                    for (noti in this@with) {
+                        viewModel.getComments(noti)
+                    }
+                    refreshItems.addAll(this@with)
+                }
+                cancel()
+            }
+        }
     }
 
     private fun observeData() {
-        viewModel.notiState.flowWithLifecycle(viewLifecycleOwner.lifecycle)
-            .onEach { state ->
-                with(state) {
-                    onSuccess {
-                        notiAdapter.submitList(it)
-                        binding.swipeNoti.isRefreshing = false
-                    }
-                    onError {
-                        showSnackBar(binding.root, it, requireActivity())
-                        binding.swipeNoti.isRefreshing = false
-                    }
-                }
-            }.launchIn(viewLifecycleOwner.lifecycleScope)
-
         viewModel.notiCommentState.flowWithLifecycle(viewLifecycleOwner.lifecycle)
             .onEach { state ->
                 with(state) {
                     onSuccess {
-                        with(notiAdapter.currentList) {
+                        val list = notiPagingAdapter.snapshot().items
+                        with(list) {
                             find { noti -> noti.id == it.id }?.let { found ->
                                 found.commentNum = it.commentNum
-                                notiAdapter.notifyItemChanged(indexOf(found))
+                                notiPagingAdapter.notifyItemChanged(indexOf(found))
                             }
                         }
                     }
@@ -121,6 +129,10 @@ class NotificationsFragment : Fragment() {
                     }
                 }
             }.launchIn(viewLifecycleOwner.lifecycleScope)
+    }
+
+    private fun getNotiPaging() {
+        viewModel.getNotiPaging(notiPagingAdapter)
     }
 
     override fun onDestroyView() {
