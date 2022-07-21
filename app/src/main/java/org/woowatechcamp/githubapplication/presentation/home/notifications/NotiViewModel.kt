@@ -45,7 +45,7 @@ class NotiViewModel @Inject constructor(
         }
     }
 
-    private suspend fun getComments(notiList: List<NotiModel>) {
+    suspend fun getComments(notiList: List<NotiModel>) {
         notiList.forEach { item ->
             _notiCommentState.emit(
                 notiRepository.getComment(item)
@@ -54,7 +54,6 @@ class NotiViewModel @Inject constructor(
     }
 
     fun markNoti(threadId: String) = viewModelScope.launch {
-        _markState.emit(UiState.Loading)
         _markState.emit(
             notiRepository.markNoti(threadId)
         )
