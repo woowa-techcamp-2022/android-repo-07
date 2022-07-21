@@ -115,7 +115,7 @@ data class ResponseRepoSearchDTO(
             val url: String
         )
 
-        fun toEntity(): SearchInfo {
+        fun toEntity(colorInt: Int?): SearchInfo {
             val stargazersCount = when (stargazers_count >= 1000) {
                 true -> {
                     "${stargazers_count / 1000}.${(stargazers_count % 1000) / 100}k"
@@ -132,7 +132,8 @@ data class ResponseRepoSearchDTO(
                 owner.login,
                 description ?: "",
                 stargazersCount,
-                language ?: ""
+                language ?: "",
+                colorInt
             )
         }
     }

@@ -33,7 +33,13 @@ class SearchAdapter : PagingDataAdapter<SearchInfo, SearchAdapter.SearchViewHold
     class SearchViewHolder(private val binding: ItemSearchBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(data: SearchInfo) {
-            binding.data = data
+            with(binding) {
+                this.data = data
+                isLanguageVisible = data.colorInt != null
+                data.colorInt?.let {
+                    ivType.setBackgroundColor(it)
+                }
+            }
         }
     }
 }

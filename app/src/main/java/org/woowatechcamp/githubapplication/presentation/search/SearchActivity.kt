@@ -1,6 +1,7 @@
 package org.woowatechcamp.githubapplication.presentation.search
 
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
 import android.widget.EditText
 import androidx.activity.viewModels
@@ -9,8 +10,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
 import org.woowatechcamp.githubapplication.R
 import org.woowatechcamp.githubapplication.databinding.ActivitySearchBinding
 import org.woowatechcamp.githubapplication.util.ItemDecorationUtil
@@ -35,7 +38,6 @@ class SearchActivity : AppCompatActivity() {
         }
         binding.lifecycleOwner = this
         setContentView(binding.root)
-        getRepoSearch(viewModel.keyword)
         initTextChangeEvent()
         initAdapter()
         observeData()
@@ -51,19 +53,16 @@ class SearchActivity : AppCompatActivity() {
                     is SearchViewModel.SearchUiState.Empty -> {
                         isRepoNotEmpty(false)
                     }
-                    is SearchViewModel.SearchUiState.Loading -> {
-                        // TODO : Loading, Error 추후 구현
-                    }
                     else -> {
-                        // TODO : Loading, Error 추후 구현
+                        Log.d("422에러 : ","에러가 발생했습니다")
+                        getRepoSearch(binding.etSearch.text.toString())
                     }
                 }
             }.launchIn(lifecycleScope)
     }
 
-    private fun getRepoSearch(keyword: String) {
-        // TODO : 페이징 수정 예정
-        viewModel.getRepoSearch(viewModel.keyword).flowWithLifecycle(lifecycle)
+    private fun getRepoSearch(keyword : String) {
+        viewModel.getRepoSearch(keyword).flowWithLifecycle(lifecycle)
             .onEach {
                 searchAdapter.submitData(it)
             }
@@ -72,9 +71,12 @@ class SearchActivity : AppCompatActivity() {
 
     private fun initTextChangeEvent() {
         binding.etSearch.setTextChangeListener {
-            getRepoSearch(binding.etSearch.text.toString())
             viewModel.setLoading()
-            viewModel.textChangeAction.invoke(binding.etSearch.text.toString())
+            lifecycleScope.launch {
+                delay(150L)
+                getRepoSearch(binding.etSearch.text.toString())
+            }
+            // viewModel.textChangeAction.invoke(binding.etSearch.text.toString())
             isRepoNotEmpty(it)
         }
 
