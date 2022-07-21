@@ -19,10 +19,9 @@ class RepoPagingSource(
                 return LoadResult.Error(it)
             }
 
-
         val nextPosition = if (result.isNotEmpty()) currentPosition + 1 else null
         val previousPosition =
-            if (currentPosition != START_POSITION_INDEX) null else currentPosition - 1
+            if (currentPosition != START_POSITION_INDEX) currentPosition - 1 else null
 
         return runCatching {
             LoadResult.Page(
