@@ -1,4 +1,4 @@
-### GitHub Service
+### GitHub Application
 손쉽게 GitHub Issue 및 Notification 을 확인하고, 다른 사람들의 Repository 를 빠르게 검색해보세요!
 <br>
 #### 👋   Feature
