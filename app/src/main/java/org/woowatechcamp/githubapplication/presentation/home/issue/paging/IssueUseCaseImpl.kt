@@ -19,7 +19,7 @@ class IssueUseCaseImpl @Inject constructor(
     ) : Result<List<IssueModel>> =
         runCatching {
             service.getIssuePaging(state,"created", "desc", pagingUnit, index)
-                .filter { issue -> issue.pull_request == null }
+                .filter { issue -> issue.pullRequest == null }
                 .map { it.getIssueModel() }
         }
 }
