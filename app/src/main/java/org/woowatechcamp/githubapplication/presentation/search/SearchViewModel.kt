@@ -26,7 +26,7 @@ class SearchViewModel @Inject constructor(
         get() = _searchUiState.asStateFlow()
 
     var keyword = ""
-    // 페이징 수정 요망
+
     fun getRepoSearch(keyword : String) = Pager(
         config = PagingConfig(
             pageSize = 10,
@@ -40,7 +40,8 @@ class SearchViewModel @Inject constructor(
     val textChangeAction = debounce<String>(150L, viewModelScope,
         block = {
             keyword = it
-            getRepoSearch(keyword)
+            if(keyword != "")
+                getRepoSearch(keyword)
         }
     )
 

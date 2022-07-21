@@ -36,7 +36,6 @@ class SearchActivity : AppCompatActivity() {
         }
         binding.lifecycleOwner = this
         setContentView(binding.root)
-        getRepoSearch()
         initTextChangeEvent()
         initAdapter()
         observeData()
@@ -45,15 +44,15 @@ class SearchActivity : AppCompatActivity() {
     private fun observeData() {
         viewModel.searchUiState.flowWithLifecycle(lifecycle)
             .onEach {
-                with(binding) {
-                    when (it) {
-                        is SearchViewModel.SearchUiState.Success -> {
-                            isRepoNotEmpty(true)
-                        }
-                        is SearchViewModel.SearchUiState.Empty -> {
-                            isRepoNotEmpty(false)
-                        }
-                        else -> { showToast("에러가 발생했습니다") }
+                when (it) {
+                    is SearchViewModel.SearchUiState.Success -> {
+                        isRepoNotEmpty(true)
+                    }
+                    is SearchViewModel.SearchUiState.Empty -> {
+                        isRepoNotEmpty(false)
+                    }
+                    else -> {
+                        showToast("에러가 발생했습니다")
                     }
                 }
             }.launchIn(lifecycleScope)
@@ -70,6 +69,7 @@ class SearchActivity : AppCompatActivity() {
     private fun initTextChangeEvent() {
         binding.etSearch.setTextChangeListener {
             viewModel.setLoading()
+            getRepoSearch()
             viewModel.textChangeAction.invoke(binding.etSearch.text.toString())
             isRepoNotEmpty(it)
         }
