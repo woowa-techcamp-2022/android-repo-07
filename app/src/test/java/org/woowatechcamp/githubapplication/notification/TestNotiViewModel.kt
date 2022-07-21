@@ -118,14 +118,12 @@ class TestNotiViewModel {
 
             // value test
             notiRepository.addCommentNoti(refreshNotiModel)
-            notiViewModel.getComments(notiList)
-            assertEquals(UiState.Success(refreshNotiModel), awaitItem())
+            notiViewModel.getComments(refreshNotiModel)
             assertEquals(UiState.Success(refreshNotiModel), awaitItem())
 
             // error test
             notiRepository.setReturnError(true)
-            notiViewModel.getComments(notiList)
-            assertEquals(UiState.Error("Test Error"), awaitItem())
+            notiViewModel.getComments(refreshNotiModel)
             assertEquals(UiState.Error("Test Error"), awaitItem())
         }
         notiRepository.setReturnError(false)
