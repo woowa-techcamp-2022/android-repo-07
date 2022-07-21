@@ -1,6 +1,5 @@
 package org.woowatechcamp.githubapplication.presentation.home.issue
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,10 +15,10 @@ import kotlinx.coroutines.flow.onEach
 import org.woowatechcamp.githubapplication.R
 import org.woowatechcamp.githubapplication.data.issue.IssueCategory
 import org.woowatechcamp.githubapplication.databinding.FragmentIssueBinding
-import org.woowatechcamp.githubapplication.presentation.home.issue.adapter.IssueAdapter
 import org.woowatechcamp.githubapplication.presentation.home.issue.adapter.IssueSpinAdapter
 import org.woowatechcamp.githubapplication.presentation.home.issue.paging.IssuePagingAdapter
-import org.woowatechcamp.githubapplication.util.*
+import org.woowatechcamp.githubapplication.util.ItemDecorationUtil
+import org.woowatechcamp.githubapplication.util.ResolutionMetrics
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -47,12 +46,8 @@ class IssueFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initAdapter()
-        observeData()
 
-        binding.swipeIssue.setOnRefreshListener {
-//            viewModel.getIssues(option)
-            getIssuePaging(option)
-        }
+        binding.swipeIssue.setOnRefreshListener { getIssuePaging(option) }
     }
 
     private fun initAdapter() {
@@ -100,27 +95,11 @@ class IssueFragment : Fragment() {
         }
     }
 
-    private fun observeData() {
-        viewModel.issueState.flowWithLifecycle(viewLifecycleOwner.lifecycle)
-            .onEach { state ->
-                with(state) {
-                    onSuccess {
-//                        issueAdapter.submitList(it)
-                        binding.swipeIssue.isRefreshing = false
-                    }
-                    onError {
-                        showSnackBar(binding.root, it, requireActivity())
-                        binding.swipeIssue.isRefreshing = false
-                    }
-                }
-            }
-            .launchIn(viewLifecycleOwner.lifecycleScope)
-    }
-
     private fun getIssuePaging(state: String) {
         viewModel.getIssuePaging(state).flowWithLifecycle(lifecycle)
             .onEach {
                 issuePagingAdapter.submitData(it)
+                binding.swipeIssue.isRefreshing = false
             }
             .launchIn(lifecycleScope)
     }

@@ -1,5 +1,6 @@
 package org.woowatechcamp.githubapplication.data.issue
 
+import org.woowatechcamp.githubapplication.data.issue.model.IssueResponse
 import org.woowatechcamp.githubapplication.presentation.home.issue.model.IssueModel
 
 interface IssueUseCase {
