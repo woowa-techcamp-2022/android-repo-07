@@ -16,8 +16,9 @@
 
 #### 🏃  Android 7
 
-|[안광민](https://shimmering-cougar-07b.notion.site/2-3-38124d9047a64c2dadc20aca7382c834)|[문다빈]()|
+|[안광민](https://shimmering-cougar-07b.notion.site/2-3-38124d9047a64c2dadc20aca7382c834)|[문다빈](https://github.com/mdb1217)|
 |------------------------------------|-------------------------------------|
+|로그인, 메인(Issue, Notification)      |서치, 프로필                           |
 <br>
 
 ✂️  Stack
