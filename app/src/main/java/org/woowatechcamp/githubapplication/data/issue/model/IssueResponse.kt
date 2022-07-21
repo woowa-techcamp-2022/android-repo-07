@@ -1,5 +1,6 @@
 package org.woowatechcamp.githubapplication.data.issue.model
 
+import com.google.gson.annotations.SerializedName
 import org.woowatechcamp.githubapplication.presentation.home.issue.model.IssueModel
 import org.woowatechcamp.githubapplication.presentation.home.issue.model.IssueState
 import org.woowatechcamp.githubapplication.util.ext.getDate
@@ -7,35 +8,35 @@ import org.woowatechcamp.githubapplication.util.ext.getIndexString
 import org.woowatechcamp.githubapplication.util.ext.getTimeDiff
 
 data class IssueResponse(
-    val active_lock_reason: Any,
+    @SerializedName("active_lock_reason") val activeLockReason: Any,
     val assignee: Assignee,
     val assignees: List<Assignee>,
-    val author_association: String,
+    @SerializedName("author_association") val authorAssociation: String,
     val body: String,
-    val closed_at: Any,
+    @SerializedName("closed_at") val closedAt: Any,
     val comments: Int,
-    val comments_url: String,
-    val created_at: String,
+    @SerializedName("comments_url") val commentsUrl: String,
+    @SerializedName("created_at") val createdAt: String,
     val draft: Boolean,
-    val events_url: String,
-    val html_url: String,
+    @SerializedName("events_url") val eventsUrl: String,
+    @SerializedName("html_url") val htmlUrl: String,
     val id: Int,
     val labels: List<Label>,
-    val labels_url: String,
+    @SerializedName("labels_url") val labelsUrl: String,
     val locked: Boolean,
     val milestone: Any,
-    val node_id: String,
+    @SerializedName("node_id") val nodeId: String,
     val number: Int,
-    val performed_via_github_app: Any,
-    val pull_request: PullRequest?,
+    @SerializedName("performed_via_github_app") val performedViaGithubApp: Any,
+    @SerializedName("pull_request") val pullRequest: PullRequest?,
     val reactions: Reactions,
     val repository: Repository,
-    val repository_url: String,
+    @SerializedName("repository_url") val repositoryUrl: String,
     val state: String,
-    val state_reason: Any,
-    val timeline_url: String,
+    @SerializedName("state_reason") val stateReason: Any,
+    @SerializedName("timeline_url") val timelineUrl: String,
     val title: String,
-    val updated_at: String,
+    @SerializedName("updated_at") val updatedAt: String,
     val url: String,
     val user: User
 ) {
@@ -44,10 +45,10 @@ data class IssueResponse(
             id = id,
             state = IssueState.getIssueState(state),
             name = repository.name,
-            fullName = repository.full_name,
+            fullName = repository.fullName,
             number = number.getIndexString(),
             title = title,
-            timeDiff = updated_at.getDate().getTimeDiff()
+            timeDiff = updatedAt.getDate().getTimeDiff()
         )
     }
 }

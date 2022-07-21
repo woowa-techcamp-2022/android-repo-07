@@ -10,10 +10,18 @@ import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.woowatechcamp.githubapplication.BuildConfig
+import org.woowatechcamp.githubapplication.data.auth.AuthRepository
+import org.woowatechcamp.githubapplication.data.auth.AuthRepositoryImpl
 import org.woowatechcamp.githubapplication.data.auth.AuthService
+import org.woowatechcamp.githubapplication.data.issue.IssueRepository
+import org.woowatechcamp.githubapplication.data.issue.IssueRepositoryImpl
 import org.woowatechcamp.githubapplication.data.issue.IssueService
+import org.woowatechcamp.githubapplication.data.noti.NotiRepository
+import org.woowatechcamp.githubapplication.data.noti.NotiRepositoryImpl
 import org.woowatechcamp.githubapplication.data.noti.NotiService
 import org.woowatechcamp.githubapplication.data.remote.service.SearchService
+import org.woowatechcamp.githubapplication.data.user.UserRepository
+import org.woowatechcamp.githubapplication.data.user.UserRepositoryImpl
 import org.woowatechcamp.githubapplication.data.user.UserService
 import org.woowatechcamp.githubapplication.network.TokenInterceptor
 import org.woowatechcamp.githubapplication.util.AuthPreferences
@@ -117,10 +125,34 @@ object NetworkModule {
         @GithubRetrofit retrofit: Retrofit
     ): NotiService = retrofit.create(NotiService::class.java)
 
-
     @Singleton
     @Provides
     fun providesSearchService(
         @GithubRetrofit retrofit: Retrofit
     ): SearchService = retrofit.create(SearchService::class.java)
+
+    @Singleton
+    @Provides
+    fun providesIssueRepository(
+        service: IssueService
+    ): IssueRepository = IssueRepositoryImpl(service)
+
+    @Singleton
+    @Provides
+    fun providesUserRepository(
+        service: UserService
+    ): UserRepository = UserRepositoryImpl(service)
+
+    @Singleton
+    @Provides
+    fun providesNotiRepository(
+        service: NotiService
+    ): NotiRepository = NotiRepositoryImpl(service)
+
+    @Singleton
+    @Provides
+    fun providesAuthRepository(
+        service: AuthService,
+        preferences: AuthPreferences
+    ): AuthRepository = AuthRepositoryImpl(service, preferences)
 }

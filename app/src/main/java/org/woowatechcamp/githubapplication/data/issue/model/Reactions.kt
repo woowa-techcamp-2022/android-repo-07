@@ -11,6 +11,6 @@ data class Reactions(
     val hooray: Int,
     val laugh: Int,
     val rocket: Int,
-    val total_count: Int,
+    @SerializedName("total_count") val totalCount: Int,
     val url: String
 )

@@ -1,9 +1,11 @@
 package org.woowatechcamp.githubapplication.data.issue.model
 
+import com.google.gson.annotations.SerializedName
+
 data class PullRequest(
-    val diff_url: String,
-    val html_url: String,
-    val merged_at: Any,
-    val patch_url: String,
+    @SerializedName("diff_url") val diffUrl: String,
+    @SerializedName("html_url") val htmlUrl: String,
+    @SerializedName("merged_at") val mergedAt: Any,
+    @SerializedName("patch_url") val patchUrl: String,
     val url: String
 )

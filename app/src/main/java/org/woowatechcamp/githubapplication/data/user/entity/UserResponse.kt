@@ -1,49 +1,50 @@
 package org.woowatechcamp.githubapplication.data.user.entity
 
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 import org.woowatechcamp.githubapplication.presentation.user.model.UserModel
 
 @Parcelize
 data class UserResponse(
-    val avatar_url: String?,
+    @SerializedName("avatar_url") val avatarUrl: String?,
     val bio: String?,
     val blog: String?,
     val collaborators: Int?,
     val company: String?,
-    val created_at: String?,
-    val disk_usage: Int?,
+    @SerializedName("created_at") val createdAt: String,
+    @SerializedName("disk_usage") val diskUsage: Int?,
     val email: String?,
-    val events_url: String?,
+    @SerializedName("events_url") val eventsUrl: String?,
     val followers: Int?,
-    val followers_url: String?,
+    @SerializedName("followers_url") val followersUrl: String,
     val following: Int?,
-    val following_url: String?,
-    val gists_url: String?,
-    val gravatar_id: String?,
+    @SerializedName("following_url") val followingUrl: String,
+    @SerializedName("gists_url") val gistsUrl: String,
+    @SerializedName("gravatar_id") val gravatarId: String,
     val hireable: Boolean?,
-    val html_url: String?,
+    @SerializedName("html_url") val htmlUrl: String,
     val id: Int?,
     val location: String?,
     val login: String,
     val name: String?,
-    val node_id: String?,
-    val organizations_url: String?,
-    val owned_private_repos: Int?,
+    @SerializedName("node_id") val nodeId: String?,
+    @SerializedName("organizations_url") val organizationsUrl: String,
+    @SerializedName("owned_private_repos") val ownedPrivateRepos: Int?,
     val plan: Plan?,
-    val private_gists: Int?,
-    val public_gists: Int?,
-    val public_repos: Int?,
-    val received_events_url: String?,
-    val repos_url: String?,
-    val site_admin: Boolean?,
-    val starred_url: String?,
-    val subscriptions_url: String?,
-    val total_private_repos: Int?,
-    val twitter_username: String?,
-    val two_factor_authentication: Boolean?,
+    @SerializedName("private_gists") val privateGists: Int?,
+    @SerializedName("public_gists") val publicGists: Int?,
+    @SerializedName("public_repos") val publicRepos: Int?,
+    @SerializedName("received_events_url") val receivedEventsUrl: String,
+    @SerializedName("repos_url") val reposUrl: String,
+    @SerializedName("site_admin") val siteAdmin: Boolean,
+    @SerializedName("starred_url") val starredUrl: String,
+    @SerializedName("subscriptions_url") val subscriptionsUrl: String,
+    @SerializedName("total_private_repos") val totalPrivateRepos: Int?,
+    @SerializedName("twitter_username") val twitterUsername: String?,
+    @SerializedName("two_factor_authentication") val twoFactorAuthentication: Boolean?,
     val type: String?,
-    val updated_at: String?,
+    @SerializedName("updated_at") val updatedAt: String?,
     val url: String?
 ) : Parcelable {
     fun refreshStarred(starredNum: Int): UserModel {
@@ -54,9 +55,9 @@ data class UserResponse(
             location = location.orEmpty(),
             blog = blog.orEmpty(),
             email = email.orEmpty(),
-            imgUrl = avatar_url.orEmpty(),
+            imgUrl = avatarUrl.orEmpty(),
             followInfo = "$followers Followers ・ $following Following",
-            repoNum = (public_repos ?: 0) + (total_private_repos ?: 0),
+            repoNum = (publicRepos ?: 0) + (totalPrivateRepos ?: 0),
             starredNum = starredNum
         )
     }

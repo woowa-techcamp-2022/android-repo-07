@@ -1,7 +1,9 @@
-package org.woowatechcamp.githubapplication.data.notifications.model
+package org.woowatechcamp.githubapplication.data.noti.model
+
+import com.google.gson.annotations.SerializedName
 
 data class Subject(
-    val latest_comment_url: String,
+    @SerializedName("latest_comment_url") val latestCommentUrl: String,
     val title: String,
     val type: String,
     val url: String

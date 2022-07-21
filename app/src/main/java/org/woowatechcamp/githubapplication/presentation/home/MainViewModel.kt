@@ -1,6 +1,5 @@
 package org.woowatechcamp.githubapplication.presentation.home
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,7 +20,7 @@ class MainViewModel @Inject constructor(
 
     val mainState: StateFlow<UiState<UserModel>>
         get() = _mainState.asStateFlow()
-    val profile : SharedFlow<UiState<UserModel>>
+    val profile: SharedFlow<UiState<UserModel>>
         get() = _profile.asSharedFlow()
 
     fun getUser() = viewModelScope.launch {
