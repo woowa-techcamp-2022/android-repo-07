@@ -6,4 +6,3 @@ import org.woowatechcamp.githubapplication.util.UiState
 interface IssueRepository {
     suspend fun getIssues(state: String): UiState<List<IssueModel>>
 }
-
