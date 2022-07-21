@@ -7,6 +7,7 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.PATCH
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface NotiService {
     // Notifications 가져오기
@@ -25,4 +26,11 @@ interface NotiService {
         @Path("repo") repo: String,
         @Path("name") name: String
     ): List<CommentResponse>?
+
+    // Notifications paging
+    @GET("/notifications")
+    suspend fun getNotiPaging(
+        @Query("per_page") perPage: Int,
+        @Query("page") page: Int
+    ): List<NotiResponse>
 }
