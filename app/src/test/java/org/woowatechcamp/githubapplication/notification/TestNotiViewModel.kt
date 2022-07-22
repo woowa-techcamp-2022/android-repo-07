@@ -1,7 +1,6 @@
 package org.woowatechcamp.githubapplication.notification
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.ViewModel
 import app.cash.turbine.test
 import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -9,15 +8,8 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.woowatechcamp.githubapplication.data.noti.NotiRepository
-import org.woowatechcamp.githubapplication.data.noti.NotiRepositoryImpl
-import org.woowatechcamp.githubapplication.data.noti.NotiUseCase
-import org.woowatechcamp.githubapplication.issue.FakeIssueRepository
-import org.woowatechcamp.githubapplication.presentation.home.issue.IssueViewModel
-import org.woowatechcamp.githubapplication.presentation.home.issue.model.IssueModel
-import org.woowatechcamp.githubapplication.presentation.home.issue.model.IssueState
 import org.woowatechcamp.githubapplication.presentation.home.notifications.NotiViewModel
-import org.woowatechcamp.githubapplication.presentation.home.notifications.model.NotiModel
+import org.woowatechcamp.githubapplication.domain.entity.NotiModel
 import org.woowatechcamp.githubapplication.rule.MainCoroutineRule
 import org.woowatechcamp.githubapplication.util.UiState
 

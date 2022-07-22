@@ -18,8 +18,8 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import org.woowatechcamp.githubapplication.R
 import org.woowatechcamp.githubapplication.databinding.FragmentNotificationsBinding
-import org.woowatechcamp.githubapplication.presentation.home.notifications.model.NotiModel
-import org.woowatechcamp.githubapplication.presentation.home.notifications.paging.NotiPagingAdapter
+import org.woowatechcamp.githubapplication.domain.entity.NotiModel
+import org.woowatechcamp.githubapplication.presentation.home.notifications.adapter.NotiPagingAdapter
 import org.woowatechcamp.githubapplication.util.*
 import javax.inject.Inject
 

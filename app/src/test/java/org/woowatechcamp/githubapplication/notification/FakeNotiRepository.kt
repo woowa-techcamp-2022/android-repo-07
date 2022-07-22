@@ -1,11 +1,7 @@
 package org.woowatechcamp.githubapplication.notification
 
-import org.woowatechcamp.githubapplication.data.issue.IssueRepository
-import org.woowatechcamp.githubapplication.data.noti.NotiRepository
-import org.woowatechcamp.githubapplication.presentation.home.issue.model.IssueModel
-import org.woowatechcamp.githubapplication.presentation.home.issue.model.IssueState
-import org.woowatechcamp.githubapplication.presentation.home.notifications.model.NotiModel
-import org.woowatechcamp.githubapplication.presentation.user.model.UserModel
+import org.woowatechcamp.githubapplication.domain.repository.NotiRepository
+import org.woowatechcamp.githubapplication.domain.entity.NotiModel
 import org.woowatechcamp.githubapplication.util.UiState
 import org.woowatechcamp.githubapplication.util.getOrError
 

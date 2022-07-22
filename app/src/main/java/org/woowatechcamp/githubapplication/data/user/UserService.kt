@@ -1,7 +1,7 @@
 package org.woowatechcamp.githubapplication.data.user
 
-import org.woowatechcamp.githubapplication.data.user.entity.UserResponse
-import org.woowatechcamp.githubapplication.data.user.starred.StarredResponse
+import org.woowatechcamp.githubapplication.data.user.model.UserResponse
+import org.woowatechcamp.githubapplication.data.user.model.StarredResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 

@@ -5,11 +5,11 @@
 
     <data>
 
-        <import type="org.woowatechcamp.githubapplication.presentation.user.model.UserModel" />
+        <import type="org.woowatechcamp.githubapplication.domain.entity.UserModel" />
 
         <variable
             name="user"
-            type="UserModel" />
+            type="org.woowatechcamp.githubapplication.domain.entity.UserModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

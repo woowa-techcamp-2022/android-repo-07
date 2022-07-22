@@ -6,7 +6,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import org.woowatechcamp.githubapplication.util.AuthPreferences
+import org.woowatechcamp.githubapplication.data.local.AuthPreferences
 
 @Module
 @InstallIn(SingletonComponent::class)

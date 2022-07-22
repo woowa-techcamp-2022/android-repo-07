@@ -9,8 +9,8 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.woowatechcamp.githubapplication.presentation.home.issue.IssueViewModel
-import org.woowatechcamp.githubapplication.presentation.home.issue.model.IssueModel
-import org.woowatechcamp.githubapplication.presentation.home.issue.model.IssueState
+import org.woowatechcamp.githubapplication.domain.entity.IssueModel
+import org.woowatechcamp.githubapplication.presentation.home.issue.IssueState
 import org.woowatechcamp.githubapplication.rule.MainCoroutineRule
 import org.woowatechcamp.githubapplication.util.UiState
 

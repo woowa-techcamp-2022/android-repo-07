@@ -1,7 +1,7 @@
 package org.woowatechcamp.githubapplication.notification
 
-import org.woowatechcamp.githubapplication.data.noti.NotiUseCase
-import org.woowatechcamp.githubapplication.presentation.home.notifications.model.NotiModel
+import org.woowatechcamp.githubapplication.domain.usecase.NotiUseCase
+import org.woowatechcamp.githubapplication.domain.entity.NotiModel
 
 class FakeNotiUseCase : NotiUseCase {
     override suspend fun invoke(index: Int, pagingUnit: Int): Result<List<NotiModel>> {

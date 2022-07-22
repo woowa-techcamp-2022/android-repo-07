@@ -1,7 +1,7 @@
 package org.woowatechcamp.githubapplication.data.noti.model
 
 import com.google.gson.annotations.SerializedName
-import org.woowatechcamp.githubapplication.presentation.home.notifications.model.NotiModel
+import org.woowatechcamp.githubapplication.domain.entity.NotiModel
 import org.woowatechcamp.githubapplication.util.ext.*
 
 data class NotiResponse(

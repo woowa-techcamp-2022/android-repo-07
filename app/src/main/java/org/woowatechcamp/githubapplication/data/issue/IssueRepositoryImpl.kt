@@ -1,6 +1,7 @@
 package org.woowatechcamp.githubapplication.data.issue
 
-import org.woowatechcamp.githubapplication.presentation.home.issue.model.IssueModel
+import org.woowatechcamp.githubapplication.domain.repository.IssueRepository
+import org.woowatechcamp.githubapplication.domain.entity.IssueModel
 import org.woowatechcamp.githubapplication.util.UiState
 import org.woowatechcamp.githubapplication.util.getOrError
 import javax.inject.Inject

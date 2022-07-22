@@ -1,5 +1,6 @@
 package org.woowatechcamp.githubapplication.data.auth
 
+import org.woowatechcamp.githubapplication.data.auth.model.AuthResponse
 import retrofit2.http.POST
 import retrofit2.http.Query
 

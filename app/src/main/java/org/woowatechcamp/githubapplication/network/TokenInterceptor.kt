@@ -3,7 +3,7 @@ package org.woowatechcamp.githubapplication.network
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
-import org.woowatechcamp.githubapplication.util.AuthPreferences
+import org.woowatechcamp.githubapplication.data.local.AuthPreferences
 import java.io.IOException
 
 class TokenInterceptor(
