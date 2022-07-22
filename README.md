@@ -19,7 +19,7 @@
 
 ## 🏃  Android 7
 
-|이름|[안광민](https://shimmering-cougar-07b.notion.site/2-3-38124d9047a64c2dadc20aca7382c834)|[문다빈](https://github.com/mdb1217)|
+|이름|[안광민](https://github.com/creativeduck)|[문다빈](https://github.com/mdb1217)|
 |-|------------------------------------|-------------------------------------|
 |맡은 부분|로그인, 메인(Issue, Notification)      |서치, 프로필                           |
 ||![img](https://github.com/creativeduck.png?size=100) | ![img](https://github.com/mdb1217.png?size=100) |
