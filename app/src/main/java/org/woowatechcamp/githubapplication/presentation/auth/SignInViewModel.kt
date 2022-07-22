@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import org.woowatechcamp.githubapplication.BuildConfig
-import org.woowatechcamp.githubapplication.data.auth.AuthRepository
+import org.woowatechcamp.githubapplication.domain.repository.AuthRepository
 import org.woowatechcamp.githubapplication.util.UiState
 import javax.inject.Inject
 

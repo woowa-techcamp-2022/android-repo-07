@@ -16,7 +16,7 @@ import org.woowatechcamp.githubapplication.R
 import org.woowatechcamp.githubapplication.data.issue.IssueCategory
 import org.woowatechcamp.githubapplication.databinding.FragmentIssueBinding
 import org.woowatechcamp.githubapplication.presentation.home.issue.adapter.IssueSpinAdapter
-import org.woowatechcamp.githubapplication.presentation.home.issue.paging.IssuePagingAdapter
+import org.woowatechcamp.githubapplication.presentation.home.issue.adapter.IssuePagingAdapter
 import org.woowatechcamp.githubapplication.util.ItemDecorationUtil
 import org.woowatechcamp.githubapplication.util.ResolutionMetrics
 import javax.inject.Inject

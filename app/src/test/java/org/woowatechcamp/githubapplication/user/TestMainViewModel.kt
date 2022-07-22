@@ -9,7 +9,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.woowatechcamp.githubapplication.presentation.home.MainViewModel
-import org.woowatechcamp.githubapplication.presentation.user.model.UserModel
+import org.woowatechcamp.githubapplication.domain.entity.UserModel
 import org.woowatechcamp.githubapplication.rule.MainCoroutineRule
 import org.woowatechcamp.githubapplication.util.UiState
 

@@ -11,10 +11,10 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
-import org.woowatechcamp.githubapplication.data.issue.IssueRepository
-import org.woowatechcamp.githubapplication.data.issue.IssueUseCase
-import org.woowatechcamp.githubapplication.presentation.home.issue.model.IssueModel
-import org.woowatechcamp.githubapplication.presentation.home.issue.paging.IssuePagingSource
+import org.woowatechcamp.githubapplication.domain.repository.IssueRepository
+import org.woowatechcamp.githubapplication.domain.usecase.IssueUseCase
+import org.woowatechcamp.githubapplication.domain.entity.IssueModel
+import org.woowatechcamp.githubapplication.data.issue.paging.IssuePagingSource
 import org.woowatechcamp.githubapplication.util.UiState
 import javax.inject.Inject
 

@@ -1,7 +1,7 @@
 package org.woowatechcamp.githubapplication.issue
 
-import org.woowatechcamp.githubapplication.data.issue.IssueUseCase
-import org.woowatechcamp.githubapplication.presentation.home.issue.model.IssueModel
+import org.woowatechcamp.githubapplication.domain.usecase.IssueUseCase
+import org.woowatechcamp.githubapplication.domain.entity.IssueModel
 import org.woowatechcamp.githubapplication.util.getOrError
 
 class FakeIssueUseCase : IssueUseCase {

@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <import type="org.woowatechcamp.githubapplication.presentation.home.notifications.model.NotiModel"/>
+        <import type="org.woowatechcamp.githubapplication.domain.entity.NotiModel"/>
         <variable
             name="noti"
-            type="NotiModel" />
+            type="org.woowatechcamp.githubapplication.domain.entity.NotiModel" />
 
     </data>
 

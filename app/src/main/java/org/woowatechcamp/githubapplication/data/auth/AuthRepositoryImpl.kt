@@ -1,6 +1,7 @@
 package org.woowatechcamp.githubapplication.data.auth
 
-import org.woowatechcamp.githubapplication.util.AuthPreferences
+import org.woowatechcamp.githubapplication.domain.repository.AuthRepository
+import org.woowatechcamp.githubapplication.data.local.AuthPreferences
 import org.woowatechcamp.githubapplication.util.UiState
 import org.woowatechcamp.githubapplication.util.getOrError
 import javax.inject.Inject

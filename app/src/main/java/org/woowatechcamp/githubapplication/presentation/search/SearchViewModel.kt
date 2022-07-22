@@ -9,7 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import org.woowatechcamp.githubapplication.data.remote.paging.RepoPagingSource
+import org.woowatechcamp.githubapplication.data.search.paging.RepoPagingSource
 import org.woowatechcamp.githubapplication.domain.entity.SearchInfo
 import org.woowatechcamp.githubapplication.domain.usecase.RepoSearchUseCase
 import org.woowatechcamp.githubapplication.util.debounce

@@ -11,11 +11,11 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import org.woowatechcamp.githubapplication.data.noti.NotiRepository
-import org.woowatechcamp.githubapplication.data.noti.NotiUseCase
-import org.woowatechcamp.githubapplication.presentation.home.notifications.model.NotiModel
-import org.woowatechcamp.githubapplication.presentation.home.notifications.paging.NotiPagingAdapter
-import org.woowatechcamp.githubapplication.presentation.home.notifications.paging.NotiPagingSource
+import org.woowatechcamp.githubapplication.domain.repository.NotiRepository
+import org.woowatechcamp.githubapplication.domain.usecase.NotiUseCase
+import org.woowatechcamp.githubapplication.domain.entity.NotiModel
+import org.woowatechcamp.githubapplication.presentation.home.notifications.adapter.NotiPagingAdapter
+import org.woowatechcamp.githubapplication.data.noti.paging.NotiPagingSource
 import org.woowatechcamp.githubapplication.util.UiState
 import org.woowatechcamp.githubapplication.util.ext.cancelWhenActive
 import javax.inject.Inject
