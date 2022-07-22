@@ -5,6 +5,12 @@
 
     <data>
 
+        <import type="android.view.View" />
+
+        <variable
+            name="isLanguageVisible"
+            type="boolean" />
+
         <variable
             name="data"
             type="org.woowatechcamp.githubapplication.domain.entity.SearchInfo" />
@@ -20,6 +26,7 @@
             android:id="@+id/iv_profile"
             android:layout_width="@dimen/size_profile_24"
             android:layout_height="0dp"
+            app:imageUrl="@{data.profileImg}"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -91,12 +98,13 @@
             android:layout_width="@dimen/size_language_type_14dp"
             android:layout_height="0dp"
             android:layout_marginStart="12dp"
-            android:src="@color/purple"
+            android:visibility="@{isLanguageVisible? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintBottom_toBottomOf="@+id/iv_star"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintStart_toEndOf="@+id/tv_star_count"
             app:layout_constraintTop_toTopOf="@+id/iv_star"
-            app:shapeAppearance="@style/CornerSize50Percent" />
+            app:shapeAppearance="@style/CornerSize50Percent"
+            tools:src="@color/purple" />
 
         <TextView
             android:id="@+id/tv_language"

@@ -1,13 +1,11 @@
 package org.woowatechcamp.githubapplication.data.auth
 
-import javax.inject.Inject
-import javax.inject.Singleton
+import org.woowatechcamp.githubapplication.util.UiState
 
-@Singleton
-class AuthRepository @Inject constructor(private val service : AuthService)  {
+interface AuthRepository {
     suspend fun getToken(
-        clientId : String,
-        clientSecrets : String,
+        clientId: String,
+        clientSecrets: String,
         code: String
-    ) = service.getToken(clientId, clientSecrets, code)
+    ): UiState<String>
 }

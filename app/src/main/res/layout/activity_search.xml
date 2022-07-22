@@ -35,7 +35,6 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-
         </androidx.appcompat.widget.Toolbar>
 
         <org.woowatechcamp.githubapplication.presentation.search.custom.SearchEditText
@@ -51,12 +50,13 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_search"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:clipToPadding="false"
             android:overScrollMode="never"
             android:paddingTop="16dp"
             android:visibility="@{isNotEmpty? View.VISIBLE : View.GONE}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_search"
             tools:itemCount="3"
             tools:listitem="@layout/item_search" />

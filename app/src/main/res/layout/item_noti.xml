@@ -1,103 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="org.woowatechcamp.githubapplication.presentation.home.notifications.model.NotiModel"/>
+        <variable
+            name="noti"
+            type="NotiModel" />
+
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:paddingStart="28dp"
-        android:paddingTop="16dp"
-        android:paddingEnd="28dp"
-        android:paddingBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/iv_noti"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@color/purple"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearance="@style/CornerSize50Percent" />
-
-        <TextView
-            android:id="@+id/tv_noti_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="11dp"
-            android:text="sam/whatsingmygithub"
-            android:textColor="@color/grey"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@id/iv_noti"
-            app:layout_constraintStart_toEndOf="@+id/iv_noti"
-            app:layout_constraintTop_toTopOf="@+id/iv_noti" />
-
-        <TextView
-            android:id="@+id/tv_noti_num"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="11dp"
-            android:text="#1"
-            android:textColor="@color/grey"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@id/iv_noti"
-            app:layout_constraintEnd_toStartOf="@+id/tv_noti_date"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
-            app:layout_constraintStart_toEndOf="@+id/tv_noti_name"
-            app:layout_constraintTop_toTopOf="@+id/iv_noti" />
-
-        <TextView
-            android:id="@+id/tv_noti_date"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1일 전"
-            android:textColor="@color/grey"
-            android:textSize="14sp"
-            app:layout_constraintBaseline_toBaselineOf="@+id/tv_noti_name"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tv_noti_num" />
-
-        <TextView
-            android:id="@+id/tv_noti_title"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="11dp"
-            android:layout_marginTop="8dp"
-            android:text="프로젝트 요구사항 및 참고자료"
-            android:textColor="@color/white"
-            android:textSize="14sp"
-            android:layout_marginEnd="15dp"
-            app:layout_constraintStart_toEndOf="@id/iv_noti"
-            app:layout_constraintTop_toBottomOf="@+id/tv_noti_name"
-            app:layout_constraintEnd_toStartOf="@id/barrier_comment"
-            android:gravity="start"/>
+            android:paddingStart="28dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="28dp"
+            android:paddingBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/tv_noti_comment"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:background="@drawable/rectangle_white_radius_3"
-            android:gravity="center"
-            android:text="1"
-            android:textColor="@color/primary"
-            android:textSize="12sp"
-            app:layout_constraintBaseline_toBaselineOf="@+id/tv_noti_title"
-            app:layout_constraintEnd_toEndOf="parent" />
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/iv_noti"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@color/purple"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearance="@style/CornerSize50Percent" />
 
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/barrier_comment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:constraint_referenced_ids="tv_noti_comment"
-            app:barrierDirection="start" />
+            <TextView
+                android:id="@+id/tv_noti_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="11dp"
+                android:textColor="@color/grey"
+                android:textSize="14sp"
+                android:text="@{noti.fullName}"
+                android:gravity="start"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintEnd_toStartOf="@id/tv_noti_num"
+                app:layout_constraintBottom_toBottomOf="@id/iv_noti"
+                app:layout_constraintStart_toEndOf="@+id/iv_noti"
+                app:layout_constraintTop_toTopOf="@+id/iv_noti" />
+
+            <TextView
+                android:id="@+id/tv_noti_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="11dp"
+                android:textColor="@color/grey"
+                android:textSize="14sp"
+                android:text="@{noti.num}"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_noti_date"
+                app:layout_constraintEnd_toStartOf="@+id/tv_noti_date"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toEndOf="@+id/tv_noti_name"
+                app:layout_constraintTop_toTopOf="@+id/tv_noti_date" />
+
+            <TextView
+                android:id="@+id/tv_noti_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/grey"
+                android:textSize="14sp"
+                android:text="@{noti.timeDiff}"
+                app:layout_constraintBaseline_toBaselineOf="@+id/tv_noti_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tv_noti_num" />
+
+            <TextView
+                android:id="@+id/tv_noti_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="11dp"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:layout_marginEnd="15dp"
+                android:text="@{noti.title}"
+                app:layout_constraintStart_toEndOf="@id/iv_noti"
+                app:layout_constraintTop_toBottomOf="@+id/tv_noti_name"
+                app:layout_constraintEnd_toStartOf="@id/barrier_comment"
+                android:gravity="start" />
+
+            <TextView
+                android:id="@+id/tv_noti_comment"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background='@{noti.commentNum >= 0 ? @drawable/rectangle_white_radius_3 : @drawable/rectangle_grey_radius_3}'
+                android:gravity="center"
+                android:textColor="@color/primary"
+                android:textSize="12sp"
+                android:text='@{noti.commentNum >= 0 ? String.valueOf(noti.commentNum) : ""}'
+                app:layout_constraintBaseline_toBaselineOf="@+id/tv_noti_title"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="tv_noti_comment"
+                app:barrierDirection="start" />
 
 
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

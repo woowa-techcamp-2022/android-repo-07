@@ -7,5 +7,6 @@ data class SearchInfo(
     val owner: String,
     val description: String,
     val starCount: String,
-    val language: String
+    val language: String,
+    val colorInt: Int?,
 )

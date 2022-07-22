@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.MainActivity">
+    tools:context=".presentation.home.MainActivity">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_main_start"
@@ -45,7 +45,8 @@
         app:tabSelectedTextColor="@color/white"
         app:tabTextAppearance="@style/TabTextMain"
         app:tabGravity="fill"
-        />
+        app:tabMaxWidth="0dp"
+        app:tabMode="fixed"/>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vp_main"

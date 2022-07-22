@@ -24,24 +24,24 @@
             android:name=".presentation.search.SearchActivity"
             android:exported="true" />
         <activity
-            android:name=".presentation.MainActivity"
+            android:name=".presentation.home.MainActivity"
             android:exported="false"/>
 
         <activity android:name=".presentation.auth.SignInActivity"
-            android:exported="true">
+            android:exported="true"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
                     android:host="github-auth"
                     android:scheme="wooah"/>
+
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

@@ -1,11 +1,8 @@
 package org.woowatechcamp.githubapplication.data.user
 
-import javax.inject.Inject
-import javax.inject.Singleton
+import org.woowatechcamp.githubapplication.presentation.user.model.UserModel
+import org.woowatechcamp.githubapplication.util.UiState
 
-@Singleton
-class UserRepository @Inject constructor(
-    private val service : UserService
-) {
-    suspend fun getUser() = service.getUser()
+interface UserRepository {
+    suspend fun getUser(): UiState<UserModel>
 }

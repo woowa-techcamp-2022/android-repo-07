@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_window_focused="true">
+        <set>
+            <objectAnimator android:propertyName="rotation"
+                android:duration="300"
+                android:valueFrom="180"
+                android:valueTo="360" />
+        </set>
+    </item>
+
+    <item android:state_window_focused="false">
+        <set>
+            <objectAnimator android:propertyName="rotation"
+                android:duration="300"
+                android:valueFrom="0"
+                android:valueTo="180"/>
+        </set>
+    </item>
+</selector>

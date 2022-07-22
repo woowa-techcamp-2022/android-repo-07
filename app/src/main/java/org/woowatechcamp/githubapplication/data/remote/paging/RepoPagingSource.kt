@@ -13,17 +13,17 @@ class RepoPagingSource(
     override suspend fun load(
         params: LoadParams<Int>
     ): LoadResult<Int, SearchInfo> {
+
         val currentPosition = params.key ?: START_POSITION_INDEX
 
-        val result = repoSearchUseCase("kotlin", currentPosition, 10)
+        val result = repoSearchUseCase(query, currentPosition, 10)
             .getOrElse {
                 return LoadResult.Error(it)
             }
 
-
         val nextPosition = if (result.isNotEmpty()) currentPosition + 1 else null
         val previousPosition =
-            if (currentPosition != START_POSITION_INDEX) null else currentPosition - 1
+            if (currentPosition != START_POSITION_INDEX) currentPosition - 1 else null
 
         return runCatching {
             LoadResult.Page(

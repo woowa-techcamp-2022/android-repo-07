@@ -5,7 +5,7 @@
     <string name="sign_in_btn">GitHub 로그인</string>
     <string name="main_tab_title_issue">Issue</string>
     <string name="main_tab_title_notifications">Notifications</string>
-
+    <string name="code">code</string>
     <!-- search -->
     <string name="search">Search</string>
     <string name="search_find_your_stuff">Find Your Stuff</string>
@@ -19,11 +19,21 @@
     <string name="dot">・</string>
     <string name="repositories">Repositories</string>
     <string name="starred">Starred</string>
+    <string name="filter">Filter</string>
+    <string name="profile_item">profile_item</string>
 
     <!-- tools -->
     <string name="jetbrains">JetBrains</string>
     <string name="search_item_description">The Kotlin Programming Language.</string>
     <string name="star_count">1.4k</string>
     <string name="kotlin">Kotlin</string>
+
+    <!-- issue    -->
+    <string name="open_category">Open</string>
+    <string name="closed_category">Closed</string>
+    <string name="all_category">All</string>
+    <string name="open">open</string>
+    <string name="closed">closed</string>
+    <string name="all">all</string>
     <string name="location">Seoul, Korea</string>
 </resources>

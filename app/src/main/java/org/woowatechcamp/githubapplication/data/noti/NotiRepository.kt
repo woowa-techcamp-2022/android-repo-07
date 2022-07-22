@@ -1,13 +1,14 @@
 package org.woowatechcamp.githubapplication.data.noti
 
-import javax.inject.Inject
-import javax.inject.Singleton
+import org.woowatechcamp.githubapplication.presentation.home.notifications.model.NotiModel
+import org.woowatechcamp.githubapplication.util.UiState
 
-@Singleton
-class NotiRepository @Inject constructor(
-    private val service : NotiService
-) {
-    suspend fun getNoti() = service.getNoti()
+interface NotiRepository {
 
-    suspend fun markNoti(threadId : Long) = service.markNoti(threadId)
+    suspend fun getNoti(): UiState<List<NotiModel>>
+
+    suspend fun getComment(noti: NotiModel): UiState<NotiModel>
+
+    suspend fun markNoti(threadId: String): UiState<String>
+
 }

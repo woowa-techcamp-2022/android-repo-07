@@ -1,11 +1,8 @@
 package org.woowatechcamp.githubapplication.data.issue
 
-import javax.inject.Inject
-import javax.inject.Singleton
+import org.woowatechcamp.githubapplication.presentation.home.issue.model.IssueModel
+import org.woowatechcamp.githubapplication.util.UiState
 
-@Singleton
-class IssueRepository @Inject constructor(
-    private val service : IssueService
-) {
-    suspend fun getIssues(state : String) = service.getIssues(state)
+interface IssueRepository {
+    suspend fun getIssues(state: String): UiState<List<IssueModel>>
 }

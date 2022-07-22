@@ -3,7 +3,7 @@ package org.woowatechcamp.githubapplication.util
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 
-const val START_POSITION_INDEX = 0
+const val START_POSITION_INDEX = 1
 
 abstract class OffsetPagingSource<V : Any> : PagingSource<Int, V>() {
     override fun getRefreshKey(state: PagingState<Int, V>): Int? {
