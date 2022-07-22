@@ -1,19 +1,13 @@
 package org.woowatechcamp.githubapplication.auth
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import app.cash.turbine.test
 import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.woowatechcamp.githubapplication.data.auth.AuthRepository
-import org.woowatechcamp.githubapplication.issue.FakeIssueRepository
 import org.woowatechcamp.githubapplication.presentation.auth.SignInViewModel
-import org.woowatechcamp.githubapplication.presentation.home.issue.IssueViewModel
-import org.woowatechcamp.githubapplication.presentation.home.issue.model.IssueModel
-import org.woowatechcamp.githubapplication.presentation.home.issue.model.IssueState
 import org.woowatechcamp.githubapplication.rule.MainCoroutineRule
 import org.woowatechcamp.githubapplication.util.UiState
 

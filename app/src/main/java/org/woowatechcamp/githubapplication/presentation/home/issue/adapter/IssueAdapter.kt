@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import org.woowatechcamp.githubapplication.databinding.ItemIssueBinding
-import org.woowatechcamp.githubapplication.presentation.home.issue.model.IssueModel
+import org.woowatechcamp.githubapplication.domain.entity.IssueModel
 import org.woowatechcamp.githubapplication.util.ItemDiffCallback
 
 class IssueAdapter : ListAdapter<IssueModel, IssueAdapter.IssueViewHolder>(

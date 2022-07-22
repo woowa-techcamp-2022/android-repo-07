@@ -1,10 +1,6 @@
 package org.woowatechcamp.githubapplication.auth
 
-import org.woowatechcamp.githubapplication.data.auth.AuthRepository
-import org.woowatechcamp.githubapplication.data.issue.IssueRepository
-import org.woowatechcamp.githubapplication.presentation.home.issue.model.IssueModel
-import org.woowatechcamp.githubapplication.presentation.home.issue.model.IssueState
-import org.woowatechcamp.githubapplication.presentation.user.model.UserModel
+import org.woowatechcamp.githubapplication.domain.repository.AuthRepository
 import org.woowatechcamp.githubapplication.util.UiState
 import org.woowatechcamp.githubapplication.util.getOrError
 

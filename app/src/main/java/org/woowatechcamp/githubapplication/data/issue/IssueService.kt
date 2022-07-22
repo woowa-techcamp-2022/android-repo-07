@@ -1,7 +1,6 @@
 package org.woowatechcamp.githubapplication.data.issue
 
 import org.woowatechcamp.githubapplication.data.issue.model.IssueResponse
-import org.woowatechcamp.githubapplication.presentation.home.issue.model.IssueModel
 import retrofit2.http.GET
 import retrofit2.http.Query
 

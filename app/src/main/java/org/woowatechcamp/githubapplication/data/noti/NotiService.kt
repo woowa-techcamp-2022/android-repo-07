@@ -2,7 +2,7 @@ package org.woowatechcamp.githubapplication.data.noti
 
 import org.woowatechcamp.githubapplication.data.noti.model.NotiResponse
 import org.woowatechcamp.githubapplication.data.notifications.model.NotiMarkResponse
-import org.woowatechcamp.githubapplication.data.user.comment.CommentResponse
+import org.woowatechcamp.githubapplication.data.noti.model.CommentResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.PATCH

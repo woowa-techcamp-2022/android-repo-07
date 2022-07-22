@@ -1,8 +1,8 @@
 package org.woowatechcamp.githubapplication.data.issue.model
 
 import com.google.gson.annotations.SerializedName
-import org.woowatechcamp.githubapplication.presentation.home.issue.model.IssueModel
-import org.woowatechcamp.githubapplication.presentation.home.issue.model.IssueState
+import org.woowatechcamp.githubapplication.domain.entity.IssueModel
+import org.woowatechcamp.githubapplication.presentation.home.issue.IssueState
 import org.woowatechcamp.githubapplication.util.ext.getDate
 import org.woowatechcamp.githubapplication.util.ext.getIndexString
 import org.woowatechcamp.githubapplication.util.ext.getTimeDiff

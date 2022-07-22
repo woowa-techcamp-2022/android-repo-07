@@ -5,8 +5,8 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import org.woowatechcamp.githubapplication.data.user.UserRepository
-import org.woowatechcamp.githubapplication.presentation.user.model.UserModel
+import org.woowatechcamp.githubapplication.domain.repository.UserRepository
+import org.woowatechcamp.githubapplication.domain.entity.UserModel
 import org.woowatechcamp.githubapplication.util.UiState
 import javax.inject.Inject
 

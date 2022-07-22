@@ -1,6 +1,6 @@
 package org.woowatechcamp.githubapplication.domain.usecase
 
-import org.woowatechcamp.githubapplication.data.remote.service.SearchService
+import org.woowatechcamp.githubapplication.data.search.SearchService
 import org.woowatechcamp.githubapplication.domain.entity.SearchInfo
 import org.woowatechcamp.githubapplication.util.JsonToColorUtil
 import javax.inject.Inject

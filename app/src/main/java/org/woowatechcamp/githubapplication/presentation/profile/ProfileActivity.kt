@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import org.woowatechcamp.githubapplication.R
 import org.woowatechcamp.githubapplication.databinding.ActivityProfileBinding
-import org.woowatechcamp.githubapplication.presentation.user.model.UserModel
+import org.woowatechcamp.githubapplication.domain.entity.UserModel
 import org.woowatechcamp.githubapplication.util.ext.startAction
 import org.woowatechcamp.githubapplication.util.ext.startMail
 

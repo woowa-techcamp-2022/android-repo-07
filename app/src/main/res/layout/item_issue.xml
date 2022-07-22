@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="org.woowatechcamp.githubapplication.presentation.home.issue.model.IssueModel"/>
+        <import type="org.woowatechcamp.githubapplication.domain.entity.IssueModel"/>
         <variable
             name="issue"
-            type="IssueModel" />
+            type="org.woowatechcamp.githubapplication.domain.entity.IssueModel" />
     </data>
 
 
