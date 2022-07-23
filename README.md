@@ -23,7 +23,7 @@
 |-|------------------------------------|-------------------------------------|
 |맡은 부분|로그인, 메인(Issue, Notification)      |서치, 프로필                           |
 ||![img](https://github.com/creativeduck.png?size=100) | ![img](https://github.com/mdb1217.png?size=100) |
-|개발일지|[링크](https://shimmering-cougar-07b.notion.site/2-3-38124d9047a64c2dadc20aca7382c834)|[링크](https://winter-name-da8.notion.site/17604cb744474ebb962e91cdfc903ae9)|
+|개발일지|[링크](https://shimmering-cougar-07b.notion.site/GitHub-Search-App-cc976ae1a29d41c4a5d7597928c4fb7b)|[링크](https://winter-name-da8.notion.site/17604cb744474ebb962e91cdfc903ae9)|
 
 <br>
 
