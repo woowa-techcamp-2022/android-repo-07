@@ -17,6 +17,9 @@ class TestAuthViewModel {
     private lateinit var authViewModel : SignInViewModel
     private lateinit var authRepository : FakeAuthRepository
 
+    private val code = "code"
+    private val token = "token"
+
     @ExperimentalCoroutinesApi
     @get:Rule
     var mainCoroutineRule = MainCoroutineRule()
@@ -31,23 +34,25 @@ class TestAuthViewModel {
     }
 
     @Test
-    fun test_auth_viewModel() = runTest {
-        val code = "code"
-        val token = "token"
-
-        // empty test
+    fun test_auth_empty() = runTest {
         assertEquals(UiState.Empty, authViewModel.signInState.value)
+    }
 
-        // null test
+    @Test
+    fun test_auth_null() = runTest {
         authViewModel.getToken(code)
         assertEquals(UiState.Error("Test Null"), authViewModel.signInState.value)
+    }
 
-        // value test
+    @Test
+    fun test_auth_value() = runTest {
         authRepository.addToken(token)
         authViewModel.getToken(code)
         assertEquals(UiState.Success(token), authViewModel.signInState.value)
+    }
 
-        // error test
+    @Test
+    fun test_auth_error() = runTest {
         authRepository.setReturnError(true)
         authViewModel.getToken(code)
         assertEquals(UiState.Error("Test Error"), authViewModel.signInState.value)
