@@ -20,6 +20,53 @@ class TestNotiViewModel {
     private lateinit var notiRepository: FakeNotiRepository
     private lateinit var notiUseCase : FakeNotiUseCase
 
+    private val threadId = "Hello"
+    private val notiList = listOf(
+        NotiModel(
+            id = "creative",
+            name = "duck",
+            fullName = "creativeduck",
+            title = "Noti Test",
+            timeDiff = "1일 전",
+            imgUrl = "https://hello",
+            num = "#0",
+            commentNum = 0,
+            url = "https://bye",
+            timeDiffNum = 100L,
+            repo = "/repo",
+            threadId = "10101"
+        ),
+        NotiModel(
+            id = "creative",
+            name = "duck",
+            fullName = "creativeduck",
+            title = "Noti Test",
+            timeDiff = "1일 전",
+            imgUrl = "https://hello",
+            num = "#0",
+            commentNum = 1,
+            url = "https://bye",
+            timeDiffNum = 100L,
+            repo = "/repo",
+            threadId = "10101"
+        )
+    )
+
+    private val refreshNotiModel = NotiModel(
+        id = "creative",
+        name = "duck",
+        fullName = "creativeduck",
+        title = "Noti Test",
+        timeDiff = "1일 전",
+        imgUrl = "https://hello",
+        num = "#0",
+        commentNum = 3,
+        url = "https://bye",
+        timeDiffNum = 100L,
+        repo = "/repo",
+        threadId = "10101"
+    )
+
     @ExperimentalCoroutinesApi
     @get:Rule
     var mainCoroutineRule = MainCoroutineRule()
@@ -36,125 +83,110 @@ class TestNotiViewModel {
     }
 
     @Test
-    fun test_noti_viewModel() = runTest {
-
-        val threadId = "Hello"
-        val notiList = listOf(
-            NotiModel(
-                id = "creative",
-                name = "duck",
-                fullName = "creativeduck",
-                title = "Noti Test",
-                timeDiff = "1일 전",
-                imgUrl = "https://hello",
-                num = "#0",
-                commentNum = 0,
-                url = "https://bye",
-                timeDiffNum = 100L,
-                repo = "/repo",
-                threadId = "10101"
-            ),
-            NotiModel(
-                id = "creative",
-                name = "duck",
-                fullName = "creativeduck",
-                title = "Noti Test",
-                timeDiff = "1일 전",
-                imgUrl = "https://hello",
-                num = "#0",
-                commentNum = 1,
-                url = "https://bye",
-                timeDiffNum = 100L,
-                repo = "/repo",
-                threadId = "10101"
-            )
-        )
-
-        val refreshNotiModel = NotiModel(
-            id = "creative",
-            name = "duck",
-            fullName = "creativeduck",
-            title = "Noti Test",
-            timeDiff = "1일 전",
-            imgUrl = "https://hello",
-            num = "#0",
-            commentNum = 3,
-            url = "https://bye",
-            timeDiffNum = 100L,
-            repo = "/repo",
-            threadId = "10101"
-        )
-
-        // notifications test
+    fun test_noti_loading() = runTest {
         notiViewModel.notiState.test {
-
-            // loading test
             notiViewModel.getNoti()
             assertEquals(UiState.Loading, awaitItem())
             assertEquals(UiState.Error("Test Null"), awaitItem())
+        }
+    }
 
-            // value test
+    @Test
+    fun test_noti_value() = runTest {
+        notiViewModel.notiState.test {
             notiRepository.addNoties(notiList)
             notiViewModel.getNoti()
             assertEquals(UiState.Loading, awaitItem())
             assertEquals(UiState.Success(notiList), awaitItem())
+        }
+    }
 
-            // error test
+    @Test
+    fun test_noti_erro() = runTest {
+        notiViewModel.notiState.test {            // error test
             notiRepository.setReturnError(true)
             notiViewModel.getNoti()
             assertEquals(UiState.Loading, awaitItem())
             assertEquals(UiState.Error("Test Error"), awaitItem())
         }
-        notiRepository.setReturnError(false)
+    }
 
-        // comment test
+    @Test
+    fun test_comment_null() = runTest {
         notiViewModel.notiCommentState.test {
-            // null test
+            notiViewModel.getComments(refreshNotiModel)
             assertEquals(UiState.Error("Test Null"), awaitItem())
+        }
+    }
 
-            // value test
+    @Test
+    fun test_comment_value() = runTest {
+        notiViewModel.notiCommentState.test {
             notiRepository.addCommentNoti(refreshNotiModel)
             notiViewModel.getComments(refreshNotiModel)
             assertEquals(UiState.Success(refreshNotiModel), awaitItem())
+        }
+    }
 
-            // error test
+    @Test
+    fun test_comment_error() = runTest {
+        notiViewModel.notiCommentState.test {
             notiRepository.setReturnError(true)
             notiViewModel.getComments(refreshNotiModel)
             assertEquals(UiState.Error("Test Error"), awaitItem())
         }
-        notiRepository.setReturnError(false)
+    }
 
-        // mark test
+    @Test
+    fun test_mark_null() = runTest {
         notiViewModel.markState.test {
-            // null test
             notiViewModel.markNoti(threadId)
             assertEquals(UiState.Error("Test Null"), awaitItem())
+        }
+    }
 
-            // value 205 test
+    @Test
+    fun test_mark_value_205() = runTest {
+        notiViewModel.markState.test {
             notiRepository.setStatus(205)
             notiViewModel.markNoti(threadId)
             assertEquals(UiState.Success("Success"), awaitItem())
+        }
+    }
 
-            // value 304 test
+    @Test
+    fun test_mark_value_304() = runTest {
+        notiViewModel.markState.test {
             notiRepository.setStatus(304)
             notiViewModel.markNoti(threadId)
             assertEquals(UiState.Error("Not Modified"), awaitItem())
+        }
+    }
 
-            // value 403 test
+    @Test
+    fun test_mark_value_403() = runTest {
+        notiViewModel.markState.test {
             notiRepository.setStatus(403)
             notiViewModel.markNoti(threadId)
             assertEquals(UiState.Error("Forbidden"), awaitItem())
+        }
+    }
 
-            // value else test
+    @Test
+    fun test_mark_value_other_status() = runTest {
+        notiViewModel.markState.test {
             notiRepository.setStatus(500)
             notiViewModel.markNoti(threadId)
             assertEquals(UiState.Error("Status Error"), awaitItem())
+        }
+    }
 
-            // error test
+    @Test
+    fun test_mark_error() = runTest {
+        notiViewModel.markState.test {
             notiRepository.setReturnError(true)
             notiViewModel.markNoti(threadId)
             assertEquals(UiState.Error("Test Error"), awaitItem())
         }
-
     }
 }
